@@ -1,6 +1,6 @@
 from django.contrib import admin
-from jokeoverflow.models import Category, Video, UserProfile, Joke, Comment
-
+from jokeoverflow.models import Category, Video
+from jokeoverflow.models import UserProfile, Joke, Comment
 # Register your models here.
 admin.site.register(Category, Video)
 admin.site.register(UserProfile, Joke)
