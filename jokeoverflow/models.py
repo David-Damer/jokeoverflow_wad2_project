@@ -22,7 +22,7 @@ class Video(models.Model):
     
     title = models.CharField(max_length=128, unique=True)
     added_by = models.OneToOneField(User)
-    link = models.URLField()
+    urls = models.URLField()
     added_date = models.DateField()
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
