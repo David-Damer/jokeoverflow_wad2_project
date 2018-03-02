@@ -1,17 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.template.defaultfilters import slugify 
+from django.template.defaultfilters import slugify
+from datetime import datetime
 
 # Create your models here.
 
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User Model instance.
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, primary_key=True)
 
     # The additional attributes we wish to include
     date_of_birth = models.DateField(blank=False)
-    user_bio = models.CharField(max_length=256, blank=True)
-    user_picture = models.ImageField(upload_to='profile_images', blank=True)
+    user_bio = models.TextField(max_length=256)
+    user_picture = models.ImageField(upload_to='profile_images')
     image_from = models.URLField()  # For acknowledging sources of images when populating with fake data
 
     def __str__(self):
@@ -53,7 +54,7 @@ class Category(models.Model):
 
 class Joke(models.Model):
     title = models.CharField(max_length=128)
-    joke_text = models.CharField(max_length=256)
+    joke_text = models.TextField(max_length=256)
     date_added = models.DateField()
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
@@ -66,9 +67,9 @@ class Joke(models.Model):
 
 
 class Comment(models.Model):
-    comment_text = models.CharField(max_length=256)
+    comment_text = models.TextField(max_length=256)
     made_by = models.OneToOneField(User)
-    date_added = models.DateField()
+    date_added = models.DateField(auto_now_add=datetime.now())
     joke = models.OneToOneField(Joke)
 
     def __str__(self):
