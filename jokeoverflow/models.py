@@ -55,12 +55,12 @@ class Category(models.Model):
 class Joke(models.Model):
     title = models.CharField(max_length=128)
     joke_text = models.TextField(max_length=256)
-    date_added = models.DateField()
+    date_added = models.DateField(null=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
     flagged = models.BooleanField(default=False)
-    category = models.OneToOneField(Category)
-    added_by = models.OneToOneField(User)
+    category = models.ForeignKey(Category)
+    added_by = models.ForeignKey(User)
 
     def __str__(self):
         return self.title
@@ -74,3 +74,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.comment_text
+
+class Voted(models.Model):
+    joke = models.OneToOneField(Joke)
+    user = models.OneToOneField(User)
+
+    def __str__(self):
+        return self.joke.title + " : Voted on by " + self.user.username
