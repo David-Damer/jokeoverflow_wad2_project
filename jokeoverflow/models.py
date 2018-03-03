@@ -7,10 +7,10 @@ from datetime import datetime
 
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User Model instance.
-    user = models.OneToOneField(User, primary_key=True)
+    user = models.OneToOneField(User)
 
     # The additional attributes we wish to include
-    date_of_birth = models.DateField(blank=False)
+    date_of_birth = models.DateField(null=True,blank=False)
     user_bio = models.TextField(max_length=256)
     user_picture = models.ImageField(upload_to='profile_images')
     image_from = models.URLField()  # For acknowledging sources of images when populating with fake data
