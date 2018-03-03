@@ -110,6 +110,7 @@ def populate():
         'Adult':{'jokes': adult_jokes, 'restricted': True, 'num_jokes': len(adult_jokes)},
 
     }
+    videos = []
     for cat, cat_data in cats.items():
         # c = add_cat(cat)
         # Updated the population script to pass through the specific values for views and likes
