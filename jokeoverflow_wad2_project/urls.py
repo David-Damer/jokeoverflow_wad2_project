@@ -15,7 +15,22 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf.urls import include
+from jokeoverflow import views
+from django.conf import settings
+from django.conf.urls.static import static
 
+app_name = 'jokeoverflow'
 urlpatterns = [
+    url(r'^$', views.home, name='home'),
     url(r'^admin/', admin.site.urls),
-]
+    url(r'^home/', views.home, name='home'),
+    url(r'^about_us/', views.about_us, name='about_us'),
+    url(r'^contact_us/', views.contact_us, name='contact_us'),
+    url(r'^faq/', views.faq, name='faq'),
+    url(r'^latest_news/', views.latest_news, name='latest_news'),
+    url(r'^top_rated_videos/', views.top_rated_videos, name='top_rated_videos'),
+    url(r'^top_rated_jokes/', views.top_rated_jokes, name='top_rated_jokes'),
+    url(r'^category/(?P<category_name_slug>[\w\-]+)/$',
+        views.show_category, name='show_category'),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

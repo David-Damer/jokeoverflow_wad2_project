@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+	<head lang="en">
+		<meta charset="UTF-8" />
+		<div>
+			<img src="{% static "images/logo.png" %}" alt="Logo" /> 
+		</div>
+		{% block title_block %}
+		{% endblock %}
+	</head>
+	<body>
+		<div>
+			<h1>JOKE OVERFLOW </h1>
+		</div>
+		<div class = "navbar">
+			<ul>
+				<li class="nav-item">
+            				<a class="nav-link" href="{% url 'home' %}">Home</a>
+          			</li>
+				<li class="nav-item">
+            				<a class="nav-link" href="{% url 'top_rated_jokes' %}">Top Rated Jokes</a>
+          			</li>
+				<li class="nav-item">
+            				<a class="nav-link" href="{% url 'top_rated_videos' %}">Top Rated Videos</a>
+          			</li>
+					<ul class="list-group">
+						{% for cat in category_list%}
+							 <li>{{ cat.title }}<li>
+						{% endfor %}
+					</ul>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+            					<div class="dropdown-menu" aria-labelledby="dropdown01">
+							{% if categories%}
+								{% for cat in categories %}
+									<a class="dropdown-item" href= "{% url 'show_category' cat.slug %}">{{cat.title}}</a>
+									 <li>{{ cat.title }}<li>
+								{% endfor %}
+							{% endif %}
+            					</div>
+          				</li>
+			</ul>
+		</div>
+		<div>
+			{% block body_block %}
+			{% endblock %}
+		</div>
+		<div>
+			<ul>
+				<li><a href="{% url 'latest_news' %}">Latest News</a></li>
+				<li><a href="{% url 'about_us' %}">About</a></li>
+				<li>User Profile</li>
+				<li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+				<li><a href="{% url 'faq' %}">FAQ</a></li>
+			</ul>
+		</div>
+	</body>
+</html>
+
