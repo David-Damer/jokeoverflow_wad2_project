@@ -22,8 +22,8 @@ class UserProfile(models.Model):
 class Video(models.Model):
     title = models.CharField(max_length=128, unique=True)
     added_by = models.ForeignKey(User)
-    urls = models.URLField()
-    added_date = models.DateField(null=True)
+    url = models.URLField()
+    date_added = models.DateField(null=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
 
@@ -67,10 +67,10 @@ class Joke(models.Model):
 
 
 class Comment(models.Model):
-    comment_text = models.TextField(max_length=256)
-    made_by = models.OneToOneField(User)
-    date_added = models.DateField(auto_now_add=datetime.now())
-    joke = models.OneToOneField(Joke)
+    comment_text = models.TextField(max_length=256, unique=False)
+    made_by = models.ForeignKey(User)
+    date_added = models.DateField(null=True)
+    joke = models.ForeignKey(Joke)
 
     def __str__(self):
         return self.comment_text

@@ -10,7 +10,6 @@ from jokeoverflow.models import UserProfile, Comment, Joke, Video, Category
 from django.contrib.auth.models import User
 
 
-
 def populate():
     # Create users
     users = [
@@ -89,7 +88,8 @@ def populate():
     ]
 
     adult_jokes = [
-        {'title': 'Rubik\'s cube', 'text': 'What do a penis and a Rubik\'s cube have in common?\nThe more you play with it the harder it gets.',
+        {'title': 'Rubik\'s cube',
+         'text': 'What do a penis and a Rubik\'s cube have in common?\nThe more you play with it the harder it gets.',
          'date_added': '2018-01-01',
          'upvotes': 5, 'downvotes': 7, 'added_by': 'DavidDamer'},
         {'title': 'Santa',
@@ -103,24 +103,83 @@ def populate():
     ]
 
     cats = {
-        'Knock Knock':{'jokes': knock_knock_jokes, 'restricted': False, 'num_jokes': len(knock_knock_jokes)},
+        'Knock Knock': {'jokes': knock_knock_jokes, 'restricted': False, 'num_jokes': len(knock_knock_jokes)},
         'Yo Mama': {'jokes': yo_mama_jokes, 'restricted': False, 'num_jokes': len(yo_mama_jokes)},
-        'Chuck Norris':{'jokes': chuck_norris_jokes, 'restricted': False, 'num_jokes': len(chuck_norris_jokes)},
-        'Dad Joke':{'jokes': dad_jokes, 'restricted': False, 'num_jokes': len(dad_jokes)},
-        'Adult':{'jokes': adult_jokes, 'restricted': True, 'num_jokes': len(adult_jokes)},
+        'Chuck Norris': {'jokes': chuck_norris_jokes, 'restricted': False, 'num_jokes': len(chuck_norris_jokes)},
+        'Dad Joke': {'jokes': dad_jokes, 'restricted': False, 'num_jokes': len(dad_jokes)},
+        'Adult': {'jokes': adult_jokes, 'restricted': True, 'num_jokes': len(adult_jokes)},
 
     }
-    videos = [{
-        'title': '','urls': '', 'added_by': '', 'date_added': '','upvotes': 0, 'downvotes': 0,
-    }
+    videos = [
+        {'title': 'Compilation', 'url': 'https://www.youtube.com/watch?v=DODLEX4zzLQ', 'added_by': 'StuartMcMillan',
+         'date_added': '2017-08-08', 'upvotes': 7, 'downvotes': 22
+         },
+        {'title': 'Laugh til you Fart', 'url': 'https://www.youtube.com/watch?v=bXZEP6OwKBQ', 'added_by': 'JoeKadi',
+         'date_added': '2017-09-12', 'upvotes': 8, 'downvotes': 9
+         },
+        {'title': 'Auditions', 'url': 'https://www.youtube.com/watch?v=2uxtfgx5S2s', 'added_by': 'SamuelCook',
+         'date_added': '2018-02-12', 'upvotes': 22, 'downvotes': 7
+         },
+        {'title': 'Fails', 'url': 'https://www.youtube.com/watch?v=iqV9aAqBhqA', 'added_by': 'DavidDamer',
+         'date_added': '2018-10-12', 'upvotes': 41, 'downvotes': 144
+         },
+        {'title': 'Dogs', 'url': 'https://www.youtube.com/watch?v=aEzZLXBH3rU', 'added_by': 'DavidDamer',
+         'date_added': '2018-10-09', 'upvotes': 12, 'downvotes': 8
+         }
 
     ]
+    comments = [
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Dr who joke', 'added_by': 'StuartMcMillan',
+         'date_added': '2018-02-02'},
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Hungry', 'added_by': 'StuartMcMillan',
+         'date_added': '2018-02-02'},
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Sandwich', 'added_by': 'StuartMcMillan',
+         'date_added': '2018-02-02'},
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Street', 'added_by': 'StuartMcMillan',
+         'date_added': '2018-02-02'},
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Rubik\'s cube', 'added_by': 'StuartMcMillan',
+         'date_added': '2018-02-02'},
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Death', 'added_by': 'StuartMcMillan',
+         'date_added': '2018-02-02'},
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Ugly Joke', 'added_by': 'StuartMcMillan',
+         'date_added': '2018-02-02'},
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Lightbulb', 'added_by': 'StuartMcMillan',
+         'date_added': '2018-02-02'},
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Santa', 'added_by': 'StuartMcMillan',
+         'date_added': '2018-02-02'},
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Lifts', 'added_by': 'StuartMcMillan',
+         'date_added': '2018-02-02'},
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Hockey Joke', 'added_by': 'StuartMcMillan',
+         'date_added': '2018-02-02'},
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Fat mama joke', 'added_by': 'StuartMcMillan',
+         'date_added': '2018-02-02'},
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Iva Joke', 'added_by': 'StuartMcMillan',
+         'date_added': '2018-02-02'},
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Canoe Joke', 'added_by': 'StuartMcMillan',
+         'date_added': '2018-02-02'},
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Guns', 'added_by': 'StuartMcMillan',
+         'date_added': '2018-02-02'},
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Dr who joke', 'added_by': 'SamuelCook',
+         'date_added': '2018-02-02'},
+
+      ]
     for cat, cat_data in cats.items():
         c = add_cat(cat, cat_data["restricted"], cat_data["num_jokes"])
         for joke in cat_data["jokes"]:
             user = User.objects.get(username=joke['added_by'])
             add_joke(category=c, title=joke['title'], text=joke['text'], date_added=joke['date_added'],
                      upvotes=joke['upvotes'], downvotes=joke['downvotes'], added_by=user)
+
+    for video in videos:
+        usr = User.objects.get(username=video['added_by'])
+        add_video(title=video['title'], url=video['url'], added_by=usr, date_added=video['date_added'],
+                  upvotes=video['upvotes'], downvotes=video['downvotes'])
+
+    for comment in comments:
+        usr = User.objects.get(username=comment['added_by'])
+        joke = Joke.objects.get(title=comment['joke'])
+        add_comment(comment_text=comment['text'], added_by=usr, joke=joke, date_added=comment['date_added'])
+
 
 
 def add_profile(user, date_of_birth, user_bio):
@@ -134,11 +193,13 @@ def add_user(name, email, password):
     user = User.objects.get_or_create(username=name, email=email, password=password)[0]
     return user
 
+
 def add_cat(title, restricted, no_of_jokes):
     cat = Category.objects.get_or_create(title=title, restricted=restricted)[0]
     cat.no_of_jokes = no_of_jokes
     cat.save()
     return cat
+
 
 def add_joke(title, category, text, date_added, upvotes, downvotes, added_by):
     joke = Joke.objects.get_or_create(title=title, category=category, added_by=added_by)[0]
@@ -148,6 +209,25 @@ def add_joke(title, category, text, date_added, upvotes, downvotes, added_by):
     joke.downvotes = downvotes
     joke.save()
     return joke
+
+
+def add_video(title, url, date_added, added_by, upvotes, downvotes):
+    vid = Video.objects.get_or_create(title=title, added_by=added_by)[0]
+    vid.url = url
+    vid.date_added = date_added
+    vid.upvotes = upvotes
+    vid.downvotes = downvotes
+    vid.save()
+    return vid
+
+def add_comment(comment_text, added_by, date_added, joke):
+    comment = Comment.objects.get_or_create(made_by=added_by, joke=joke)[0]
+    comment.comment_text = comment_text
+    comment.date_added = date_added
+    comment.save()
+    return comment
+
+
 
 
 if __name__ == '__main__':
