@@ -93,7 +93,7 @@ def show_category(request, category_name_slug):
         context_dict['category'] = category
     except Category.DoesNotExist:
         context_dict['category'] = None
-    return render(request, 'rango/category.html', context_dict)
+    return render(request, 'jokeoverflow/joke_category.html', context_dict)
 
 
     

@@ -79,7 +79,7 @@ def populate():
          'date_added': '2018-01-01',
          'upvotes': 5, 'downvotes': 7, 'added_by': 'DavidDamer'},
         {'title': 'Lifts',
-         'text': 'I\'m terrified of lifts....\nI\'m satrting to take steps to avoid them.',
+         'text': 'I\'m terrified of lifts....\nI\'m starting to take steps to avoid them.',
          'date_added': '2018-01-01',
          'upvotes': 44, 'downvotes': 1, 'added_by': 'JoeKadi'},
         {'title': 'Sandwich',
@@ -110,10 +110,12 @@ def populate():
         'Adult':{'jokes': adult_jokes, 'restricted': True, 'num_jokes': len(adult_jokes)},
 
     }
-    videos = []
+    videos = [{
+        'title': '','urls': '', 'added_by': '', 'date_added': '','upvotes': 0, 'downvotes': 0,
+    }
+
+    ]
     for cat, cat_data in cats.items():
-        # c = add_cat(cat)
-        # Updated the population script to pass through the specific values for views and likes
         c = add_cat(cat, cat_data["restricted"], cat_data["num_jokes"])
         for joke in cat_data["jokes"]:
             user = User.objects.get(username=joke['added_by'])
