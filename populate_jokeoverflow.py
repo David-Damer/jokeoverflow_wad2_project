@@ -162,7 +162,7 @@ def populate():
         {'text': 'This is hilarious, tell me another!', 'joke': 'Dr who joke', 'added_by': 'SamuelCook',
          'date_added': '2018-02-02'},
 
-      ]
+    ]
     for cat, cat_data in cats.items():
         c = add_cat(cat, cat_data["restricted"], cat_data["num_jokes"])
         for joke in cat_data["jokes"]:
@@ -179,7 +179,6 @@ def populate():
         usr = User.objects.get(username=comment['added_by'])
         joke = Joke.objects.get(title=comment['joke'])
         add_comment(comment_text=comment['text'], added_by=usr, joke=joke, date_added=comment['date_added'])
-
 
 
 def add_profile(user, date_of_birth, user_bio):
@@ -207,6 +206,7 @@ def add_joke(title, category, text, date_added, upvotes, downvotes, added_by):
     joke.date_added = date_added
     joke.upvotes = upvotes
     joke.downvotes = downvotes
+    joke.rating = upvotes - downvotes
     joke.save()
     return joke
 
@@ -217,8 +217,10 @@ def add_video(title, url, date_added, added_by, upvotes, downvotes):
     vid.date_added = date_added
     vid.upvotes = upvotes
     vid.downvotes = downvotes
+    vid.rating = upvotes - downvotes
     vid.save()
     return vid
+
 
 def add_comment(comment_text, added_by, date_added, joke):
     comment = Comment.objects.get_or_create(made_by=added_by, joke=joke)[0]
@@ -226,8 +228,6 @@ def add_comment(comment_text, added_by, date_added, joke):
     comment.date_added = date_added
     comment.save()
     return comment
-
-
 
 
 if __name__ == '__main__':

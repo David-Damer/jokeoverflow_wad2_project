@@ -1,4 +1,4 @@
 Django==1.11.7
 Pillow==5.0.0
 pytz==2018.3
-django-registration-redux
+django-registration-redux==1.4
