@@ -1,0 +1,8 @@
+db.sqlite3
+.idea
+*.pyc
+venv*
+*example*
+*migrations*
+*.key
+*__pycache__*

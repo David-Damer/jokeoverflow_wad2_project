@@ -1,0 +1,60 @@
+{% extends 'jokeoverflow/base.html' %}
+{% load staticfiles %}
+{% block title_block %}
+	Home
+{% endblock %}
+{% block body_block %}
+	<h1>This is the HOME page</h1>
+	<div>
+		<h2> Most Liked Jokes </h2>
+		<p>
+			{% if topratedjokes %}
+				<ul class="list-group">
+					{% for joke in topratedjokes %}
+						 <li>{{ joke.title }}</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<strong>There are no jokes present.</strong>
+			{% endif %}
+		</p>
+	</div>
+	<div>
+		<h2> Most Liked Videos </h2>
+		<p>
+			{% if topratedvideos %}
+				<ul class="list-group">
+					{% for video in topratedvideos %}
+						<li>{{ video.title }}</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<strong>There are no videos present.</strong>
+			{% endif %}
+		</p>
+	</div>
+	<div>
+		<h2> Recently Added Jokes </h2>
+		<p>
+			{% if recentjokes%}
+				<ul class="list-group">
+					{% for joke in recentjokes%}
+						 <li>{{ joke.title }}</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<strong>There are no jokes present.</strong>
+			{% endif %}
+		</p>
+	</div>
+	{% if categories %}
+		<ul class="list-group">
+			{% for category in categories %}
+				<li class="list-group-item"><a href="{% url 'jokeoverflow:show_category' category.slug %}">
+					{{ category.title }}</a></li>
+			{% endfor %}
+		</ul>
+	{% else %}
+		<strong>There are no categories present.</strong>
+	{% endif %}
+{% endblock %}
