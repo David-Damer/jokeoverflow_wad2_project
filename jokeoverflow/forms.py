@@ -1,5 +1,6 @@
 from django import forms
 from jokeoverflow.models import UserProfile, Joke, Video, Comment, Category, Voted
+from django.contrib.auth.models import User
 
 class UserProfileForm(forms.ModelForm):
 
@@ -11,3 +12,10 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         exclude = ('user',)
+
+class UserForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput())
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password')
