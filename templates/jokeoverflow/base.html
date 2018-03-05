@@ -48,6 +48,12 @@
 		</div>
 		<div>
 			<ul>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'auth_logout' %}?next=/home/">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'registration_register' %}">Register</a></li>
+                <li><a href="{% url 'auth_login' %}">Login</a></li>
+            {% endif %}
 				<li><a href="{% url 'latest_news' %}">Latest News</a></li>
 				<li><a href="{% url 'about_us' %}">About</a></li>
 				<li>User Profile</li>
