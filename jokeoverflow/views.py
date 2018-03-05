@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from jokeoverflow.models import Category, Video, Joke
+from jokeoverflow.forms import UserProfileForm
 
 def home(request):
 
