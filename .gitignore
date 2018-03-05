@@ -5,3 +5,4 @@ venv*
 *example*
 *migrations*
 *.key
+*__pycache__*
