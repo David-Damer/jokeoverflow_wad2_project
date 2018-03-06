@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+
 <html>
 <head lang="en">
     <meta charset="UTF-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+   	<link rel="icon" href="{% static 'images/favicon.png' %}">
     <div>
         <img src="{% static "images/logo.png" %}" alt="Logo"/>
     </div>
+	
     {% block title_block %}
     {% endblock %}
 </head>
@@ -34,6 +41,7 @@
                                href="{% url 'jokeoverflow:show_category' cat.slug %}">{{ cat.title }} </a></li>
                     {% endfor %}
                 {% endif %}
+		</div>
 
     </ul>
 </div>
@@ -53,7 +61,7 @@
             <li><a href="{% url 'auth_login' %}">Login</a></li>
         {% endif %}
         <li><a href="{% url 'jokeoverflow:latest_news' %}">Latest News</a></li>
-        <li><a href="{% url 'jokeoverflow:about_us' %}">About</a></li>
+        <li><a href="{% url 'jokeoverflow:about_us' %}">About Us</a></li>
         <li>User Profile</li>
         <li><a href="{% url 'jokeoverflow:contact_us' %}">Contact Us</a></li>
         <li><a href="{% url 'jokeoverflow:faq' %}">FAQ</a></li>
