@@ -20,12 +20,12 @@ from jokeoverflow import views
 from django.conf import settings
 from django.conf.urls.static import static
 from registration.backends.simple.views import RegistrationView
-
+from django.core.urlresolvers import reverse
 
 # redirects user to the index page if successful at logging in
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, user):
-        return 'jokeoverflow/home/'
+        return reverse('/home/')
 
 
 app_name = 'jokeoverflow'

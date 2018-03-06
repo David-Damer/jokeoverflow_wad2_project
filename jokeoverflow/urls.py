@@ -14,19 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 from django.conf.urls import url
-from django.contrib import admin
-from django.conf.urls import include
 from jokeoverflow import views
-from django.conf import settings
-from django.conf.urls.static import static
-from registration.backends.simple.views import RegistrationView
 
-class MyRegistrationView(RegistrationView):
-    def get_success_url(self, user):
-        return '/home/'
-    
 app_name = 'jokeoverflow'
 urlpatterns = [
+    url(r'^$', views.home, name='home'),
     url(r'^home/', views.home, name='home'),
     url(r'^about_us/', views.about_us, name='about_us'),
     url(r'^contact_us/', views.contact_us, name='contact_us'),
