@@ -25,7 +25,7 @@ from django.core.urlresolvers import reverse
 # redirects user to the index page if successful at logging in
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, user):
-        return reverse('/home/')
+        return '/jokeoverflow/'
 
 
 app_name = 'jokeoverflow'
