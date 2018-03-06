@@ -4,4 +4,16 @@
 {% endblock %}
 {% block body_block %}
 	<h1>This is the TOP RATED VIDEOS page</h1>
+	<h2> Most Liked Videos </h2>
+	<p>
+		{% if topratedvideos %}
+			<ul class="list-group">
+				{% for video in topratedvideos %}
+					<li>{{ video.title }}</li>
+				{% endfor %}
+			</ul>
+		{% else %}
+			<strong>There are no videos present.</strong>
+		{% endif %}
+	</p>
 {% endblock %}

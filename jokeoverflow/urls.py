@@ -21,16 +21,21 @@ from django.conf import settings
 from django.conf.urls.static import static
 from registration.backends.simple.views import RegistrationView
 
-
-# redirects user to the index page if successful at logging in
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, user):
         return '/home/'
-
-
+    
 app_name = 'jokeoverflow'
 urlpatterns = [
-    url(r'^$', views.home, name='home'),
-    url(r'^jokeoverflow/', include('jokeoverflow.urls')),
-    url(r'^admin/', admin.site.urls),
-              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    url(r'^home/', views.home, name='home'),
+    url(r'^about_us/', views.about_us, name='about_us'),
+    url(r'^contact_us/', views.contact_us, name='contact_us'),
+    url(r'^faq/', views.faq, name='faq'),
+    url(r'^latest_news/', views.latest_news, name='latest_news'),
+    url(r'^top_rated_videos/', views.top_rated_videos, name='top_rated_videos'),
+    url(r'^top_rated_jokes/', views.top_rated_jokes, name='top_rated_jokes'),
+    url(r'^category/(?P<category_name_slug>[\w\-]+)/$',
+        views.show_category, name='show_category'),
+    url(r'^accounts/register/$', MyRegistrationView.as_view(), name='registration_register'),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
+]

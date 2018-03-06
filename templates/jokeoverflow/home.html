@@ -8,10 +8,10 @@
 	<div>
 		<h2> Most Liked Jokes </h2>
 		<p>
-			{% if rated_jokes %}
+			{% if topratedjokes %}
 				<ul class="list-group">
-					{% for joke in rated_jokes %}
-						 <li>{{ joke.title }}<li>
+					{% for joke in topratedjokes %}
+						 <li>{{ joke.title }}</li>
 					{% endfor %}
 				</ul>
 			{% else %}
@@ -22,10 +22,10 @@
 	<div>
 		<h2> Most Liked Videos </h2>
 		<p>
-			{% if rated_videos %}
+			{% if topratedvideos %}
 				<ul class="list-group">
-					{% for video in rated_videos %}
-						 <li>{{ video.title}}<li>
+					{% for video in topratedvideos %}
+						<li>{{ video.title }}</li>
 					{% endfor %}
 				</ul>
 			{% else %}
@@ -36,10 +36,10 @@
 	<div>
 		<h2> Recently Added Jokes </h2>
 		<p>
-			{% if recent_jokes %}
+			{% if recentjokes%}
 				<ul class="list-group">
-					{% for joke in recent_jokes %}
-						 <li>{{ joke.title }}<li>
+					{% for joke in recentjokes%}
+						 <li>{{ joke.title }}</li>
 					{% endfor %}
 				</ul>
 			{% else %}
@@ -50,11 +50,11 @@
 	{% if categories %}
 		<ul class="list-group">
 			{% for category in categories %}
-				 <li class="list-group-item"><a href="{% url 'show_category' category.slug %}">
-					{{ category.name }}</a></li>
+				<li class="list-group-item"><a href="{% url 'jokeoverflow:show_category' category.slug %}">
+					{{ category.title }}</a></li>
 			{% endfor %}
 		</ul>
 	{% else %}
 		<strong>There are no categories present.</strong>
 	{% endif %}
-{% endblock %}
+{% endblock %}
