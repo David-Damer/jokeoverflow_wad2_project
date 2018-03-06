@@ -7,3 +7,4 @@ For virtualenv to install all files in the requirements.txt file.
     activate your virtualenv
     run: pip install -r requirements.txt in your shell
 
+change to readme
