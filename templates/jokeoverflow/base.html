@@ -44,10 +44,10 @@
 		<div>
 			<ul>
 				{% if user.is_authenticated %}
-                			<li><a href="{% url 'jokeoverflow:auth_logout' %}?next=/home/">Logout</a></li>
+                			<li><a href="{% url 'auth_logout' %}?next=/home/">Logout</a></li>
            			{% else %}
-             				<li><a href="{% url 'jokeoverflow:registration_register' %}">Register</a></li>
-                			<li><a href="{% url 'jokeoverflow:auth_login' %}">Login</a></li>
+             				<li><a href="{% url 'registration_register' %}">Register</a></li>
+                			<li><a href="{% url 'auth_login' %}">Login</a></li>
             			{% endif %}
 				<li><a href="{% url 'jokeoverflow:latest_news' %}">Latest News</a></li>
 				<li><a href="{% url 'jokeoverflow:about_us' %}">About</a></li>
@@ -57,5 +57,6 @@
 			</ul>
 		</div>
 	</body>
-</html>
+</html>
+
 

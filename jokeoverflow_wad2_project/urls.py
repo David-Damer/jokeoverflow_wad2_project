@@ -25,7 +25,7 @@ from registration.backends.simple.views import RegistrationView
 # redirects user to the index page if successful at logging in
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, user):
-        return '/home/'
+        return 'jokeoverflow/home/'
 
 
 app_name = 'jokeoverflow'

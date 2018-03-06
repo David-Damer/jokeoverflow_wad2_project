@@ -25,7 +25,7 @@ MEDIA_URL = '/media/'
 REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
-LOGIN_REDIRECT_URL = '/home/'
+LOGIN_REDIRECT_URL = '/jokeoverflow/home/'
 LOGIN_URL = '/accounts/login/'
 
 
