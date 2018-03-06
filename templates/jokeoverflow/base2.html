@@ -13,16 +13,20 @@
 			<img src="{% static "images/logo.png" %}" class="img-fluid" alt="Logo"  width=100%/>
 	</div>
 	<!-- Bootstrap core CSS -->
+	<!-- <link rel="stylesheet" href="{% static "css/core.css" %}" /> -->
 	<link href="http://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css"rel="stylesheet">
 	<!-- Custom styles for this template -->
-	<link href="http://v4-alpha.getbootstrap.com/examples/dashboard/dashboard.css"rel="stylesheet">
+	<link rel="stylesheet" href="{% static "css/base.css" %}" />
+
+
     {% block title_block %}
     {% endblock %}
 </head>
-<body style="margin:0; padding:0" >
+<body >
 
 
-<nav class="navbar navbar-toggleable-md navbar-inverse  bg-inverse">
+<nav class="navbar navbar-toggleable-md navbar-inverse  bg-inverse">
+
 	<button class="navbar-toggler navbar-toggler-right hidden-lg-up"
 		type="button"
 		data-toggle="collapse"
@@ -90,8 +94,8 @@
 <footer class="container">
       	<ul>
 		<a href="{% url 'jokeoverflow:latest_news' %}">Latest News</a> :
-        	<a href="{% url 'jokeoverflow:about_us' %}">About Us</a> :
-        	User Profile :
+        	<a class = "footer-link" href="{% url 'jokeoverflow:about_us' %}">About Us</a> :
+			<a class = "footer-link" >User Profile</a> :
         	<a href="{% url 'jokeoverflow:contact_us' %}">Contact Us</a> :
         	<a href="{% url 'jokeoverflow:faq' %}">FAQ</a>
 	</ul>
