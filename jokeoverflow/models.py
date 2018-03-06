@@ -12,7 +12,7 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
 
     # The additional attributes we wish to include
-    date_of_birth = models.DateField(null=True, blank=False)
+    date_of_birth = models.DateField(blank=False)
     user_bio = models.TextField(max_length=256)
     user_picture = models.ImageField(upload_to='profile_images')
     image_from = models.URLField()  # For acknowledging sources of images when populating with fake data
@@ -25,7 +25,7 @@ class Video(models.Model):
     title = models.CharField(max_length=128, unique=True)
     added_by = models.ForeignKey(User)
     url = models.URLField()
-    date_added = models.DateField(null=True, default=now().date())
+    date_added = models.DateField(auto_now_add=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
@@ -58,7 +58,7 @@ class Category(models.Model):
 class Joke(models.Model):
     title = models.CharField(max_length=128)
     joke_text = models.TextField(max_length=256)
-    date_added = models.DateField(null=True, default=now().date())
+    date_added = models.DateField(auto_now_add=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
     flagged = models.BooleanField(default=False)
@@ -73,7 +73,7 @@ class Joke(models.Model):
 class Comment(models.Model):
     comment_text = models.TextField(max_length=256, unique=False)
     made_by = models.ForeignKey(User)
-    date_added = models.DateField(null=True, default=now().date())
+    date_added = models.DateField(auto_now_add=True)
     joke = models.ForeignKey(Joke)
 
     def __str__(self):

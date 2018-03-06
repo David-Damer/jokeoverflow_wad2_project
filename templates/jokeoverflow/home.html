@@ -24,7 +24,7 @@
 		<p>
 			{% if rated_videos %}
 				<ul class="list-group">
-					{% for video in rated_videos%}
+					{% for video in rated_videos %}
 						 <li>{{ video.title}}<li>
 					{% endfor %}
 				</ul>
@@ -57,4 +57,4 @@
 	{% else %}
 		<strong>There are no categories present.</strong>
 	{% endif %}
-{% endblock %}
+{% endblock %}

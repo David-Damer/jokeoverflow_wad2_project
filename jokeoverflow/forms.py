@@ -5,7 +5,7 @@ from django.utils.timezone import now
 
 
 class UserProfileForm(forms.ModelForm):
-    date_of_birth = forms.DateField(required=True)
+    date_of_birth = forms.DateField(required=True, help_text='Please add your date of birth in yyyy-mm-dd format.')
     user_bio = forms.CharField(max_length=256, required=False)
     user_picture = forms.ImageField(required=False)
     image_from = forms.URLField(widget=forms.HiddenInput(), required=False)
@@ -26,7 +26,7 @@ class UserForm(forms.ModelForm):
 class JokeForm(forms.ModelForm):
     title = forms.CharField(max_length=128, help_text='Give the joke a title.')
     joke_text = forms.CharField(max_length=256, help_text='Tell us your joke!')
-    date_added = forms.DateField(widget=forms.HiddenInput, initial=now().date())
+    date_added = forms.DateField(widget=forms.HiddenInput)
     upvotes = forms.IntegerField(widget=forms.HiddenInput, initial=0)
     downvotes = forms.IntegerField(widget=forms.HiddenInput, initial=0)
     flagged = forms.BooleanField(widget=forms.HiddenInput, initial=False)
