@@ -6,3 +6,4 @@ venv*
 *migrations*
 *.key
 *__pycache__*
+temp
