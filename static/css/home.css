@@ -1,0 +1,64 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-image: url("/static/images/background+pattern+design+33.jpg");
+  color:black;
+}
+
+h1{
+  color:black;
+  
+}
+
+.form-container{
+	background-color: rgba(255, 204, 0, 0.2);
+  
+	border-radius: 20px;
+  border-style: solid;
+  border-color: #ffcc00;
+  border-width: 2px;
+
+}
+
+
+.btn-80{
+	border-width: 2px;
+	border-color: #e6b800;
+ 	padding: 20px 20px;
+	width:50%;
+	color:black;
+	background-color: #ffd633
+	transition-duration: 100s;
+}
+
+.btn-80:hover{
+	color:black;
+	transition-duration: 20s;
+	background-color:#ffcc00;
+	background-color: #000000;
+}
+
+.col-md-3{
+	border-width:4px;
+	background-color: rgba(255, 204, 0, 0.2);
+	border-radius: 20px;
+  	border-style: solid;
+  	border-color: #ffcc00;
+	
+}
+
+.section-title{
+	text-align:center;
+}
+
+.section-list{
+	color:red;
+
+}
+
+p{
+	color:blue;
+}

@@ -18,9 +18,11 @@
 {% block body_block %}
 
 <div class ="text-center">
-<hr>
-	<div class = "form-container">
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+	
+    <h1>Please sign in</h1>
+
+<div class = "form-container">
+	<br>
 	<form method="post" action=".">
 		{% csrf_token %}
         	{{ form.as_p }}
