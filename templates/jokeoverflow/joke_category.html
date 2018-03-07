@@ -1,7 +1,41 @@
-{% extends 'jokeoverflow/base.html' %}
+{% extends 'jokeoverflow/base2.html' %}
+{% load staticfiles %}
+
 {% block title_block %}
-	Joke Category
+	{{ category.name}}
 {% endblock %}
+
 {% block body_block %}
 	<h1>This is the JOKE CATEGORY page</h1>
+
+          <div class="col-md-4">
+            <h2> Most Liked Jokes </h2>
+		<p>
+			{% if topratedjokes %}
+				<ul class="list-group">
+					{% for joke in topratedjokes %}
+						 <li>{{ joke.title }} with {{ joke.upvotes }} likes</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<strong>There are no jokes present.</strong>
+			{% endif %}
+		</p>
+          </div>
+
+	  <div class="col-md-4">
+            <h2> Recently Added Jokes </h2>
+		<p>
+			{% if recentjokes %}
+				<ul class="list-group">
+					{% for joke in recentjokes%}
+						 <li>{{ joke.title }} added {{ joke.date_added }}</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<strong>There are no jokes present.</strong>
+			{% endif %}
+		</p>
+          </div>
+
 {% endblock %}
