@@ -1,20 +1,30 @@
 {% extends 'jokeoverflow/base2.html' %}
 {% load staticfiles %}
 {% block title_block %}
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+    <link href="{% static "css/home.css" %}" rel="stylesheet">
 {% endblock %}
+
+
 {% block body_block %}
 	
-
-
-
-
 <div class="container">
         <!-- Example row of columns -->
 	<div class="row">
 		<div class="col-md-1">
 		</div>
 		<div class="col-md-10">
-			<h1>This is the HOME page</h1>
+			<h1 class="text-center">This is the HOME page</h1>
 		</div>
 		<div class="col-md-1">
 		</div>
@@ -22,9 +32,11 @@
 
         <div class="row">
 
+	<div class="col-md-1">
+	</div>
 
-          <div class="col-md-4">
-            <h2> Most Liked Jokes </h2>
+          <div class="col-md-3">
+            <h2 class="text-center"> Most Liked Jokes </h2>
 		<p>
 			{% if topratedjokes %}
 				<ul class="list-group">
@@ -38,11 +50,13 @@
 		</p>
           </div>
 
+	<div class="col-md-1">
+	</div>
+	<br>
 
-
-          <div class="col-md-4">
-            <h2> Most Liked Videos </h2>
-		<p>
+          <div class="col-md-3">
+            <h2 class="text-center"> Most Liked Videos </h2>
+		<p class="section-list">
 			{% if topratedvideos %}
 				<ul class="list-group">
 					{% for video in topratedvideos %}
@@ -55,11 +69,12 @@
 		</p>
           </div>
 
+	<div class="col-md-1">
+	</div>
+	<br>
 
-
-
-          <div class="col-md-4">
-            <h2> Recently Added Jokes </h2>
+          <div class="col-md-3">
+            <h2 class="text-center"> Recently Added Jokes </h2>
 		<p>
 			{% if recentjokes%}
 				<ul class="list-group">
@@ -72,6 +87,10 @@
 			{% endif %}
 		</p>
           </div>
+
+	<div class="col-md-1">
+	</div>
+
         </div>
 
         <hr>

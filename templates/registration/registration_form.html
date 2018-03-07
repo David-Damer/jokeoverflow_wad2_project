@@ -1,9 +1,48 @@
-{% extends "jokeoverflow/base.html" %}
+{% extends "jokeoverflow/base2.html" %}
+{% load staticfiles %}
+{% block title_block %}
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+    <link href="{% static "css/register.css" %}" rel="stylesheet">
+
+{% endblock %}
 {% block body_block %}
-    <h1>Register Here</h1>
+
+
+<div class ="text-center">
+	<h1>Register Here</h1>
+</div>
+
+<div class = "form-container">
+	<br>
     <form method="post" action=".">
         {% csrf_token %}
         {{ form.as_p }}
-        <input type="submit" value="Submit" />
+	<div class ="text-center">
+	<br>
+        <input class="btn btn-80 btn-lg btn-primary " type="submit" value="Submit" />
+	</div>
     </form> 
+	<br>
+</div>
+
+<hr>
+<div class ="text-center">
+<div class = "bottom-text">
+	<p>
+       	 	Already got an account?
+       	 	<a href ="{% url 'auth_login' %}">Log in</a>
+    	</p>
+	</div>
+</div>
+
 {% endblock %}

@@ -68,4 +68,3 @@ def top_rated_jokes(request):
     context_dict = {'categories': category_list, 'topratedjokes' : rated_jokes}
     response = render(request, 'jokeoverflow/top_rated_jokes.html', context_dict)
     return response
-

@@ -1,19 +1,22 @@
-{% extends 'jokeoverflow/base.html' %}
+{% extends 'jokeoverflow/base2.html' %}
 {% block title_block %}
-	Top Rated Jokes
 {% endblock %}
 {% block body_block %}
 	<h1>This is the TOP RATED JOKES page</h1>
-	<h2> Most Liked Jokes </h2>
-	<p>
-		{% if topratedjokes %}
-			<ul class="list-group">
-				{% for joke in topratedjokes %}
-					 <li>{{ joke.title }}</li>
-				{% endfor %}
-			</ul>
-		{% else %}
-			<strong>There are no jokes present.</strong>
-		{% endif %}
-	</p>	
+	<div class="row">
+		<div class="col-md-12">
+		<h2> Most Liked Jokes </h2>
+		<p>
+			{% if topratedjokes %}
+				<ul class="list-group">
+					{% for joke in topratedjokes %}
+						 <li>{{ joke.title }}</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<strong>There are no jokes present.</strong>
+			{% endif %}
+		</p>
+		</div>	
+	</div>
 {% endblock %}
