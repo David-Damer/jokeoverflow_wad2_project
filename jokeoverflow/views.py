@@ -23,10 +23,11 @@ def show_category(request, category_name_slug):
     context_dict = {}
 
     try:
+        category_list = Category.objects.order_by('title')
         category = Category.objects.get(slug=category_name_slug)
         rated_jokes = Joke.objects.filter(category=category).order_by('-upvotes')[:5]
         recent_jokes = Joke.objects.filter(category=category).order_by('-date_added')[:5]
-        context_dict = {'category': category, 'topratedjokes': rated_jokes, 'recentjokes': recent_jokes, }
+        context_dict = {'categories': category_list, 'category': category, 'topratedjokes': rated_jokes, 'recentjokes': recent_jokes, }
     except Category.DoesNotExist:
         context_dict['category'] = None
         context_dict['topratedjokes'] = None
