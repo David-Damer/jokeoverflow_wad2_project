@@ -1,3 +1,4 @@
+{% load staticfiles %}
 html,
 body {
   height: 100%;
@@ -9,7 +10,7 @@ body {
 }
 
 h1{
-  color:red;
+  color:black;
   
 }
 
@@ -20,6 +21,7 @@ h1{
   border-style: solid;
   border-color: #ffcc00;
   border-width: 2px;
+  padding: 20px;
 
 }
 
