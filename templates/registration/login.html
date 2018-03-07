@@ -1,14 +1,47 @@
 {% extends "jokeoverflow/base2.html" %}
+{% load staticfiles %}
+{% block title_block %}
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+    <link href="{% static "css/signin.css" %}" rel="stylesheet">
+
+{% endblock %}
 {% block body_block %}
-    <h1>Login</h1>
-    <form method="post" action=".">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Log in"/>
-        <input type="hidden" name="next" value="{{ next}}"/>
-    </form>
-    <p>
-        Not a member?
-        <a href ="{% url 'registration_register' %}">Register</a>
-    </p>
+
+<div class ="text-center">
+<hr>
+	<div class = "form-container">
+<br>
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+	<form method="post" action=".">
+		{% csrf_token %}
+        	{{ form.as_p }}
+		<input class="btn btn-80 btn-lg btn-primary " type="submit" value = "Sign in" ></button>
+        	<input type="hidden" name="next" value="{{ next}}"/>
+		
+      
+	</form>  
+<br>   
+	</div>
+	<hr>
+	<div class = "bottom-text">
+	<p>
+       	 	Not a member?
+       	 	<a href ="{% url 'registration_register' %}">Register</a>
+    	</p>
+	</div>
+</div>
+
+
+
+
 {% endblock %}
