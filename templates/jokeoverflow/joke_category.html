@@ -42,7 +42,7 @@
 			<p>
 				{% if alljokes %}
 					{% for joke in alljokes %}
-						<li>{{ joke.title }} - {{ joke.upvotes }} likes</li>
+						<li>{{ joke.joke_text }} - {{ joke.upvotes }} likes</li>
 					{% endfor %}
 				{% else %}
 					<strong>There are no jokes present.</strong>
