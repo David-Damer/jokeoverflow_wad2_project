@@ -6,3 +6,4 @@ venv*
 *.key
 *__pycache__*
 desktop.ini
+0001_initial.py
