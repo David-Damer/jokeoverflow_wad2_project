@@ -3,6 +3,6 @@ db.sqlite3
 *.pyc
 venv*
 *example*
-*migrations*
 *.key
 *__pycache__*
+desktop.ini
