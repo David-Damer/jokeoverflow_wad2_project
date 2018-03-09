@@ -27,6 +27,7 @@ class Video(models.Model):
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
+    embed_code = models.CharField(max_length=60)
 
     def __str__(self):
         return self.title

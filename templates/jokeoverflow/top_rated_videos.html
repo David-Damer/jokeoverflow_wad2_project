@@ -1,22 +1,32 @@
 {% extends 'jokeoverflow/base2.html' %}
 {% block title_block %}
+    Top Videos
 {% endblock %}
 {% block body_block %}
-	<h1>This is the TOP RATED VIDEOS page</h1>
-	<div class="row">
-		<div class="col-md-12">
-		<h2> Most Liked Videos </h2>
-		<p>
-			{% if topratedvideos %}
-				<ul class="list-group">
-					{% for video in topratedvideos %}
-						<li>{{ video.title }}</li>
-					{% endfor %}
-				</ul>
-			{% else %}
-				<strong>There are no videos present.</strong>
-			{% endif %}
-		</p>
-		</div>
-	</div>
-{% endblock %}
+    <h1>This is the TOP RATED VIDEOS page</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <h2> Most Liked Videos </h2>
+
+            {% if user.is_authenticated %}
+
+                {% if topratedvideos %}
+
+                            {% for video in topratedvideos %}
+                                <hr>
+                                <h5>{{ video.title }}</h5>
+                                <iframe width="420" height="280"
+                                        src={{ video.embed_code }}>
+                                </iframe>
+                                <hr>
+
+                            {% endfor %}
+                {% else %}
+                    <strong>We ain't got no vids man!!</strong>
+                {% endif %}
+            {% else %}
+                <strong>You need to be logged in to see videos!!</strong>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
