@@ -6,8 +6,8 @@ from jokeoverflow.forms import UserProfileForm
 
 def home(request):
     category_list = Category.objects.order_by('title')
-    rated_videos = Video.objects.order_by('-upvotes')[:5]
-    rated_jokes = Joke.objects.order_by('-upvotes')[:5]
+    rated_videos = Video.objects.order_by('-rating')[:5]
+    rated_jokes = Joke.objects.order_by('-rating')[:5]
     recent_jokes = Joke.objects.order_by('-date_added')[:5]
     context_dict = {'categories': category_list, 'topratedvideos': rated_videos, 'topratedjokes': rated_jokes, 'recentjokes': recent_jokes, }
     response = render(request, 'jokeoverflow/home.html', context=context_dict)
@@ -25,7 +25,7 @@ def show_category(request, category_name_slug):
     try:
         category_list = Category.objects.order_by('title')
         category = Category.objects.get(slug=category_name_slug)
-        rated_jokes = Joke.objects.filter(category=category).order_by('-upvotes')[:2]
+        rated_jokes = Joke.objects.filter(category=category).order_by('-rating')[:2]
         recent_jokes = Joke.objects.filter(category=category).order_by('-date_added')[:2]
         all_jokes = Joke.objects.filter(category=category).order_by('-upvotes')
         context_dict = {'categories': category_list, 'category': category, 'topratedjokes': rated_jokes, 'recentjokes': recent_jokes, 'alljokes': all_jokes,}
