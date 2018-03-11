@@ -1,18 +1,9 @@
-$(document).ready(function(){
-    $("#about-btn").click( function(event) {
-        alert("You clicked the button using JQuery!");
+$(document).ready(function () {
+    $('.thumbnail').hover(function () {
+        $(this).animate({paddingLeft: '+=5px'}, 200);
+
+    }, function () {
+        $(this).animate({paddingLeft: '-=5px'}, 200);
     });
-    $("p").hover( function() {
-        $(this).css('color', 'red');
-    },
-        function() {
-        $(this).css('color', 'blue');
-        });
-    $("#about-btn").addClass('btn btn-primary');
-    $("#about-btn").click( function(event){
-        msgstr = $("#msg").html()
-        msgstr = msgstr +"ooo"
-        $("#msg").html(msgstr)
-    });
-    });
+});
 

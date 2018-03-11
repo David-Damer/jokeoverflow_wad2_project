@@ -29,6 +29,7 @@ def youtube_search(q):
         part='id, snippet',
         maxResults=5,
         type='video',
+        videoEmbeddable='true'
     ).execute()
 
     results = []
@@ -38,7 +39,8 @@ def youtube_search(q):
             videoId = item['id']['videoId']
             title = item['snippet']['title']
             description = item['snippet']['description']
-            results.append({'id': videoId, 'title': title, 'description': description})
+            thumbnail = item['snippet']['thumbnails']['default']
+            results.append({'id': videoId, 'title': title, 'description': description, 'thumbnail': thumbnail})
 
     except:
         print('error')

@@ -73,7 +73,6 @@ def top_rated_videos(request):
     query = ''
 
     if request.method == 'POST':
-        print('post' + query)
         query = request.POST['query'].strip()
         if query:
             result_list = youtube_search(q=query)
