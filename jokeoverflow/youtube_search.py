@@ -6,7 +6,6 @@
 #       to find the correct place to provide that key..
 
 import argparse
-import json
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
@@ -27,20 +26,22 @@ def youtube_search(q):
     # query term.
     search_response = youtube.search().list(
         q=q,
-        part='snippet',
-        maxResults=5
+        part='id, snippet',
+        maxResults=5,
+        type='video',
     ).execute()
 
     results = []
 
     try:
-        print(search_response)
-
-
+        for item in search_response['items']:
+            videoId = item['id']['videoId']
+            title = item['snippet']['title']
+            description = item['snippet']['description']
+            results.append({'id': videoId, 'title': title, 'description': description})
 
     except:
         print('error')
-
     return results
 
 

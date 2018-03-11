@@ -69,6 +69,17 @@ def top_rated_videos(request):
     category_list = Category.objects.order_by('title')
     rated_videos = Video.objects.order_by('-upvotes')[:5]
     context_dict = {'categories': category_list, 'topratedvideos': rated_videos}
+    result_list = []
+    query = ''
+
+    if request.method == 'POST':
+        print('post' + query)
+        query = request.POST['query'].strip()
+        if query:
+            result_list = youtube_search(q=query)
+    context_dict['previous_query'] = query
+    context_dict['result_list'] = result_list
+
     response = render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
     return response
 
