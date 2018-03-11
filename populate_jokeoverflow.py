@@ -274,7 +274,7 @@ def add_video(title, url, date_added, added_by, upvotes, downvotes):
     vid.upvotes = upvotes
     vid.downvotes = downvotes
     vid.rating = upvotes - downvotes
-    vid.embed_code ='https://www.youtube.com/embed/' + url.split('=')[-1]
+    vid.embed_code ='https://www.youtube.com/embed/' + url.split('=', 1)[-1]
     vid.save()
     return vid
 
