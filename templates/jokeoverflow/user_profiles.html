@@ -1,7 +1,20 @@
-{% extends 'jokeoverflow/base.html' %}
+{% extends 'jokeoverflow/base2.html' %}
 {% block title_block %}
 	User Profile
 {% endblock %}
 {% block body_block %}
 	<h1>This is the USER PROFILES page</h1>
+	<div>
+		<p>
+			{% if user_profiles %}
+				<ul class="list-group">
+					{% for user in user_profiles %}
+						<li>{{ user.user }} - {{ user.user_bio }} </li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<strong>There are no User Profiles.</strong>
+			{% endif %}
+		</p>
+         </div>
 {% endblock %}

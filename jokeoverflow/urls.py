@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^contact_us/', views.contact_us, name='contact_us'),
     url(r'^faq/', views.faq, name='faq'),
     url(r'^latest_news/', views.latest_news, name='latest_news'),
+    url(r'^user_profiles/', views.user_profiles, name='user_profiles'),
     url(r'^top_rated_videos/', views.top_rated_videos, name='top_rated_videos'),
     url(r'^top_rated_jokes/', views.top_rated_jokes, name='top_rated_jokes'),
     url(r'^category/(?P<category_name_slug>[\w\-]+)/$',

@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from jokeoverflow.models import Category, Video, Joke
+from jokeoverflow.models import Category, Video, Joke, UserProfile
 from jokeoverflow.forms import UserProfileForm
 from jokeoverflow.youtube_search import *
 
@@ -62,6 +62,13 @@ def latest_news(request):
     category_list = Category.objects.order_by('title')
     context_dict = {'categories': category_list}
     response = render(request, 'jokeoverflow/latest_news.html', context_dict)
+    return response
+
+def user_profiles(request):
+    category_list = Category.objects.order_by('title')
+    user_profiles = UserProfile.objects.order_by('user')
+    context_dict = {'categories': category_list, 'user_profiles': user_profiles}
+    response = render(request, 'jokeoverflow/user_profiles.html', context_dict)
     return response
 
 
