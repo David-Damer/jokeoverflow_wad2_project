@@ -7,61 +7,73 @@
         <div class="col-md-12">
             <h2> Most Liked Videos </h2>
 
-            {% if user.is_authenticated %}
 
-                {% if topratedvideos %}
 
-                    {% for video in topratedvideos %}
-                        <hr>
-                        <h5>{{ video.title }}</h5>
-                        <iframe width="420" height="280"
-                                src={{ video.embed_code }}
-                                        allowfullscreen>
-                        </iframe>
-                        <hr>
+            {% if topratedvideos %}
 
-                    {% endfor %}
-                {% else %}
-                    <strong>We ain't got no vids man!!</strong>
-                {% endif %}
+                {% for video in topratedvideos %}
+                    <hr>
+                    <h5>{{ video.title }}</h5>
+                    <iframe width="420" height="280" title="{{ video.title }}"
+                            src={{ video.embed_code }}
+                                    allowfullscreen>
+                    </iframe>
+                    <hr>
+
+                {% endfor %}
             {% else %}
-                <strong>You need to be logged in to see videos!!</strong>
+                <strong>We ain't got no vids man!!</strong>
             {% endif %}
+
         </div>
     </div>
     <div>
-        <h1>Search Youtube</h1>
-        <br/>
-        <form class="form-inline" id="user_form"
-              method="POST" action="{% url 'jokeoverflow:top_rated_videos' %}">
-            {% csrf_token %}
-            <div class="form-group">
-                <input class="form-control" type="text" size="50"
-                       name="query" value="{{ previous_query }}" id="query"/>
+        {% if user.is_authenticated %}
+            <br/>
+            <form class="form-inline" id="user_form"
+                  method="POST" action="{% url 'jokeoverflow:top_rated_videos' %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <input class="form-control" type="text" size="50"
+                           name="query" value="{{ previous_query }}" id="query"/>
+
+                </div>
+                <button class="btn btn-primary" type="submit" id="submit"
+                        value="Search">Search YouTube
+                </button>
+            </form>
+            <br>
+
+            <div>
+                {% if result_list %}
+                    <h3>Results</h3>
+                    <!-- Display sea4rch results in an ordered list -->
+                    <div class="list-group">
+                        {% for result in result_list %}
+                            <div class="list-group-item">
+                                <h6 class="list-group-item-heading">
+                                    <a title="Click to watch!"
+                                            href="https://www.youtube.com/embed/{{ result.id }}"><img class="thumbnail"
+                                            src="{{ result.thumbnail.url }}" alt="No thumbnail"> {{ result.title }}</a>
+                                </h6>
+                                <p class="list-group-item-text">{{ result.description }}</p>
+                                {% if user.is_authenticated %}
+                                    <br>
+                                    <button data-id="{{ result.id }}" data-title="{{ result.title }}"
+                                            data-code="https://www.youtube.com/embed/{{ result.link }}"
+                                            data-added-by="{{ user }}"
+                                            class="video-add btn btn-info btn-sm" type="button">Add
+                                    </button>
+                                    <br>
+                                {% endif %}
+
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
 
             </div>
-            <button class="btn btn-primary" type="submit" id="submit"
-                    value="Search">Search
-            </button>
-        </form>
-
-        <div>
-            {% if result_list %}
-                <h3>Results</h3>
-                <!-- Display sea4rch results in an ordered list -->
-                <div class="list-group">
-                    {% for result in result_list %}
-                        <div class="list-group-item">
-                            <h4 class="list-group-item-heading">
-                                <a href="https://www.youtube.com/embed/{{ result.id }}">{{ result.title }}</a>
-                            </h4>
-                            <p class="list-group-item-text">{{ result.description }}</p>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% endif %}
-
-        </div>
-    </div>
-<br>
+            </div>
+        {% endif %}
+    <br>
 {% endblock %}
