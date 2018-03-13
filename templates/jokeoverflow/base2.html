@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="{% static 'images/favicon.png' %}">
-    <div class="row" fixed-top>
-        <img src="{% static "images/logo.png" %}" class="img-fluid" alt="Logo" width=100%/>
+    <link rel="icon" href="{% static 'images/favicon4.png' %}">
+    <div class="row logo-top" fixed-top>
+        <img src="{% static "images/logo2.png" %}" class="img-responsive logo-img" alt="Logo" />
     </div>
     <!-- Bootstrap core CSS -->
     <!-- <link rel="stylesheet" href="{% static "css/core.css" %}" /> -->
@@ -36,8 +36,12 @@
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    <a class="navbar-brand menu-icon" href="{% url 'jokeoverflow:home' %}">
+    <img class = "menu-img" border=5px alt="Icon" src="{% static "images/favicon4.png" %}">
+    </a>
+    <!--<img class="navbar-brand menu-icon" href="{% url 'jokeoverflow:home' %}" src="{% static "images/favicon4.png" %}"
     <a class="navbar-brand" href="{% url 'jokeoverflow:home' %}">Joke Overflow</a>
-
+    -->
 
     <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav mr-auto">

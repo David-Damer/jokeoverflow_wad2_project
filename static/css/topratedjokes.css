@@ -105,33 +105,46 @@ p{
 
 
 .box-cont{
-	p: red;
+	p: red;
+
     color: black;
-    a: red;    
+
+    a: red;
+    
+
 }
-
+
+
 .box-cont a:link {
     color:black;
 	text-decoration: underline;
-}
 
-
+}
+
+
+
 
 .box-cont a:visited {
-    color:black;
+
+    color:black;
 	text-decoration: none
-}
+
+}
 
 
 .box-cont a:active {
-    color:#ffcc00;
-}
+
+    color:#ffcc00;
+
+}
 
 .box-cont a:hover{
-    color: black;
+
+    color: black;
     text-decoration: underline;
 	font-weight: bold;
-}
+
+}
 
 
 
@@ -170,7 +183,9 @@ opacity: 1;
 .pop-joke-title{
 	color:black;
 	font-size: 30px;
-	text-decoration: underline;
+	/*text-decoration: underline;*/
+	text-decoration:none;
+	font-weight:bold;
 }
 
 .pop-joke-text{
