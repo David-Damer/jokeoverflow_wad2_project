@@ -5,7 +5,7 @@ from django.utils.timezone import now
 
 
 class UserProfileForm(forms.ModelForm):
-    date_of_birth = forms.DateField(required=True, help_text='Please add your date of birth in yyyy-mm-dd format.')
+    date_of_birth = forms.DateField(required=True, widget=forms.DateInput, help_text='Please add your date of birth')
     user_bio = forms.CharField(max_length=256, required=False)
     user_picture = forms.ImageField(required=False)
     image_from = forms.URLField(widget=forms.HiddenInput(), required=False)
@@ -49,7 +49,7 @@ class VideoForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-    comment_text = forms.CharField(max_length=256, help_text='Please enter your comments...')
+    comment_text = forms.CharField(max_length=256, help_text='Please enter your comments...', widget=forms.Textarea)
 
     class Meta:
         model = Comment

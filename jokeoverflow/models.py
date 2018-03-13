@@ -12,7 +12,7 @@ class UserProfile(models.Model):
     # The additional attributes we wish to include
     date_of_birth = models.DateField(blank=False)
     user_bio = models.TextField(max_length=256)
-    user_picture = models.ImageField(upload_to='profile_images')
+    user_picture = models.ImageField(upload_to='static/images')
     image_from = models.URLField()  # For acknowledging sources of images when populating with fake data
 
     def __str__(self):
@@ -28,6 +28,7 @@ class Video(models.Model):
     downvotes = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     embed_code = models.CharField(max_length=60)
+    thumbnail = models.URLField()
 
     def __str__(self):
         return self.title
