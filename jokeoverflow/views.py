@@ -75,7 +75,7 @@ def user_profiles(request):
 def top_rated_videos(request):
     category_list = Category.objects.order_by('title')
     rated_videos = Video.objects.order_by('-upvotes')[:5]
-    context_dict = {'categories': category_list, 'topratedvideos': rated_videos}
+    context_dict = {'categories': category_list, 'topratedvideos': rated_videos,}
     result_list = []
     query = ''
 

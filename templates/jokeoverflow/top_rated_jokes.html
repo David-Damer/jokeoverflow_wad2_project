@@ -1,16 +1,60 @@
 {% extends 'jokeoverflow/base2.html' %}
+{% load staticfiles %}
 {% block title_block %}
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="{% static "css/topratedjokes.css" %}" rel="stylesheet">
 {% endblock %}
 {% block body_block %}
 	<h1>This is the TOP RATED JOKES page</h1>
+
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-6 list-box">
 		<h2> Most Liked Jokes </h2>
 		<p>
 			{% if topratedjokes %}
-				<ul class="list-group">
+				<ul class="list-group joke-list">
 					{% for joke in topratedjokes %}
-						 <li>{{ joke.title }}</li>
+<div class = "box-cont" >
+<a href="#{{joke.id}}">{{ joke.title }}</a>
+</div>
+
+<div id="{{joke.id}}" class="modalDialog">
+<div>
+    <a href="#close" title="Close" class="close">X</a>
+	<br>
+    <div class = "pop-joke-title text-center">{{ joke.title }}</div>
+	<br>
+    <div class = "pop-joke-text">{{ joke.joke_text }}</div>
+	<br>
+<div class="row">
+<div class="col-md-3 ">
+	<img class = "vote-icon" src="{% static "images/icons/upvote.png" %}" alt="Upvote" /> 
+	{{ joke.upvotes }}
+
+</div>
+<div class="col-md-3 ">
+	<img class = "vote-icon" src="{% static "images/icons/downvote.png" %}" alt="Upvote" /> 
+	{{ joke.downvotes }}
+</div>
+
+<div class="col-md-6 ">
+	<h6>COMMENTS</h6>
+</div>
+</div>
+
+<div class="row">
+<div class = "col-md-12">
+	<h6>Joke Author: {{joke.added_by}}<h6>
+</div>
+</div>
+
+
+
+
+</div>
+</div>
+
+
 					{% endfor %}
 				</ul>
 			{% else %}
@@ -19,4 +63,6 @@
 		</p>
 		</div>	
 	</div>
+<br>
+
 {% endblock %}
