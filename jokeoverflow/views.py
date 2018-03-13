@@ -89,6 +89,12 @@ def top_rated_videos(request):
     response = render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
     return response
 
+def log_complaint(request):
+    category_list = Category.objects.order_by('title')
+    context_dict = {'categories': category_list}
+    response = render(request, 'jokeoverflow/log_complaint.html', context_dict)
+    return response
+
 
 def top_rated_jokes(request):
     category_list = Category.objects.order_by('title')
