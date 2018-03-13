@@ -1,9 +1,9 @@
 {% extends 'jokeoverflow/base2.html' %}
+{% load staticfiles %}
 {% block title_block %}
-	User Profile
 {% endblock %}
 {% block body_block %}
-	<h1>This is the USER PROFILES page</h1>
+	<h1>Hello {{ user }}</h1>
 	<div>
 		<p>
 			{% if user_profiles %}
@@ -17,4 +17,12 @@
 			{% endif %}
 		</p>
          </div>
+
+	<h2>Your Jokes</h2>
+	<p>
+
+
+	</p>		
+
+	
 {% endblock %}
