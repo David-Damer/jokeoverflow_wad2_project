@@ -10,8 +10,8 @@ from jokeoverflow.youtube_search import *
 def home(request):
     category_list = Category.objects.order_by('title')
     rated_videos = Video.objects.order_by('-rating')[:5]
-    rated_jokes = Joke.objects.order_by('-rating')[:5]
-    recent_jokes = Joke.objects.order_by('-date_added')[:5]
+    rated_jokes = Joke.objects.order_by('-rating')[:10]
+    recent_jokes = Joke.objects.order_by('-date_added')[:10]
     context_dict = {'categories': category_list, 'topratedvideos': rated_videos, 'topratedjokes': rated_jokes,
                     'recentjokes': recent_jokes, }
     response = render(request, 'jokeoverflow/home.html', context=context_dict)
