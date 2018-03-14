@@ -105,36 +105,51 @@ p{
 
 
 .box-cont{
-	p: red;
+	p: red;
+
     color: black;
-    a: red;    
+
+    a: red;
+    
+
 }
-
+
+
 .box-cont a:link {
     color:black;
 	text-decoration: underline;
-}
 
-
+}
 
-.box-cont a:visited {
-    color:black;
-	text-decoration: none
-}
+
+
+
+
 
 
 .box-cont a:active {
-    color:#ffcc00;
-}
+
+    color:#ffcc00;
+
+}
+
+
 
 .box-cont a:hover{
-    color: black;
+
+    color:black;
+	font-style: italic;
     text-decoration: underline;
 	font-weight: bold;
-}
+}
 
 
+.box-cont a:visited {
+    background-color:pink;
+    color:blue;
+    font-style: italic;
 
+}
     .close {
         background: #ffcc00;
         color: black;
@@ -170,7 +185,9 @@ opacity: 1;
 .pop-joke-title{
 	color:black;
 	font-size: 30px;
-	text-decoration: underline;
+	/*text-decoration: underline;*/
+	text-decoration:none;
+	font-weight:bold;
 }
 
 .pop-joke-text{
@@ -185,6 +202,14 @@ padding: 25px 25px 25px 25px;
 
 .vote-icon{
 	width:20px;
+}
+
+#upvoteYES-image{
+width:20px;
+}
+
+.up-img{
+width:30px;
 }
 
 

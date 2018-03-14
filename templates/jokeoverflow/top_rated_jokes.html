@@ -3,6 +3,7 @@
 {% block title_block %}
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="{% static "css/topratedjokes.css" %}" rel="stylesheet">
+
 {% endblock %}
 {% block body_block %}
 	<h1>This is the TOP RATED JOKES page</h1>
@@ -15,12 +16,13 @@
 				<ul class="list-group joke-list">
 					{% for joke in topratedjokes %}
 <div class = "box-cont" >
-<a href="#{{joke.id}}">{{ joke.title }}</a>
+<a href="#joke{{joke.id}}">{{ joke.title }}</a>
 </div>
 
-<div id="{{joke.id}}" class="modalDialog">
+<div id="joke{{joke.id}}" class="modalDialog">
 <div>
-    <a href="#close" title="Close" class="close">X</a>
+	
+  	<a href="#close" title="Close" class="close">&times;</a>
 	<br>
     <div class = "pop-joke-title text-center">{{ joke.title }}</div>
 	<br>
@@ -28,8 +30,13 @@
 	<br>
 <div class="row">
 <div class="col-md-3 ">
-	<img class = "vote-icon" src="{% static "images/icons/upvote.png" %}" alt="Upvote" /> 
-	{{ joke.upvotes }}
+	{% if user.is_authenticated %}
+		<!--<button id="upvoteYES-image" class = "up-img"><img src="{% static "images/icons/upvoteYES.png" %}" ></button>-->
+		<img class = "vote-icon" src="{% static "images/icons/upvoteYES.png" %}" alt="Upvote" /> 
+	{% else %}
+		<img class = "vote-icon" src="{% static "images/icons/upvoteNO.png" %}" alt="Upvote" />
+	{% endif %}
+{{ joke.upvotes }}
 
 </div>
 <div class="col-md-3 ">

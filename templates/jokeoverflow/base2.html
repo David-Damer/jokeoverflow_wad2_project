@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="{% static 'images/favicon.png' %}">
-    <div class="row" fixed-top>
-        <img src="{% static "images/logo.png" %}" class="img-fluid" alt="Logo" width=100%/>
+    <link rel="icon" href="{% static 'images/favicon4.png' %}">
+    <div class="row logo-top" fixed-top>
+        <img src="{% static "images/logo2.png" %}" class="img-responsive logo-img" alt="Logo" />
     </div>
     <!-- Bootstrap core CSS -->
     <!-- <link rel="stylesheet" href="{% static "css/core.css" %}" /> -->
@@ -36,8 +36,12 @@
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    <a class="navbar-brand menu-icon" href="{% url 'jokeoverflow:home' %}">
+    <img class = "menu-img" border=5px alt="Icon" src="{% static "images/favicon4.png" %}">
+    </a>
+    <!--<img class="navbar-brand menu-icon" href="{% url 'jokeoverflow:home' %}" src="{% static "images/favicon4.png" %}"
     <a class="navbar-brand" href="{% url 'jokeoverflow:home' %}">Joke Overflow</a>
-
+    -->
 
     <div class="collapse navbar-collapse" id="navbar">
         <ul class="navbar-nav mr-auto">
@@ -83,7 +87,7 @@
 <div class="container-fluid">
     <br>
     <div class="row">
-        <div class="col-sm-10 offset-sm-1 col-md-8 offset-md-2 main">
+        <div class="col-sm-10 offset-sm-1 col-md-10 offset-md-1 main">
             {% block body_block %}{% endblock %}
         </div>
     </div>
@@ -95,7 +99,12 @@
     <ul>
         <a href="{% url 'jokeoverflow:latest_news' %}">Latest News</a> :
         <a class="footer-link" href="{% url 'jokeoverflow:about_us' %}">About Us</a> :
-        <a href="{% url 'jokeoverflow:user_profiles' %}">User Profile</a> :
+
+        
+	{% if user.is_authenticated %}
+		<a href="{% url 'jokeoverflow:user_profiles' %}">{{ user }}'s Page</a> :
+	{% endif %}
+
         <a href="{% url 'jokeoverflow:contact_us' %}">Contact Us</a> :
         <a href="{% url 'jokeoverflow:faq' %}">FAQ</a>
     </ul>
