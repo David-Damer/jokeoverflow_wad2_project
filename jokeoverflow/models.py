@@ -12,13 +12,13 @@ class UserProfile(models.Model):
     # The additional attributes we wish to include
     date_of_birth = models.DateField(blank=False)
     user_bio = models.TextField(max_length=256)
-    user_picture = models.ImageField(upload_to='profile_images')
+    user_picture = models.ImageField()
     image_from = models.URLField()  # For acknowledging sources of images when populating with fake data
 
     def __str__(self):
         return self.user.username
 
-
+        
 class Video(models.Model):
     title = models.CharField(max_length=128, unique=True)
     added_by = models.ForeignKey(User)
@@ -28,6 +28,7 @@ class Video(models.Model):
     downvotes = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
     embed_code = models.CharField(max_length=60)
+    thumbnail = models.URLField()
 
     def __str__(self):
         return self.title
@@ -90,3 +91,11 @@ class Voted(models.Model):
 
     def __str__(self):
         return self.joke.title + " : Voted on by " + self.user.username
+
+
+class Complaint(models.Model):
+    user = models.ForeignKey(User)
+    complaint = models.TextField(max_length=256, blank=False)
+
+    def __str__(self):
+        return self.complaint

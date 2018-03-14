@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.decorators import login_required
 from jokeoverflow.models import Category, Video, Joke, UserProfile
 from jokeoverflow.forms import UserProfileForm
 from jokeoverflow.youtube_search import *
@@ -10,8 +11,8 @@ from jokeoverflow.youtube_search import *
 def home(request):
     category_list = Category.objects.order_by('title')
     rated_videos = Video.objects.order_by('-rating')[:5]
-    rated_jokes = Joke.objects.order_by('-rating')[:5]
-    recent_jokes = Joke.objects.order_by('-date_added')[:5]
+    rated_jokes = Joke.objects.order_by('-rating')[:10]
+    recent_jokes = Joke.objects.order_by('-date_added')[:10]
     context_dict = {'categories': category_list, 'topratedvideos': rated_videos, 'topratedjokes': rated_jokes,
                     'recentjokes': recent_jokes, }
     response = render(request, 'jokeoverflow/home.html', context=context_dict)
@@ -75,7 +76,7 @@ def user_profiles(request):
 def top_rated_videos(request):
     category_list = Category.objects.order_by('title')
     rated_videos = Video.objects.order_by('-upvotes')[:5]
-    context_dict = {'categories': category_list, 'topratedvideos': rated_videos}
+    context_dict = {'categories': category_list, 'topratedvideos': rated_videos,}
     result_list = []
     query = ''
 
@@ -115,3 +116,21 @@ def search(request):
             result_list = youtube_search(q=query)
     context_dictionary = {'previous_query': query, 'result_list': result_list}
     return render(request, 'jokeoverflow/top_rated_videos.html', context_dictionary)
+
+def register_profile(request):
+    form = UserProfileForm()
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            user_profile = form.save(commit=False)
+            user_profile.user = request.user
+            user_profile.save()
+
+            return redirect('home')
+        else:
+            print(form.errors)
+
+    context_dict = {'form':form}
+
+    return render(request, 'jokeoverflow/register_profile.html', context_dict)
