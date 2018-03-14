@@ -91,3 +91,11 @@ class Voted(models.Model):
 
     def __str__(self):
         return self.joke.title + " : Voted on by " + self.user.username
+
+
+class Complaint(models.Model):
+    user = models.ForeignKey(User)
+    complaint = models.TextField(max_length=256, blank=False)
+
+    def __str__(self):
+        return self.complaint

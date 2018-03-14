@@ -1,5 +1,5 @@
 from django import forms
-from jokeoverflow.models import UserProfile, Joke, Video, Comment, Category
+from jokeoverflow.models import UserProfile, Joke, Video, Comment, Category, Complaint
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 
@@ -65,3 +65,11 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ('title',)
+
+
+class ComplaintForm(forms.ModelForm):
+    complaint = forms.CharField(widget=forms.Textarea, max_length=256)
+
+    class Meta:
+        model = Complaint
+        exclude = ('user',)
