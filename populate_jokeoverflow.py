@@ -167,20 +167,25 @@ def populate():
     }
     videos = [
         {'title': 'Compilation', 'url': 'https://www.youtube.com/watch?v=DODLEX4zzLQ', 'added_by': 'WeeCraig',
-         'date_added': '2017-08-08', 'upvotes': 7, 'downvotes': 22
+         'date_added': '2017-08-08', 'upvotes': 7, 'downvotes': 22,
+         'thumbnail': 'http://img.youtube.com/vi/DODLEX$zzLQ/3.jpg'
          },
         {'title': 'Laugh til you Fart', 'url': 'https://www.youtube.com/watch?v=bXZEP6OwKBQ',
          'added_by': 'PatriciaWorker',
-         'date_added': '2017-09-12', 'upvotes': 8, 'downvotes': 9
+         'date_added': '2017-09-12', 'upvotes': 8, 'downvotes': 9,
+         'thumbnail': 'http://img.youtube.com/vi/bXZEP6OwKBQ/3.jpg'
          },
         {'title': 'Auditions', 'url': 'https://www.youtube.com/watch?v=2uxtfgx5S2s', 'added_by': 'SammyTheMan',
-         'date_added': '2018-02-12', 'upvotes': 22, 'downvotes': 7
+         'date_added': '2018-02-12', 'upvotes': 22, 'downvotes': 7,
+         'thumbnail': 'http://img.youtube.com/vi/2uxtfgx5S2s/3.jpg'
          },
         {'title': 'Fails', 'url': 'https://www.youtube.com/watch?v=iqV9aAqBhqA', 'added_by': 'EricCarpenter',
-         'date_added': '2018-10-12', 'upvotes': 41, 'downvotes': 144
+         'date_added': '2018-10-12', 'upvotes': 41, 'downvotes': 144,
+         'thumbnail': 'http://img.youtube.com/vi/iqV9aAqBhqA/3.jpg'
          },
         {'title': 'Dogs', 'url': 'https://www.youtube.com/watch?v=aEzZLXBH3rU', 'added_by': 'EricCarpenter',
-         'date_added': '2018-10-09', 'upvotes': 12, 'downvotes': 8
+         'date_added': '2018-10-09', 'upvotes': 12, 'downvotes': 8,
+         'thumbnail': 'http://img.youtube.com/vi/aEzZLXBH3rU/3.jpg'
          }
 
     ]
@@ -229,7 +234,7 @@ def populate():
     for video in videos:
         usr = User.objects.get(username=video['added_by'])
         add_video(title=video['title'], url=video['url'], added_by=usr, date_added=video['date_added'],
-                  upvotes=video['upvotes'], downvotes=video['downvotes'])
+                  upvotes=video['upvotes'], downvotes=video['downvotes'], thumbnail=video['thumbnail'])
 
     for comment in comments:
         usr = User.objects.get(username=comment['added_by'])
@@ -267,7 +272,7 @@ def add_joke(title, category, text, date_added, upvotes, downvotes, added_by):
     return joke
 
 
-def add_video(title, url, date_added, added_by, upvotes, downvotes):
+def add_video(title, url, date_added, added_by, upvotes, downvotes, thumbnail):
     vid = Video.objects.get_or_create(title=title, added_by=added_by)[0]
     vid.url = url
     vid.date_added = date_added
@@ -275,6 +280,7 @@ def add_video(title, url, date_added, added_by, upvotes, downvotes):
     vid.downvotes = downvotes
     vid.rating = upvotes - downvotes
     vid.embed_code ='https://www.youtube.com/embed/' + url.split('=', 1)[-1]
+    vid.thumbnail = thumbnail
     vid.save()
     return vid
 

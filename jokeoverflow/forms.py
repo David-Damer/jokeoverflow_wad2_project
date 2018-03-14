@@ -45,7 +45,7 @@ class VideoForm(forms.ModelForm):
 
     class Meta:
         model = Video
-        exclude = ('added_by', 'date_added',)
+        exclude = ('added_by', 'date_added', 'thumbnail')
 
 
 class CommentForm(forms.ModelForm):
