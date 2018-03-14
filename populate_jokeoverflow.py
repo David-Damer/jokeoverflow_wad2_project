@@ -245,6 +245,8 @@ def populate():
 def add_profile(user, date_of_birth, user_bio):
     up = UserProfile.objects.get_or_create(user=user, date_of_birth=date_of_birth)[0]
     up.user_bio = user_bio
+    up.user_picture = None
+    up.image_from = "http://lorempixel.com/64/64/people/"
     up.save()
     return up
 

@@ -1,5 +1,4 @@
 from django.db import models
-from django import forms
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 
@@ -13,20 +12,12 @@ class UserProfile(models.Model):
     # The additional attributes we wish to include
     date_of_birth = models.DateField(blank=False)
     user_bio = models.TextField(max_length=256)
-    user_picture = models.ImageField(upload_to='static/images')
+    user_picture = models.ImageField()
     image_from = models.URLField()  # For acknowledging sources of images when populating with fake data
 
     def __str__(self):
         return self.user.username
 
-class UserProfileForm(forms.ModelForm):
-    date_of_birth = forms.DateField()
-    user_bio = forms.CharField()
-    user_picture = forms.ImageField()
-
-    class Meta:
-        model = UserProfile
-        exclude = ('user',)
         
 class Video(models.Model):
     title = models.CharField(max_length=128, unique=True)
