@@ -1,12 +1,13 @@
 from django import forms
-from jokeoverflow.models import UserProfile, Joke, Video, Comment, Category
+from jokeoverflow.models import UserProfile, Joke, Video, Comment, Category, Complaint
 from django.contrib.auth.models import User
 from django.utils.timezone import now
 
 
 class UserProfileForm(forms.ModelForm):
-    date_of_birth = forms.DateField(required=True, help_text='Please add your date of birth in yyyy-mm-dd format.')
-    user_bio = forms.CharField(max_length=256, required=False)
+    date_of_birth = forms.DateField(required=True, widget=forms.SelectDateWidget(years=range(1960, now().year + 1)),
+                                    help_text='This is required: Date of birth')
+    user_bio = forms.CharField(widget=forms.Textarea, max_length=256, required=False)
     user_picture = forms.ImageField(required=False)
     image_from = forms.URLField(widget=forms.HiddenInput(), required=False)
 
@@ -45,11 +46,11 @@ class VideoForm(forms.ModelForm):
 
     class Meta:
         model = Video
-        exclude = ('added_by', 'date_added',)
+        exclude = ('added_by', 'date_added', 'thumbnail')
 
 
 class CommentForm(forms.ModelForm):
-    comment_text = forms.CharField(max_length=256, help_text='Please enter your comments...')
+    comment_text = forms.CharField(max_length=256, help_text='Please enter your comments...', widget=forms.Textarea)
 
     class Meta:
         model = Comment
@@ -65,3 +66,11 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ('title',)
+
+
+class ComplaintForm(forms.ModelForm):
+    complaint = forms.CharField(widget=forms.Textarea, max_length=256)
+
+    class Meta:
+        model = Complaint
+        exclude = ('user',)
