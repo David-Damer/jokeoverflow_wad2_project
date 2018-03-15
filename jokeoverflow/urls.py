@@ -32,5 +32,6 @@ urlpatterns = [
     url(r'^category/(?P<category_name_slug>[\w\-]+)/$',
         views.show_category, name='show_category'),
     url(r'register_profile/', views.register_profile, name='register_profile'),
+    url(r'^add/$', views.auto_add_video, name='auto_add_video'),
 
 ]

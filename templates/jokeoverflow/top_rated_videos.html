@@ -56,14 +56,14 @@
                                 <h6 class="list-group-item-heading">
                                     <a title="Click to watch!"
                                             href="https://www.youtube.com/embed/{{ result.id }}"><img class="thumbnail"
-                                            src="{{ result.thumbnail.url }}" alt="No thumbnail"> {{ result.title }}</a>
+                                            src="{{ result.thumbnail.url }}" alt="No thumbnail">{{ result.title }}</a>
                                 </h6>
                                 <p class="list-group-item-text">{{ result.description }}</p>
                                 {% if user.is_authenticated %}
                                     <br>
                                     <button data-id="{{ result.id }}" data-title="{{ result.title }}"
-                                            data-code="https://www.youtube.com/embed/{{ result.link }}"
-                                            data-added-by="{{ user }}"
+                                            data-code="https://www.youtube.com/embed/{{ result.id }}"
+                                            data-added-by="{{ user }}" data-url="None" data-thumb="{{ result.thumbnail.url }}"
                                             class="video-add btn btn-info btn-sm" type="button">Add
                                     </button>
                                     <br>

@@ -9,7 +9,12 @@
 			{% if user_profiles %}
 				<ul class="list-group">
 					{% for user in user_profiles %}
-						<li>{{ user.user }} - {{ user.user_bio }} </li>
+                        {% if user.user_picture %}
+                        <img width="64" height="64" src="{{ user.user_picture.url }}"/>
+                        {% else %}
+                        <img width="64" height="64" src="http://lorempixel.com/64/64/people/"/>
+                        {% endif %}
+						<li> {{ user.user }} - {{ user.user_bio }}</li>
 					{% endfor %}
 				</ul>
 			{% else %}
@@ -25,4 +30,4 @@
 	</p>		
 
 	
-{% endblock %}
+{% endblock %}
