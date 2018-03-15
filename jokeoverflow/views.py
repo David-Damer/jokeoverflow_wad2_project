@@ -102,7 +102,8 @@ def top_rated_jokes(request):
     category_list = Category.objects.order_by('title')
     rated_jokes = Joke.objects.order_by('-upvotes')[:5]
     comments = Comment.objects.all()
-    context_dict = {'categories': category_list, 'comments': comments, 'topratedjokes': rated_jokes}
+    users = UserProfile.objects.all()
+    context_dict = {'categories': category_list, 'comments': comments, 'topratedjokes': rated_jokes, 'users': users}
     response = render(request, 'jokeoverflow/top_rated_jokes.html', context_dict)
     return response
 

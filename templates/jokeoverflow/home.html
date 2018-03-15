@@ -70,9 +70,27 @@
 </div>
 
 <div class="col-md-6 ">
-	<h6>COMMENTS</h6>
+	<p>COMMENTS: <br>
+			  <dl class="dl-horizontal">
+
+</dl>
+		{% for comment in comments %}
+			{% if comment.joke == joke %}
+			  {% for user in users %}
+			  {% if comment.made_by == user %}
+			  <dt>{{user.date_of_birth}} {{ comment.made_by}}</dt>
+			  {% endif %}
+			  {% endfor %}
+  <dd>{{ comment.comment_text </dd>
+			  <br>
+			{% endif %}
+		{% endfor %} </p>
 </div>
 </div>
+
+	<div class="clearfix visible-xs">
+        <!-- clearfix xs cols every 2 -->
+    </div>
 
 <div class="row">
 <div class = "col-md-12">
@@ -98,7 +116,7 @@
 <br>
 	<div class="col-md-1">
 	</div>
-
+<br>
 
 
 
@@ -122,6 +140,7 @@
 
 	<div class="col-md-1">
 	</div>
+<br>
 
           <div class="col-md-4 top-block "pre-scrollable"">
             <p class="text-center sc-block-title"> Most Liked Videos </p>
@@ -156,4 +175,4 @@
 </div> <!-- /container -->
 
 
-{% endblock %}
+{% endblock %}
