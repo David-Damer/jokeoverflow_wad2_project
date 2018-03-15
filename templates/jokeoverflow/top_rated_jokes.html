@@ -14,9 +14,16 @@
 		<p>
 			{% if topratedjokes %}
 				<ul class="list-group joke-list">
-					{% for joke in topratedjokes %}
-<div class = "box-cont" >
-<a href="#joke{{joke.id}}">{{ joke.title }}</a>
+				{% for joke in topratedjokes %}
+							
+<div class = "box-cont" >					
+<a href="#joke{{joke.id}}">{{ joke.title }} - {% for com in comments %}
+						{% if com.joke == joke %}
+							{{ com.comment_text }} 
+						{% endif %}
+					{% endfor %} </a>
+						
+
 </div>
 
 <div id="joke{{joke.id}}" class="modalDialog">
@@ -45,7 +52,7 @@
 </div>
 
 <div class="col-md-6 ">
-	<h6>COMMENTS</h6>
+	<h6>{{ comment.text }}</h6>
 </div>
 </div>
 
@@ -62,11 +69,12 @@
 </div>
 
 
-					{% endfor %}
+				{% endfor %}
 				</ul>
 			{% else %}
 				<strong>There are no jokes present.</strong>
 			{% endif %}
+		
 		</p>
 		</div>	
 	</div>

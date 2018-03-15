@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.decorators import login_required
-from jokeoverflow.models import Category, Video, Joke, UserProfile
+from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment
 from jokeoverflow.forms import UserProfileForm
 from jokeoverflow.youtube_search import *
 
@@ -100,7 +100,8 @@ def log_complaint(request):
 def top_rated_jokes(request):
     category_list = Category.objects.order_by('title')
     rated_jokes = Joke.objects.order_by('-upvotes')[:5]
-    context_dict = {'categories': category_list, 'topratedjokes': rated_jokes}
+    comments = Comment.objects.all()
+    context_dict = {'categories': category_list, 'comments': comments, 'topratedjokes': rated_jokes}
     response = render(request, 'jokeoverflow/top_rated_jokes.html', context_dict)
     return response
 

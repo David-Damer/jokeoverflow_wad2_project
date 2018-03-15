@@ -1,0 +1,14 @@
+{% extends 'jokeoverflow/base2.html' %}
+{% block title_block %}
+{% endblock %}
+{% block body_block %}
+	<div>
+	{% for joke in topratedjokes %}
+				{% for com in comments %}
+					{% if com.joke == joke %}
+						<ul>{{ com.comment_text }}</ul>
+					{% endif %}
+				{% endfor %} 
+		{% endfor %}
+	</div>
+{% endblock %}
