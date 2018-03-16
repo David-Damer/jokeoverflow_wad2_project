@@ -33,5 +33,11 @@ urlpatterns = [
         views.show_category, name='show_category'),
     url(r'register_profile/', views.register_profile, name='register_profile'),
     url(r'^add/$', views.auto_add_video, name='auto_add_video'),
+    url(r'^jokeoverflow/#joke(?P<pk>\d+)/comment/$', views.add_comment_to_joke, name='add_comment_to_joke'),
+    url(r'^top_rated_jokes/add_comment_to_joke/', views.add_comment_to_joke, name='add_comment_to_joke'),
+    url(r'^add_comment_to_joke/', views.add_comment_to_joke, name='add_comment_to_joke',),
+    url(r'^jokeoverflow/add_comment_to_joke/', views.add_comment_to_joke, name='add_comment_to_joke', ),
+
+    url(r'^testingSC1/', views.testingSC1, name='testingSC1'),
 
 ]

@@ -1,0 +1,177 @@
+{% extends 'jokeoverflow/base2.html' %}
+{% load staticfiles %}
+{% block title_block %}
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+    <link href="{% static "css/home.css" %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block body_block %}
+	
+<div class="container">
+        <!-- Example row of columns -->
+	<div class="row sc-title-block">
+		<div class="col-md-1">
+		</div>
+		<div class="col-md-10">
+			<h1 class="text-center">This is the HOME page</h1>
+		</div>
+		<div class="col-md-1">
+		</div>
+	</div>
+
+        <div class="row top-tables">
+
+
+          <div class="col-md-3 top-block">
+            <p class="text-center sc-block-title"> Recently Added Jokes </p>
+		<p>
+			{% if recentjokes%}
+				<ol class="list-group joke-list">
+
+{% for joke in recentjokes %}
+<div class = "box-cont" >
+<a href="#joke{{joke.id}}">{{ joke.title }} ({{joke.category}})<br><br></a>
+</div>
+
+<div id="joke{{joke.id}}" class="modalDialog">
+<div>
+	
+  	<a href="#close" title="Close" class="close">&times;</a>
+	<br>
+    <div class = "pop-joke-title text-center">{{ joke.title }}</div>
+	<br>
+    <div class = "pop-joke-text">{{ joke.joke_text }}</div>
+	<br>
+<div class="row">
+<div class="col-md-3 ">
+	{% if user.is_authenticated %}
+		<!--<button id="upvoteYES-image" class = "up-img"><img src="{% static "images/icons/upvoteYES.png" %}" ></button>-->
+		<img class = "vote-icon" src="{% static "images/icons/upvoteYES.png" %}" alt="Upvote" /> 
+	{% else %}
+		<img class = "vote-icon" src="{% static "images/icons/upvoteNO.png" %}" alt="Upvote" />
+	{% endif %}
+{{ joke.upvotes }}
+
+</div>
+<div class="col-md-3 ">
+	<img class = "vote-icon" src="{% static "images/icons/downvote.png" %}" alt="Upvote" /> 
+	{{ joke.downvotes }}
+</div>
+
+<div class="col-md-6 ">
+	<p>COMMENTS: <br>
+			  <dl class="dl-horizontal">
+
+</dl>
+		{% for comment in comments %}
+			{% if comment.joke == joke %}
+			  {% for user in users %}
+			  {% if comment.made_by == user %}
+			  <dt>{{user.date_of_birth}} {{ comment.made_by}}</dt>
+			  {% endif %}
+			  {% endfor %}
+  <dd>{{ comment.comment_text </dd>
+			  <br>
+			{% endif %}
+		{% endfor %} </p>
+</div>
+</div>
+
+	<div class="clearfix visible-xs">
+        <!-- clearfix xs cols every 2 -->
+    </div>
+
+<div class="row">
+<div class = "col-md-12">
+	<h6>Joke Author: {{joke.added_by}}<h6>
+</div>
+</div>
+
+
+
+
+</div>
+</div>
+
+
+					{% endfor %}
+				</ol>
+			{% else %}
+				<strong>There are no jokes present.</strong>
+			{% endif %}
+		</p>
+          </div>
+
+<br>
+	<div class="col-md-1">
+	</div>
+<br>
+
+
+
+          <div class="col-md-4 top-block">
+            <p class="text-center sc-block-title"> Most Liked Jokes </p>
+		<p>
+			{% if topratedjokes %}
+				<ul class="list-group">
+					{% for joke in topratedjokes %}
+						 <li>{{ joke.title }}</li>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<strong>There are no jokes present.</strong>
+			{% endif %}
+		</p>
+          </div>
+
+	
+	<br>
+
+
+<br>
+
+          <div class="col-md-4 top-block "pre-scrollable"">
+            <p class="text-center sc-block-title"> Most Liked Videos </p>
+		<p class="section-list">
+			{% if topratedvideos %}
+				<ul class="list-group">
+					{% for video in topratedvideos %}
+						<li class="text-center top-video-item">
+						
+							<p>{{ video.title }}</p>
+					
+							<img class="thumbnail" src="{{ video.thumbnail }}" alt="No thumbnail">
+						<br>
+						<br>
+						</li>
+						<br>
+					{% endfor %}
+				</ul>
+			{% else %}
+				<strong>There are no videos present.</strong>
+			{% endif %}
+		</p>
+          </div>
+
+
+
+
+        </div>
+
+        <hr>
+
+</div> <!-- /container -->
+
+
+{% endblock %}

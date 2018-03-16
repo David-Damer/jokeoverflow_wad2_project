@@ -4,6 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.decorators import login_required
 from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment
 from jokeoverflow.forms import UserProfileForm
+from jokeoverflow.forms import CommentForm
 from django.shortcuts import redirect
 from jokeoverflow.youtube_search import *
 from django.template.defaulttags import register
@@ -77,7 +78,7 @@ def user_profiles(request):
 
 def top_rated_videos(request):
     category_list = Category.objects.order_by('title')
-    rated_videos = Video.objects.order_by('-upvotes')[:10]
+    rated_videos = Video.objects.order_by('-rating')[:10]
     context_dict = {'categories': category_list, 'topratedvideos': rated_videos,}
     result_list = []
     query = ''
@@ -188,3 +189,40 @@ def auto_add_video(request):
         context_dict = {'categories': category_list, 'topratedvideos': videos, }
 
         return render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
+
+def testingSC1(request):
+    return HttpResponse("AAAAAAAAAAA")
+
+def add_comment_to_joke(request, joke_slug, user):
+    try:
+        joke = Joke.objects.get(slug = joke_slug)
+    except Joke.DoesNotExist:
+        joke = None
+
+    form = CommentForm()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            if joke:
+                comment = form.save(commit=False)
+                comment.joke = joke
+                comment.date_added = date
+                comment.made_by = user
+                comment.save()
+                return top_rated_jokes(request)
+            else:
+                print(form.errors)
+        context_dict = {'form': form, 'joke':joke, 'user': user}
+        return render(request, context_dict)
+
+
+    form = CommentForm()
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+        else:
+            print(form.errors)
+    return render(request, 'jokeoverflow/add_comment_to_joke.html', {'form': form})
+

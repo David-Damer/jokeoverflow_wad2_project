@@ -63,7 +63,7 @@ class Joke(models.Model):
     downvotes = models.IntegerField(default=0)
     flagged = models.BooleanField(default=False)
     category = models.ForeignKey(Category)
-    added_by = models.ForeignKey(User)
+    added_by = models.ForeignKey(User, related_name='jokes')
     rating = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
 
@@ -79,7 +79,7 @@ class Comment(models.Model):
     comment_text = models.TextField(max_length=256, unique=False)
     made_by = models.ForeignKey(User)
     date_added = models.DateField(auto_now_add=True)
-    joke = models.ForeignKey(Joke)
+    joke = models.ForeignKey(Joke, related_name='comments')
 
     def __str__(self):
         return self.comment_text

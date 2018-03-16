@@ -1,5 +1,6 @@
 {% extends 'jokeoverflow/base2.html' %}
 {% load staticfiles %}
+{% load bootstrap_toolkit %
 {% block title_block %}
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="{% static "css/topratedjokes.css" %}" rel="stylesheet">
@@ -52,7 +53,7 @@ input[type=text]:focus {
 		<div class ="col-md-3">
 		</div>
 		<div class="col-md-5 list-box sc-list-box">
-			<div class="box-title text-center"><p>Most Liked Jokes</p></div>
+			<div class="box-title text-center sc-heading-title"><p>Most Liked Jokes</p></div>
 			<p>
 				{% if topratedjokes %}
 					<ul class="list-group joke-list">
@@ -70,7 +71,7 @@ input[type=text]:focus {
 								<br>
 								<div class = "pop-joke-text">
 									{{ joke.joke_text }}
-									{{ joke.joke_text|linebreaks }}
+									{# {{ joke.joke_text|linebreaks }} #}
 								</div>
 								<br>
 								<div class="row">
@@ -88,7 +89,14 @@ input[type=text]:focus {
 										{{ joke.downvotes }}
 									</div>
 									<div class="col-md-6 comments-container">
-											<br>Comments: <br>
+                                            {% if joke.comments.count == 1 %}
+
+                                        <br>{{ joke.comments.count }} Comment: <br>
+                                        {% else %}
+
+                                        <br>{{ joke.comments.count }} Comments: <br>
+                                        {% endif %}
+
 											<div class="comment-field">
 												<hr>
 												{% for comment in comments %}
@@ -98,7 +106,7 @@ input[type=text]:focus {
 												<div class="row">
 													<div class="col-md-3 comment-profile-pic">
 															<!--<img src="{{ user.user_picture}}" alt="No profile picture"}>-->
-															<img style="height:60px; float:right;" src="{{MEDIA_URL}}{{user.user_picture}}" alt="No profile picture"}>
+															<img style="height:60px; width:60px;" class="sc-com-profile-pic" style="float:right;" src="{{MEDIA_URL}}{{user.user_picture}}" alt="No profile picture"}>
 														</div>
 													<div class="col-md-9">
 														{{ comment.comment_text }}
@@ -112,7 +120,7 @@ input[type=text]:focus {
 												{% endfor %}
 											</div>
 									</div>
-								
+
 								</div>
 								<br>
 								<div class="row">
@@ -120,21 +128,47 @@ input[type=text]:focus {
 										<div>
 											{% for user in users %}
 											{% if user.user == joke.added_by %}
-												<img style="height:60px; float:right;" src="{{MEDIA_URL}}{{user.user_picture}}" alt="No profile picture"}>
+												<img style="height:60px; width:60px; float:right;" src="{{MEDIA_URL}}{{user.user_picture}}" alt="No profile picture"}>
 											{% endif %}
 											{% endfor %}
 										</div>
 									</div>
 									<div class = "col-md-5">
 										<div>
-											Joke Author: {{joke.added_by}}
+											Joke Author: <strong>{{joke.added_by}}</strong>
 											<br>
-											Date Added: {{joke.date_added}}
+											Date Added: <strong>{{joke.date_added}}</strong>
 										</div>
 									</div>
 									<div class = "col-md-6">
 										<div>
-											<h1>Make a Comment</h1>
+											<p>Make a Comment</p>
+
+
+
+
+{% for comment in joke.comments.all %}
+    <div class="comment">
+        <div class="date">{{ comment.date_added }}</div>
+        <strong>{{ comment.added_by }}</strong>
+        <p>{{ comment.comment_text|linebreaks }}</p>
+    </div>
+{% empty %}
+    <p>No comments here yet :(</p>
+{% endfor %}
+
+<a href="{% url 'jokeoverflow:testingSC1' %}">Add a Comment</a>
+
+
+
+
+
+
+
+
+
+
+
 										</div>
 									</div>
 								</div>
@@ -156,7 +190,7 @@ input[type=text]:focus {
 	<hr>
 
 
-	<div class="box-title text-center">
+	<div class="box-title sc-heading-title text-center">
 	<p>Most Liked Jokes in each Category</p>
 	</div>
 
@@ -165,9 +199,10 @@ input[type=text]:focus {
 
 		{% for cat in categories %}
 			<div class = "col-md-5 list-box sc-list-box">
-		
+
 	<p>
 	<div class="box-title text-center">Top Jokes in '{{ cat.title }}'</div>
+                <br>
 				 <div class="joke-list">
 			{% for joke in cat_rated_jokes|get_item:cat.title %}
 				{{joke.title}} <br>
