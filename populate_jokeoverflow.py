@@ -15,20 +15,22 @@ def populate():
     users = [
         {'name': 'EricCarpenter', 'email': 'eric@thepub.com', 'password': 'p@ssw0rd1',
          'date_of_birth': '1965-05-07', 'user_bio': 'I\'m a retired carpenter, my pals in the pub say I\'m  hilarious '
-                                                    'so I thought I\'d give this site a wee go.'},
+                                                    'so I thought I\'d give this site a wee go.',
+         'user_picture': 'eric.jpg'},
         {'name': 'WeeCraig', 'email': 'w33craig@thehoose.com', 'password': 'p@ssw0rd2',
          'date_of_birth': '1992-12-10',
          'user_bio': 'I\'m serious about comedy, but nothing too smutty will get past me!\n '
-                     'I\'m a merchant banker by day and joke moderator by night. '},
+                     'I\'m a merchant banker by day and joke moderator by night. ', 'user_picture': 'craig.jpg'},
         {'name': 'SammyTheMan', 'email': 'sammy@thebbc.co.uk', 'password': 'p@ssw0rd3',
-         'date_of_birth': '1994-02-16', 'user_bio': 'I write jokes for the BBC and I come here for inspiration.'},
+         'date_of_birth': '1994-02-16', 'user_bio': 'I write jokes for the BBC and I come here for inspiration.',
+         'user_picture': None},
         {'name': 'PatriciaWorker', 'email': 'fatpat@theoffice.com', 'password': 'p@ssw0rd4',
          'date_of_birth': '1994-04-06', 'user_bio': 'I\'m an office worker for a construction company.\n'
                                                     'The only light relief I get is at lunchtime when I\'m '
-                                                    'browsing joke overflow.'},
+                                                    'browsing joke overflow.', 'user_picture': 'patricia.jpg'},
         {'name': 'JimmyJokington', 'email': 'jj@home.com', 'password': 'p@ssw0rd5',
          'date_of_birth': '2002-04-06', 'user_bio': 'I like to try these jokes on the girls at school in the hope that'
-                                                    ' one will go out with me.'},
+                                                    ' one will go out with me.', 'user_picture': None},
     ]
 
     for user in users:
@@ -37,8 +39,9 @@ def populate():
         password = user['password']
         dob = user['date_of_birth']
         bio = user['user_bio']
+        picture = user['user_picture']
         usr = add_user(username, email, password)
-        usrprof = add_profile(user=usr, date_of_birth=dob, user_bio=bio)
+        usrprof = add_profile(user=usr, date_of_birth=dob, user_bio=bio, user_picture=picture)
 
     knock_knock_jokes = [
         {'title': 'Dr who joke', 'text': 'Knock knock.\nWho\'s there?\nDr.\nDr who?\nNo, Dr Jones.',
@@ -242,11 +245,11 @@ def populate():
         add_comment(comment_text=comment['text'], added_by=usr, joke=joke, date_added=comment['date_added'])
 
 
-def add_profile(user, date_of_birth, user_bio):
+def add_profile(user, date_of_birth, user_bio, user_picture):
     up = UserProfile.objects.get_or_create(user=user, date_of_birth=date_of_birth)[0]
     up.user_bio = user_bio
-    up.user_picture = None
-    up.image_from = "http://lorempixel.com/64/64/people/"
+    up.user_picture = user_picture
+    up.image_from = "http://google.com"
     up.save()
     return up
 
@@ -281,7 +284,7 @@ def add_video(title, url, date_added, added_by, upvotes, downvotes, thumbnail):
     vid.upvotes = upvotes
     vid.downvotes = downvotes
     vid.rating = upvotes - downvotes
-    vid.embed_code ='https://www.youtube.com/embed/' + url.split('=', 1)[-1]
+    vid.embed_code = 'https://www.youtube.com/embed/' + url.split('=', 1)[-1]
     vid.thumbnail = thumbnail
     vid.save()
     return vid

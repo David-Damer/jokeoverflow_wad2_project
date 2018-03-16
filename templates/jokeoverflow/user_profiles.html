@@ -10,9 +10,9 @@
 				<ul class="list-group">
 					{% for user in user_profiles %}
                         {% if user.user_picture %}
-                        <img width="64" height="64" src="{{ user.user_picture.url }}"/>
+                        <img width="64" height="64" src="{{ MEDIA_URL }}{{ user.user_picture }}"/>
                         {% else %}
-                        <img width="64" height="64" src="http://lorempixel.com/64/64/people/"/>
+                        <img width="64" height="64" src="{{ MEDIA_URL }}default.PNG" alt="No image available"/>
                         {% endif %}
 						<li> {{ user.user }} - {{ user.user_bio }}</li>
 					{% endfor %}
