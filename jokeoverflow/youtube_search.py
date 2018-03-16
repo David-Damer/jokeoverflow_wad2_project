@@ -7,7 +7,7 @@
 
 import argparse
 from googleapiclient.discovery import build
-from googleapiclient.errors import HttpError
+
 
 # Set DEVELOPER_KEY to the API key value from the APIs & auth > Registered apps
 # tab of
@@ -47,13 +47,13 @@ def youtube_search(q):
     return results
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--q', help='Search term', default='Google')
-    parser.add_argument('--max-results', help='Max results', default=25)
-    args = parser.parse_args()
-
-    try:
-        youtube_search(args)
-    except HttpError as e:
-        print('An HTTP error %d occurred:\n%s' % (e.resp.status, e.content))
+# if __name__ == '__main__':
+#     parser = argparse.ArgumentParser()
+#     parser.add_argument('--q', help='Search term', default='Google')
+#     parser.add_argument('--max-results', help='Max results', default=25)
+#     args = parser.parse_args()
+#
+#     try:
+#         youtube_search(args)
+#     except HttpError as e:
+#         print('An HTTP error %d occurred:\n%s' % (e.resp.status, e.content))
