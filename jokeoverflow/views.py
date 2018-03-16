@@ -92,7 +92,22 @@ def top_rated_videos(request):
     response = render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
     return response
 
+@login_required
 def log_complaint(request):
+    form = ComplaintForm()
+
+    if request.method == 'POST':
+        form = ComplaintForm(request.POST)
+        if form.is_valid():
+            complaint = form.save(commit = False)
+            complaint.user = request.user
+            complaint.save()
+            
+            return redirect('log_complaint')
+        else:
+            print(form.errors)
+            
+        
     category_list = Category.objects.order_by('title')
     context_dict = {'categories': category_list}
     response = render(request, 'jokeoverflow/log_complaint.html', context_dict)
