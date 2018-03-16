@@ -6,6 +6,7 @@ from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment
 from jokeoverflow.forms import UserProfileForm
 from django.shortcuts import redirect
 from jokeoverflow.youtube_search import *
+from django.template.defaulttags import register
 
 
 
@@ -101,11 +102,22 @@ def log_complaint(request):
 def top_rated_jokes(request):
     category_list = Category.objects.order_by('title')
     rated_jokes = Joke.objects.order_by('-upvotes')[:5]
+    cat_rated_dict = {}
+    for cat in category_list:
+        rated_cat_jokes = Joke.objects.filter(category=cat).order_by('upvotes')[:5]
+        cat_rated_dict[str(cat)] = rated_cat_jokes
+
+
+    print(str(cat_rated_dict))
     comments = Comment.objects.all()
     users = UserProfile.objects.all()
-    context_dict = {'categories': category_list, 'comments': comments, 'topratedjokes': rated_jokes, 'users': users}
+    context_dict = {'categories': category_list, 'cat_rated_jokes': cat_rated_dict, 'comments': comments, 'topratedjokes': rated_jokes, 'users': users}
     response = render(request, 'jokeoverflow/top_rated_jokes.html', context_dict)
     return response
+
+@register.filter
+def get_item(dictionary, key):
+    return dictionary.get(key)
 
 
 def search(request):

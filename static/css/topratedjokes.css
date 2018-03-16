@@ -41,7 +41,7 @@ h1{
 	background-color: #000000;
 }
 
-.col-md-6{
+.sc-list-box{
 	border-width:4px;
 	background-color: rgba(255, 204, 0, 0.2);
 	border-radius: 20px;
@@ -94,8 +94,8 @@ p{
         padding: 5px 20px 13px 20px;
         border-radius: 10px;
         background: #fff;
-        background: -moz-linear-gradient(#ffcc00, #999);
-       /* background: -webkit-linear-gradient(#ffcc00, #999); */
+        background: -moz-linear-gradient(#fff5cc, #ffffff);
+       background: -webkit-linear-gradient(#fff5cc, #fff);
 	border-color:#ffcc00;
 	border-width:2px;
 	border-style:solid;
@@ -150,6 +150,8 @@ p{
     font-style: italic;
 
 }
+
+/*
     .close {
         background: #ffcc00;
         color: black;
@@ -179,7 +181,7 @@ text-decoration: none;
 color:#ffcc00;
 opacity: 1;
 }
-
+*/
 
 
 .pop-joke-title{
@@ -201,7 +203,8 @@ padding: 25px 25px 25px 25px;
 }
 
 .vote-icon{
-	width:20px;
+	width:40px;
+	height:40px;
 }
 
 #upvoteYES-image{
@@ -236,5 +239,81 @@ border-color:black;
 border:solid;
 background-color:white;
 height: 150px;
-overflow-y: scroll
+overflow-y: scroll;
+overflow-x:hidden;
+}
+
+.search-div{
+}
+
+.sc-joke-search{
+    background-color:red;
+    font-weight:bold;
+    width:400px;
+}
+
+.sc-page-title p{
+    color:black;
+    font-size:30px;
+    font-weight:bold;
+    font-decoration:underline;
+
+
+}
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 64px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.comment-profile-pic{
+    width:100%;
+    border-right:1px solid #ccc;
+}
+
+.comment-profile-pic img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.box-title{
+    color:black;
+font-size:30px;
+font-size: 2vmax;
+    text-decoration:underline;
+}
+
+.box-title p{
+    color:black;
+    font-size:30px;
+font-size: 2vmax;
+    text-decoration:underline;
+}
+
+.list-box{
+
+    margin-left:auto;
+    margin-right:auto;
+    border-spacing:100px;
+    width:50%;
+    margin:4%;
+    /*background-color:red;*/
+
+}
+
+
+.logo-top{
+width:100%;
+margin:0px;
 }
