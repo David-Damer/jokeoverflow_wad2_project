@@ -2,32 +2,34 @@
 {% block title_block %}
 {% endblock %}
 {% block body_block %}
-<div class="container">
-    <h1>This is the TOP RATED VIDEOS page</h1>
-    <div class="row">
-        <div class="col-md-12">
-            <h2> Most Liked Videos </h2>
+    <div class="container">
+        <h1>This is the TOP RATED VIDEOS page</h1>
+        <div class="row">
+            <div class="col-md-12">
+                <div id="videos">
+                    <h2> Most Liked Videos </h2>
 
 
 
-            {% if topratedvideos %}
+                    {% if topratedvideos %}
 
-                {% for video in topratedvideos %}
-                    <hr>
-                    <h5>{{ video.title }}</h5>
-                    <img class="thumbnail"
-                                            src="{{ video.thumbnail }}" alt="No thumbnail">
-                    <iframe width="420" height="280" title="{{ video.title }}"
-                            src={{ video.embed_code }}
-                                    allowfullscreen>
-                    </iframe>
-                    <hr>
+                        {% for video in topratedvideos %}
+                            <hr>
+                            <h5>{{ video.title }}</h5>
+                            <img class="thumbnail"
+                                 src="{{ video.thumbnail }}" alt="No thumbnail">
+                            <iframe width="420" height="280" title="{{ video.title }}"
+                                    src={{ video.embed_code }}
+                                            allowfullscreen>
+                            </iframe>
+                            <hr>
 
-                {% endfor %}
-            {% else %}
-                <strong>We ain't got no vids man!!</strong>
-            {% endif %}
-
+                        {% endfor %}
+                    {% else %}
+                        <strong>We ain't got no vids man!!</strong>
+                    {% endif %}
+                </div>
+            </div>
         </div>
     </div>
     <div>
@@ -56,15 +58,18 @@
                             <div class="list-group-item">
                                 <h6 class="list-group-item-heading">
                                     <a title="Click to watch!"
-                                            href="https://www.youtube.com/embed/{{ result.id }}"><img class="thumbnail"
-                                            src="{{ result.thumbnail.url }}" alt="No thumbnail">{{ result.title }}</a>
+                                       href="https://www.youtube.com/embed/{{ result.id }}"><img class="thumbnail"
+                                                                                                 src="{{ result.thumbnail.url }}"
+                                                                                                 alt="No thumbnail">{{ result.title }}
+                                    </a>
                                 </h6>
                                 <p class="list-group-item-text">{{ result.description }}</p>
                                 {% if user.is_authenticated %}
                                     <br>
                                     <button data-id="{{ result.id }}" data-title="{{ result.title }}"
                                             data-code="https://www.youtube.com/embed/{{ result.id }}"
-                                            data-added-by="{{ user }}" data-url="None" data-thumb="{{ result.thumbnail.url }}"
+                                            data-added-by="{{ user }}" data-url="None"
+                                            data-thumb="{{ result.thumbnail.url }}"
                                             class="video-add btn btn-info btn-sm" type="button">Add
                                     </button>
                                     <br>
@@ -79,5 +84,5 @@
             </div>
         {% endif %}
     <br>
-</div>
+    </div>
 {% endblock %}

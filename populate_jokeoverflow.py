@@ -183,11 +183,11 @@ def populate():
          'thumbnail': 'http://img.youtube.com/vi/2uxtfgx5S2s/3.jpg'
          },
         {'title': 'Fails', 'url': 'https://www.youtube.com/watch?v=iqV9aAqBhqA', 'added_by': 'EricCarpenter',
-         'date_added': '2018-10-12', 'upvotes': 41, 'downvotes': 144,
+         'date_added': '2017-10-12', 'upvotes': 41, 'downvotes': 144,
          'thumbnail': 'http://img.youtube.com/vi/iqV9aAqBhqA/3.jpg'
          },
         {'title': 'Dogs', 'url': 'https://www.youtube.com/watch?v=aEzZLXBH3rU', 'added_by': 'EricCarpenter',
-         'date_added': '2018-10-09', 'upvotes': 12, 'downvotes': 8,
+         'date_added': '2017-10-09', 'upvotes': 12, 'downvotes': 8,
          'thumbnail': 'http://img.youtube.com/vi/aEzZLXBH3rU/3.jpg'
          }
 

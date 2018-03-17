@@ -4,16 +4,17 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.decorators import login_required
 from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment
 from jokeoverflow.forms import UserProfileForm
-from jokeoverflow.forms import CommentForm
+from jokeoverflow.forms import CommentForm, ComplaintForm
 from django.shortcuts import redirect
 from jokeoverflow.youtube_search import *
 from django.template.defaulttags import register
+from django.http import HttpResponse
 
 
 
 def home(request):
     category_list = Category.objects.order_by('title')
-    rated_videos = Video.objects.order_by('-rating')[:5]
+    rated_videos = Video.objects.all().order_by('-date_added')[:5]
     rated_jokes = Joke.objects.order_by('-rating')[:10]
     recent_jokes = Joke.objects.order_by('-date_added')[:10]
     context_dict = {'categories': category_list, 'topratedvideos': rated_videos, 'topratedjokes': rated_jokes,
@@ -68,6 +69,7 @@ def latest_news(request):
     response = render(request, 'jokeoverflow/latest_news.html', context_dict)
     return response
 
+
 def user_profiles(request):
     category_list = Category.objects.order_by('title')
     user_profiles = UserProfile.objects.order_by('user')
@@ -78,8 +80,8 @@ def user_profiles(request):
 
 def top_rated_videos(request):
     category_list = Category.objects.order_by('title')
-    rated_videos = Video.objects.order_by('-rating')[:10]
-    context_dict = {'categories': category_list, 'topratedvideos': rated_videos,}
+    rated_videos = Video.objects.all().order_by('-date_added')[:10]
+    context_dict = {'categories': category_list, 'topratedvideos': rated_videos}
     result_list = []
     query = ''
 
@@ -93,6 +95,7 @@ def top_rated_videos(request):
     response = render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
     return response
 
+
 @login_required
 def log_complaint(request):
     form = ComplaintForm()
@@ -100,15 +103,14 @@ def log_complaint(request):
     if request.method == 'POST':
         form = ComplaintForm(request.POST)
         if form.is_valid():
-            complaint = form.save(commit = False)
+            complaint = form.save(commit=False)
             complaint.user = request.user
             complaint.save()
-            
+
             return redirect('log_complaint')
         else:
             print(form.errors)
-            
-        
+
     category_list = Category.objects.order_by('title')
     context_dict = {'categories': category_list}
     response = render(request, 'jokeoverflow/log_complaint.html', context_dict)
@@ -123,13 +125,14 @@ def top_rated_jokes(request):
         rated_cat_jokes = Joke.objects.filter(category=cat).order_by('upvotes')[:5]
         cat_rated_dict[str(cat)] = rated_cat_jokes
 
-
     print(str(cat_rated_dict))
     comments = Comment.objects.all()
     users = UserProfile.objects.all()
-    context_dict = {'categories': category_list, 'cat_rated_jokes': cat_rated_dict, 'comments': comments, 'topratedjokes': rated_jokes, 'users': users}
+    context_dict = {'categories': category_list, 'cat_rated_jokes': cat_rated_dict, 'comments': comments,
+                    'topratedjokes': rated_jokes, 'users': users}
     response = render(request, 'jokeoverflow/top_rated_jokes.html', context_dict)
     return response
+
 
 @register.filter
 def get_item(dictionary, key):
@@ -148,6 +151,7 @@ def search(request):
     context_dictionary = {'previous_query': query, 'result_list': result_list}
     return render(request, 'jokeoverflow/top_rated_videos.html', context_dictionary)
 
+
 def register_profile(request):
     form = UserProfileForm()
 
@@ -162,10 +166,9 @@ def register_profile(request):
         else:
             print(form.errors)
 
-    context_dict = {'form':form}
+    context_dict = {'form': form}
 
     return render(request, 'jokeoverflow/register_profile.html', context_dict)
-
 
 
 @login_required
@@ -184,18 +187,20 @@ def auto_add_video(request):
         print('added')
         vid = Video.objects.get_or_create(title=title, url=url, embed_code=code,
                                           thumbnail=thumb, added_by=request.user)
-        videos = Video.objects.order_by('-upvotes')[:10]
-        category_list = Category.objects.order_by('title')
-        context_dict = {'categories': category_list, 'topratedvideos': videos, }
+    videos = Video.objects.all().order_by('-date_added')[:10]
+    category_list = Category.objects.order_by('title')
+    context_dict = {'categories': category_list, 'topratedvideos': videos, }
 
-        return render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
+    return render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
+
 
 def testingSC1(request):
     return HttpResponse("AAAAAAAAAAA")
 
+
 def add_comment_to_joke(request, joke_slug, user):
     try:
-        joke = Joke.objects.get(slug = joke_slug)
+        joke = Joke.objects.get(slug=joke_slug)
     except Joke.DoesNotExist:
         joke = None
 
@@ -206,15 +211,13 @@ def add_comment_to_joke(request, joke_slug, user):
             if joke:
                 comment = form.save(commit=False)
                 comment.joke = joke
-                comment.date_added = date
                 comment.made_by = user
                 comment.save()
                 return top_rated_jokes(request)
             else:
                 print(form.errors)
-        context_dict = {'form': form, 'joke':joke, 'user': user}
+        context_dict = {'form': form, 'joke': joke, 'user': user}
         return render(request, context_dict)
-
 
     form = CommentForm()
 
@@ -225,4 +228,3 @@ def add_comment_to_joke(request, joke_slug, user):
         else:
             print(form.errors)
     return render(request, 'jokeoverflow/add_comment_to_joke.html', {'form': form})
-

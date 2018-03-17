@@ -6,8 +6,8 @@ $('.video-add ').click(function () {
     var title = $(this).attr("data-title");
     var me = $(this);
     $.get('/jokeoverflow/add/',
-        {vid_id: id, url: url, code: code, thumb: thumb, title: title}, function(){
-        console.log("Video added");
+        {vid_id: id, url: url, code: code, thumb: thumb, title: title}, function(data){
+        $('#videos').HTML(data);
         me.hide();
         });
 });
