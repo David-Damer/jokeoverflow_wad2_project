@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^log_complaint', views.log_complaint, name='log_complaint'),
     url(r'^faq/', views.faq, name='faq'),
 
-    url(r'^testingSC1/', views.testingSC1, name='testingSC1'),
+    url(r'^testingSC1/(?P<jid>\d+)/$', views.testingSC1, name='testingSC1'),
 
 
 

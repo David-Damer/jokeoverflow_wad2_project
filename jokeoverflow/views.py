@@ -128,8 +128,31 @@ def top_rated_jokes(request):
     print(str(cat_rated_dict))
     comments = Comment.objects.all()
     users = UserProfile.objects.all()
+
+
+    testjoke = Joke.objects.order_by('title')[0]
+
+
+
+
+    form = ComplaintForm(request.POST)
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.made_by = request.user
+            comment.joke = Joke.objects.order_by('title')[0]
+            comment.save()
+
+            return redirect('home')
+        else:
+            print(form.errors)
+
+
+
+
     context_dict = {'categories': category_list, 'cat_rated_jokes': cat_rated_dict, 'comments': comments,
-                    'topratedjokes': rated_jokes, 'users': users}
+                    'topratedjokes': rated_jokes, 'users': users, 'form':form}
     response = render(request, 'jokeoverflow/top_rated_jokes.html', context_dict)
     return response
 
@@ -156,7 +179,7 @@ def register_profile(request):
     form = UserProfileForm()
 
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES)
+        form = UserProfileForm(request.POST)
         if form.is_valid():
             user_profile = form.save(commit=False)
             user_profile.user = request.user
@@ -194,7 +217,7 @@ def auto_add_video(request):
     return render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
 
 
-def testingSC1(request):
+def testingSC1(request, jid):
     context_dict = {}
 
     form = CommentForm()
@@ -204,6 +227,7 @@ def testingSC1(request):
     userrequest = request.user
     #jokerequest = request.joke
     #jokepass = joke_slug
+    joke = jid
 
     try:
         joke = Joke.objects.get(slug=request)
@@ -215,11 +239,11 @@ def testingSC1(request):
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
-            comment.joke = request.request.POST.get('joke')
+            comment.joke = Joke.objects.filter(id=jid)[0]
             comment.made_by = request.user
             print(form.errors)
 
-    context_dict = {'form': form}
+    context_dict = {'form': form, 'jid':jid}
 
     return render(request, 'jokeoverflow/testingSC1.html', context_dict)
 
