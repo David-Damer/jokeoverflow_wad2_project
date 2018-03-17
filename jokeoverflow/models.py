@@ -86,8 +86,8 @@ class Comment(models.Model):
 
 
 class Voted(models.Model):
-    joke = models.OneToOneField(Joke)
-    user = models.OneToOneField(User)
+    joke = models.ForeignKey(Joke)
+    user = models.ForeignKey(User)
 
     def __str__(self):
         return self.joke.title + " : Voted on by " + self.user.username

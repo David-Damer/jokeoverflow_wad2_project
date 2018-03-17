@@ -12,3 +12,10 @@ $('.video-add ').click(function () {
 
         });
 });
+$(".vote").click(function () {
+    var joke = $(this).attr('data');
+    $.get('/jokeoverflow/upvote/', {djoke: joke}, function(data){
+        $('#upvotes').html(data);
+    } );
+
+});

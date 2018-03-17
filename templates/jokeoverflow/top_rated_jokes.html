@@ -1,228 +1,228 @@
 {% extends 'jokeoverflow/base2.html' %}
 {% load staticfiles %}
-{% load bootstrap_toolkit %
+
 {% block title_block %}
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link href="{% static "css/topratedjokes.css" %}" rel="stylesheet">
 
-<style>
-input[type=text] {
-    width: 100%;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    font-size: 16px;
-    background-color: white;
-    background-image: url({% static "images/icons/search.gif" %});
-    background-size: 30px;
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    padding: 12px 20px 12px 50px;
-    -webkit-transition: width 0.4s ease-in-out;
-    transition: width 0.4s ease-in-out;
-}
+    <style>
+        input[type=text] {
+            width: 100%;
+            box-sizing: border-box;
+            border: 2px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+            background-image: url({% static "images/icons/search.gif" %});
+            background-size: 30px;
+            background-position: 10px 10px;
+            background-repeat: no-repeat;
+            padding: 12px 20px 12px 50px;
+            -webkit-transition: width 0.4s ease-in-out;
+            transition: width 0.4s ease-in-out;
+        }
 
-input[type=text]:focus {
-    width: 100%;
-}
-</style>
+        input[type=text]:focus {
+            width: 100%;
+        }
+    </style>
 
 {% endblock %}
 {% block body_block %}
-<div class="container">
-	<div class="text-center sc-page-title">
-	<p>This is the TOP RATED JOKES page</p>
-	</div>
+    <div class="container">
+        <div class="text-center sc-page-title">
+            <p>This is the TOP RATED JOKES page</p>
+        </div>
 
-	<div class="row">
-		<div class = "col-md-3">
-		</div>
+        <div class="row">
+            <div class="col-md-3">
+            </div>
 
-		<div class="search-div col-md-6">
-		<form>
-		  <input class="sc-joke-search" type="text"  name="search-joke" placeholder="Search for joke...">
-		</form>
+            <div class="search-div col-md-6">
+                <form>
+                    <input class="sc-joke-search" type="text" name="search-joke" placeholder="Search for joke...">
+                </form>
 
-		</div>
+            </div>
 
-		<div class = "col-md-3">
-		</div>
-	</div>
-		<br>
-	<div class="row">
-		<div class ="col-md-3">
-		</div>
-		<div class="col-md-5 list-box sc-list-box">
-			<div class="box-title text-center sc-heading-title"><p>Most Liked Jokes</p></div>
-			<p>
-				{% if topratedjokes %}
-					<ul class="list-group joke-list">
-						{% for joke in topratedjokes %}
-							<div class = "box-cont" >
-								<a href="#joke{{joke.id}}">{{ joke.title }}</a>
-							</div>
-							<div id="joke{{joke.id}}" class="modalDialog">
-							<div>
-								<a href="#close" title="Close" class="close">&times;</a>
-								<p>
-								<div class = "pop-joke-title text-center">
-									{{ joke.title }}
-								</div>
-								<br>
-								<div class = "pop-joke-text">
-									{{ joke.joke_text }}
-									{# {{ joke.joke_text|linebreaks }} #}
-								</div>
-								<br>
-								<div class="row">
-									<div class="col-md-3 ">
-										{% if user.is_authenticated %}
-											<!--<button id="upvoteYES-image" class = "up-img"><img src="{% static "images/icons/upvoteYES.png" %}" ></button>-->
-											<img class = "vote-icon" src="{% static "images/icons/upvoteYES.png" %}" alt="Upvote" />
-										{% else %}
-											<img class = "vote-icon" src="{% static "images/icons/upvoteNO.png" %}" alt="Upvote" />
-										{% endif %}
-										{{ joke.upvotes }}
-									</div>
-									<div class="col-md-3 ">
-										<img class = "vote-icon" src="{% static "images/icons/downvote.png" %}" alt="Downvote" />
-										{{ joke.downvotes }}
-									</div>
-									<div class="col-md-6 comments-container">
-                                            {% if joke.comments.count == 1 %}
+            <div class="col-md-3">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-5 list-box sc-list-box">
+                <div class="box-title text-center sc-heading-title"><p>Most Liked Jokes</p></div>
+                <p>
+                    {% if topratedjokes %}
+                        <ul class="list-group joke-list">
+                            {% for joke in topratedjokes %}
+                                <div class="box-cont">
+                                    <a href="#joke{{ joke.id }}">{{ joke.title }}</a>
+                                </div>
+                                <div id="joke{{ joke.id }}" class="modalDialog">
+                                    <div>
+                                        <a href="#close" title="Close" class="close">&times;</a>
+                                <p>
+                                <div class="pop-joke-title text-center">
+                                    {{ joke.title }}
+                                </div>
+                                <br>
+                                <div class="pop-joke-text">
+                                    {{ joke.joke_text }}
+                                    {# {{ joke.joke_text|linebreaks }} #}
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-3 ">
+                                        {% if user.is_authenticated %}
+                                            <input class="vote" type="image"
+                                                   src="{% static "images/icons/upvoteYES.png" %}" alt="Upvote"
+                                                   width="48" height="48" title="Like this joke">
+                                            <!--<img class = "vote-icon" src="{% static "images/icons/upvoteYES.png" %}" alt="Upvote" />-->
+                                        {% else %}
+                                            <img class="vote-icon" src="{% static "images/icons/upvoteNO.png" %}"
+                                                 alt="Upvote"/>
+                                        {% endif %}
+                                        {{ joke.upvotes }}
+                                    </div>
+                                    <div class="col-md-3 ">
+                                        <input class="down_vote" type="image"
+                                               src="{% static "images/icons/downvote.png" %}" alt="Upvote" width="48"
+                                               height="48" title="Dislike this joke">
+                                        <!--<img class = "vote-icon" src="{% static "images/icons/downvote.png" %}" alt="Downvote" />-->
+                                        {{ joke.downvotes }}
+                                    </div>
+                                    <div class="col-md-6 comments-container">
+                                        {% if joke.comments.count == 1 %}
 
-                                        <br>{{ joke.comments.count }} Comment: <br>
+                                            <br>{{ joke.comments.count }} Comment: <br>
                                         {% else %}
 
-                                        <br>{{ joke.comments.count }} Comments: <br>
+                                            <br>{{ joke.comments.count }} Comments: <br>
                                         {% endif %}
 
-											<div class="comment-field">
-												<hr>
-												{% for comment in comments %}
-												{% if comment.joke == joke %}
-												{% for user in users %}
-												{% if comment.made_by == user.user %}
-												<div class="row">
-													<div class="col-md-3 comment-profile-pic">
-															<!--<img src="{{ user.user_picture}}" alt="No profile picture"}>-->
-															<img style="height:60px; width:60px;" class="sc-com-profile-pic" style="float:right;" src="{{MEDIA_URL}}{{user.user_picture}}" alt="No profile picture"}>
-														</div>
-													<div class="col-md-9">
-														{{ comment.comment_text }}
-														<br>
-														<small>{{ comment.made_by}}</small>
-													</div>
-												</div>
-												{% endif %}
-												{% endfor %}
-												{% endif %}
-												{% endfor %}
-											</div>
-									</div>
+                                        <div class="comment-field">
+                                            <hr>
+                                            {% for comment in comments %}
+                                                {% if comment.joke == joke %}
+                                                    {% for user in users %}
+                                                        {% if comment.made_by == user.user %}
+                                                            <div class="row">
+                                                                <div class="col-md-3 comment-profile-pic">
+                                                                    <!--<img src="{{ user.user_picture}}" alt="No profile picture"}>-->
+                                                                    <img style="height:60px; width:60px;"
+                                                                         class="sc-com-profile-pic" style="float:right;"
+                                                                         src="{{ MEDIA_URL }}{{ user.user_picture }}"
+                                                                         alt="No profile picture" }>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    {{ comment.comment_text }}
+                                                                    <br>
+                                                                    <small>{{ comment.made_by }}</small>
+                                                                </div>
+                                                            </div>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
 
-								</div>
-								<br>
-								<div class="row">
-									<div class = "col-md-1">
-										<div>
-											{% for user in users %}
-											{% if user.user == joke.added_by %}
-												<img style="height:60px; width:60px; float:right;" src="{{MEDIA_URL}}{{user.user_picture}}" alt="No profile picture"}>
-											{% endif %}
-											{% endfor %}
-										</div>
-									</div>
-									<div class = "col-md-5">
-										<div>
-											Joke Author: <strong>{{joke.added_by}}</strong>
-											<br>
-											Date Added: <strong>{{joke.date_added}}</strong>
-										</div>
-									</div>
-									<div class = "col-md-6">
-										<div>
-											<p>Make a Comment</p>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-1">
+                                        <div>
+                                            {% for user in users %}
+                                                {% if user.user == joke.added_by %}
+                                                    <img style="height:60px; width:60px; float:right;"
+                                                         src="{{ MEDIA_URL }}{{ user.user_picture }}"
+                                                         alt="No profile picture" }>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div>
+                                            Joke Author: <strong>{{ joke.added_by }}</strong>
+                                            <br>
+                                            Date Added: <strong>{{ joke.date_added }}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div>
+                                            <p>Make a Comment</p>
 
 
 
 
-{% for comment in joke.comments.all %}
-    <div class="comment">
-        <div class="date">{{ comment.date_added }}</div>
-        <strong>{{ comment.added_by }}</strong>
-        <p>{{ comment.comment_text|linebreaks }}</p>
+                                            {% for comment in joke.comments.all %}
+                                                <div class="comment">
+                                                    <div class="date">{{ comment.date_added }}</div>
+                                                    <strong>{{ comment.added_by }}</strong>
+                                                    <p>{{ comment.comment_text|linebreaks }}</p>
+                                                </div>
+                                            {% empty %}
+                                                <p>No comments here yet :(</p>
+                                            {% endfor %}
+
+                                            <a href="{% url 'jokeoverflow:testingSC1' %}">Add a Comment on {{ joke }}</a>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                </p>
+                                </div>
+                                </div>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+        </p>
     </div>
-{% empty %}
-    <p>No comments here yet :(</p>
-{% endfor %}
-
-<a href="{% url 'jokeoverflow:testingSC1' %}">Add a Comment</a>
+    <div class="col-md-3">
+    </div>
+    </div>
 
 
 
+    <br>
+    <hr>
 
 
+    <div class="box-title sc-heading-title text-center">
+        <p>Most Liked Jokes in each Category</p>
+    </div>
+
+    <div class="row">
+        {% if cat_rated_jokes %}
+
+            {% for cat in categories %}
+                <div class="col-md-5 list-box sc-list-box">
+
+                    <p>
+                    <div class="box-title text-center">Top Jokes in '{{ cat.title }}'</div>
+                    <br>
+                    <div class="joke-list">
+                        {% for joke in cat_rated_jokes|get_item:cat.title %}
+                            {{ joke.title }} <br>
+                        {% endfor %}
+                        <br>
+                    </div>
+                </div>
+                <br><br>
+
+                <br><br>
+
+            {% endfor %}
+
+        {% endif %}
 
 
+    </div>
 
 
-
-
-										</div>
-									</div>
-								</div>
-								</p>
-								</div>
-							</div>
-						{% endfor %}
-					</ul>
-			{% endif %}
-			</p>
-		</div>
-		<div class ="col-md-3">
-		</div>
-	</div>
-
-
-
-	<br>
-	<hr>
-
-
-	<div class="box-title sc-heading-title text-center">
-	<p>Most Liked Jokes in each Category</p>
-	</div>
-
-	<div class="row">
-	{% if cat_rated_jokes %}
-
-		{% for cat in categories %}
-			<div class = "col-md-5 list-box sc-list-box">
-
-	<p>
-	<div class="box-title text-center">Top Jokes in '{{ cat.title }}'</div>
-                <br>
-				 <div class="joke-list">
-			{% for joke in cat_rated_jokes|get_item:cat.title %}
-				{{joke.title}} <br>
-			{% endfor %}
-					 <br>
-				 </div>
-			</div>
-			<br><br>
-
-			<br><br>
-
-		{% endfor %}
-
-	{% endif %}
-
-
-
-
-</div>
-
-
-</div>
+    </div>
 {% endblock %}

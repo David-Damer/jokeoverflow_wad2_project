@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.decorators import login_required
-from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment
+from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment, Voted
 from jokeoverflow.forms import UserProfileForm
 from jokeoverflow.forms import CommentForm, ComplaintForm
 from django.shortcuts import redirect
@@ -254,3 +254,25 @@ def add_comment_to_joke(request, joke_slug, user):
         else:
             print(form.errors)
     return render(request, 'jokeoverflow/add_comment_to_joke.html', {'form': form})
+
+@login_required
+def upvote(request):
+    joke = None
+    if request.method == 'GET':
+        joke = request.GET['djoke']
+    upvotes = 0
+    if joke:
+        upjoke = Joke.objects.get(title=joke)
+        if upjoke:
+            if Voted.objects.filter(user=request.user, joke=upjoke).exists():
+                upvotes = upjoke.upvotes
+                return HttpResponse(upvotes, "You have already upvoted this joke!")
+            else:
+                voted = Voted.objects.get_or_create(user=request.user, joke=upjoke)[0]
+                voted.save()
+                upvotes = upjoke.upvotes + 1
+                print("vote registered")
+                upjoke.upvotes = upvotes
+                upjoke.save()
+    return HttpResponse(upvotes)
+
