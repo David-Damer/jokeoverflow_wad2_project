@@ -195,7 +195,33 @@ def auto_add_video(request):
 
 
 def testingSC1(request):
-    return HttpResponse("AAAAAAAAAAA")
+    context_dict = {}
+
+    form = CommentForm()
+    joke = request.POST.get('joke')
+    userget = request.GET.get('user')
+    userpost = request.POST.get('user')
+    userrequest = request.user
+    #jokerequest = request.joke
+    #jokepass = joke_slug
+
+    try:
+        joke = Joke.objects.get(slug=request)
+    except Joke.DoesNotExist:
+        joke = None
+
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.joke = request.request.POST.get('joke')
+            comment.made_by = request.user
+            print(form.errors)
+
+    context_dict = {'form': form}
+
+    return render(request, 'jokeoverflow/testingSC1.html', context_dict)
 
 
 def add_comment_to_joke(request, joke_slug, user):

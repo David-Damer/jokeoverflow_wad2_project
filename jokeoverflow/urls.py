@@ -24,6 +24,11 @@ urlpatterns = [
     url(r'^contact_us/', views.contact_us, name='contact_us'),
     url(r'^log_complaint', views.log_complaint, name='log_complaint'),
     url(r'^faq/', views.faq, name='faq'),
+
+    url(r'^testingSC1/', views.testingSC1, name='testingSC1'),
+
+
+
     url(r'^latest_news/', views.latest_news, name='latest_news'),
     url(r'^user_profiles/', views.user_profiles, name='user_profiles'),
     url(r'^top_rated_videos/', views.top_rated_videos, name='top_rated_videos'),
@@ -38,6 +43,5 @@ urlpatterns = [
     url(r'^add_comment_to_joke/', views.add_comment_to_joke, name='add_comment_to_joke',),
     url(r'^jokeoverflow/add_comment_to_joke/', views.add_comment_to_joke, name='add_comment_to_joke', ),
 
-    url(r'^testingSC1/', views.testingSC1, name='testingSC1'),
 
 ]
