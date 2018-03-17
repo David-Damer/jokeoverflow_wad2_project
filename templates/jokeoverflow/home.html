@@ -56,8 +56,8 @@
 <div class="row">
 <div class="col-md-3 ">
 	{% if user.is_authenticated %}
-		<!--<button id="upvoteYES-image" class = "up-img"><img src="{% static "images/icons/upvoteYES.png" %}" ></button>-->
-		<img class = "vote-icon" src="{% static "images/icons/upvoteYES.png" %}" alt="Upvote" /> 
+		<input class="up_vote" type="image" src="{% static "images/icons/upvoteYES.png" %}" alt="Upvote" width="48" height="48">
+		<!--<img class = "vote-icon" src="{% static "images/icons/upvoteYES.png" %}" alt="Upvote" /> -->
 	{% else %}
 		<img class = "vote-icon" src="{% static "images/icons/upvoteNO.png" %}" alt="Upvote" />
 	{% endif %}
@@ -65,7 +65,7 @@
 
 </div>
 <div class="col-md-3 ">
-	<img class = "vote-icon" src="{% static "images/icons/downvote.png" %}" alt="Upvote" /> 
+	<input class="down_vote" type="image" src="{% static "images/icons/downvote.png" %}" alt="Upvote" width="48" height="48">
 	{{ joke.downvotes }}
 </div>
 
@@ -81,7 +81,7 @@
 			  <dt>{{user.date_of_birth}} {{ comment.made_by}}</dt>
 			  {% endif %}
 			  {% endfor %}
-  <dd>{{ comment.comment_text </dd>
+  <dd>{{ comment.comment_text }}</dd>
 			  <br>
 			{% endif %}
 		{% endfor %} </p>
@@ -94,7 +94,7 @@
 
 <div class="row">
 <div class = "col-md-12">
-	<h6>Joke Author: {{joke.added_by}}<h6>
+	<h6>Joke Author: {{joke.added_by}}</h6>
 </div>
 </div>
 
@@ -141,7 +141,7 @@
 
 <br>
 
-          <div class="col-md-4 top-block "pre-scrollable"">
+          <div class="col-md-4 top-block " pre-scrollable="" >
             <p class="text-center sc-block-title"> Most Liked Videos </p>
 		<p class="section-list">
 			{% if topratedvideos %}
