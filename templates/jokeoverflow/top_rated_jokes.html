@@ -156,10 +156,14 @@ input[type=text]:focus {
 {% empty %}
     <p>No comments here yet :(</p>
 {% endfor %}
-
-<a href="{% url 'jokeoverflow:testingSC1' %}">Add a Comment</a>
-
-
+<!--
+<a href="{% url 'jokeoverflow:testingSC1' jid=joke.id %}">Add a Comment</a>
+-->
+<form id="comment_form" method="post" action="." >
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit"/>
+</form>
 
 
 

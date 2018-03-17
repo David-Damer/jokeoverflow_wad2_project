@@ -19,6 +19,7 @@
 {% block body_block %}
 	<h1>Comment Making</h1>
 	joke= {{ joke.slug }} <br>
+	joke id = {{ jid }} <br>
 	user= {{ user }}
 	<form method="post" action="." enctype="multipart/form-data">
         {% csrf_token %}

@@ -11,6 +11,7 @@ TO DO
 [ ] Send Complaint Form
 [ ] Make Joke Form
 [ ] Search Joke Results
+[ ] Add Category Option
 
 CAN DO AFTER FRIDAY
 [ ] Logo (SAM)
