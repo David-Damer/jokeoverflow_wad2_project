@@ -11,7 +11,6 @@ from django.template.defaulttags import register
 from django.http import HttpResponse
 
 
-
 def home(request):
     category_list = Category.objects.order_by('title')
     rated_videos = Video.objects.all().order_by('-date_added')[:5]
@@ -129,11 +128,7 @@ def top_rated_jokes(request):
     comments = Comment.objects.all()
     users = UserProfile.objects.all()
 
-
     testjoke = Joke.objects.order_by('title')[0]
-
-
-
 
     form = ComplaintForm(request.POST)
     if request.method == 'POST':
@@ -148,11 +143,8 @@ def top_rated_jokes(request):
         else:
             print(form.errors)
 
-
-
-
     context_dict = {'categories': category_list, 'cat_rated_jokes': cat_rated_dict, 'comments': comments,
-                    'topratedjokes': rated_jokes, 'users': users, 'form':form}
+                    'topratedjokes': rated_jokes, 'users': users, 'form': form}
     response = render(request, 'jokeoverflow/top_rated_jokes.html', context_dict)
     return response
 
@@ -225,15 +217,14 @@ def testingSC1(request, jid):
     userget = request.GET.get('user')
     userpost = request.POST.get('user')
     userrequest = request.user
-    #jokerequest = request.joke
-    #jokepass = joke_slug
+    # jokerequest = request.joke
+    # jokepass = joke_slug
     joke = jid
 
     try:
         joke = Joke.objects.get(slug=request)
     except Joke.DoesNotExist:
         joke = None
-
 
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -243,7 +234,7 @@ def testingSC1(request, jid):
             comment.made_by = request.user
             print(form.errors)
 
-    context_dict = {'form': form, 'jid':jid}
+    context_dict = {'form': form, 'jid': jid}
 
     return render(request, 'jokeoverflow/testingSC1.html', context_dict)
 
@@ -279,6 +270,7 @@ def add_comment_to_joke(request, joke_slug, user):
             print(form.errors)
     return render(request, 'jokeoverflow/add_comment_to_joke.html', {'form': form})
 
+
 @login_required
 def upvote(request):
     joke = None
@@ -289,14 +281,40 @@ def upvote(request):
         upjoke = Joke.objects.get(title=joke)
         if upjoke:
             if Voted.objects.filter(user=request.user, joke=upjoke).exists():
+                print('already voted')
                 upvotes = upjoke.upvotes
-                return HttpResponse(upvotes, "You have already upvoted this joke!")
+                return HttpResponse(upvotes)
             else:
                 voted = Voted.objects.get_or_create(user=request.user, joke=upjoke)[0]
                 voted.save()
                 upvotes = upjoke.upvotes + 1
+                upjoke.rating = upjoke.rating + 1
                 print("vote registered")
                 upjoke.upvotes = upvotes
                 upjoke.save()
     return HttpResponse(upvotes)
 
+
+@login_required
+def downvote(request):
+    joke = None
+    print('here')
+    if request.method == 'GET':
+        joke = request.GET['djoke']
+    downvotes = 0
+    if joke:
+        downjoke = Joke.objects.get(title=joke)
+        if downjoke:
+            if Voted.objects.filter(user=request.user, joke=downjoke).exists():
+                print('already voted')
+                downvotes = downjoke.downvotes
+                return HttpResponse(downvotes)
+            else:
+                voted = Voted.objects.get_or_create(user=request.user, joke=downjoke)[0]
+                voted.save()
+                downvotes = downjoke.downvotes + 1
+                downjoke.rating = downjoke.rating - 1
+                print("vote registered")
+                downjoke.downvotes = downvotes
+                downjoke.save()
+    return HttpResponse(downvotes)

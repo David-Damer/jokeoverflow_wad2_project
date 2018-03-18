@@ -13,9 +13,18 @@ $('.video-add ').click(function () {
         });
 });
 $(".vote").click(function () {
-    var joke = $(this).attr('data');
+    var joke = $(this).attr('data-joke');
+    console.log(this);
     $.get('/jokeoverflow/upvote/', {djoke: joke}, function(data){
-        $('#upvotes').html(data);
-    } );
+        $('#u' + joke).html(data);
+    });
+
+});
+$(".down-vote").click(function () {
+    var joke = $(this).attr('data-joke');
+    console.log(this);
+    $.get('/jokeoverflow/downvote/', {djoke: joke}, function(data){
+        $('#d' + joke).html(data);
+    });
 
 });
