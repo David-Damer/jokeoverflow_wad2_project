@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'jokeoverflow',
     'registration',
+    'bootstrap_toolkit',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [

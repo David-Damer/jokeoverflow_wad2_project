@@ -1,6 +1,7 @@
 {% extends "jokeoverflow/base2.html" %}
 {% load staticfiles %}
 {% block title_block %}
+{% load crispy_forms_tags %}
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -9,40 +10,23 @@
     <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="{% static "css/base.css" %}" rel="stylesheet">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
-    <link href="{% static "css/signin.css" %}" rel="stylesheet">
+    <link href="{% static 'css/signin.css' %}" rel="stylesheet">
 
 {% endblock %}
 {% block body_block %}
-<div class="container">
-<div class ="text-center">
-	
-    <h1>Please sign in</h1>
 
-<div class = "form-container">
-	<br>
-	<form method="post" action=".">
-		{% csrf_token %}
-        	{{ form.as_p }}
-		<input class="btn btn-80 btn-lg btn-primary " type="submit" value = "Sign in" ></button>
-        	<input type="hidden" name="next" value="{{ next}}"/>
-		
-      
-	</form>  
-<br>   
-	</div>
-	<hr>
-	<div class = "bottom-text">
-	<p>
-       	 	Not a member?
-       	 	<a href ="{% url 'registration_register' %}">Register</a>
-    	</p>
-	</div>
-</div>
-
-
+<div class='col-sm-6 col-sm-offset-3'>
+    <h1 class="form-signin-heading">Login</h1>
+    <form role="form-signin"  method="post" action=".">
+        {% csrf_token %}
+        {{ form|crispy}}
+    <br>
+    <input class='btn btn-primary' type="submit" value="submit"/>
+    <br>
+    </form>
 </div>
 
 {% endblock %}

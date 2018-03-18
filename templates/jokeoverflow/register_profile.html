@@ -1,12 +1,17 @@
 {% extends 'jokeoverflow/base2.html' %}
+{% load crispy_forms_tags %}
 {% block title_block %}
-	Registration - Step 2
 {% endblock %}
 {% block body_block %}
-	<h1>Registration - Step 2</h1>
-	<form method="post" action="." enctype="multipart/form-data">
+	<div class='col-sm-6 col-sm-offset-3'>
+    <h1 class="form-signin-heading">Create a Profile</h1>
+    <form role="form-signin"  method="post" action=".">
         {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Submit"/>
+        {{ form|crispy}}
+
+    <br>
+    <input class='btn btn-primary' type="submit" value="submit"/>
+    <br>
     </form>
+</div>
 {% endblock %}
