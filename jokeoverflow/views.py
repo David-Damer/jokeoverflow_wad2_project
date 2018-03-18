@@ -9,7 +9,7 @@ from django.shortcuts import redirect
 from jokeoverflow.youtube_search import *
 from django.template.defaulttags import register
 from django.http import HttpResponse
-
+from django.contrib import messages
 
 def home(request):
     category_list = Category.objects.order_by('title')
@@ -184,7 +184,8 @@ def auto_add_video(request):
         code = request.GET['code']
         thumb = request.GET['thumb']
         print('added')
-        vid = Video.objects.get_or_create(title=title, url=url, embed_code=code,
+        if not Video.objects.filter(embed_code=code).exists():
+            vid = Video.objects.get_or_create(title=title, url=url, embed_code=code,
                                           thumbnail=thumb, added_by=request.user)
     videos = Video.objects.all().order_by('-date_added')[:10]
     category_list = Category.objects.order_by('title')
@@ -266,6 +267,7 @@ def upvote(request):
         if upjoke:
             if Voted.objects.filter(user=request.user, joke=upjoke).exists():
                 print('already voted')
+
                 upvotes = upjoke.upvotes
                 return HttpResponse(upvotes)
             else:
@@ -282,7 +284,6 @@ def upvote(request):
 @login_required
 def downvote(request):
     joke = None
-    print('here')
     if request.method == 'GET':
         joke = request.GET['djoke']
     downvotes = 0
