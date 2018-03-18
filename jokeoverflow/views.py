@@ -285,7 +285,7 @@ def upvote(request):
                 print("vote registered")
                 upjoke.upvotes = upvotes
                 upjoke.save()
-    return HttpResponse(upvotes)
+                return HttpResponse(upvotes)
 
 
 @login_required
@@ -309,4 +309,4 @@ def downvote(request):
                 print("vote registered")
                 downjoke.downvotes = downvotes
                 downjoke.save()
-    return HttpResponse(downvotes)
+                return HttpResponse(downvotes)
