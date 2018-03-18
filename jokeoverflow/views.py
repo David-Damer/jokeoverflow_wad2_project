@@ -2,17 +2,18 @@ from django.shortcuts import render
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.decorators import login_required
-from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment
+from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment, Voted
 from jokeoverflow.forms import UserProfileForm
+from jokeoverflow.forms import CommentForm, ComplaintForm
 from django.shortcuts import redirect
 from jokeoverflow.youtube_search import *
 from django.template.defaulttags import register
-
+from django.http import HttpResponse
 
 
 def home(request):
     category_list = Category.objects.order_by('title')
-    rated_videos = Video.objects.order_by('-rating')[:5]
+    rated_videos = Video.objects.all().order_by('-date_added')[:5]
     rated_jokes = Joke.objects.order_by('-rating')[:10]
     recent_jokes = Joke.objects.order_by('-date_added')[:10]
     context_dict = {'categories': category_list, 'topratedvideos': rated_videos, 'topratedjokes': rated_jokes,
@@ -67,6 +68,7 @@ def latest_news(request):
     response = render(request, 'jokeoverflow/latest_news.html', context_dict)
     return response
 
+
 def user_profiles(request):
     category_list = Category.objects.order_by('title')
     user_profiles = UserProfile.objects.order_by('user')
@@ -77,8 +79,8 @@ def user_profiles(request):
 
 def top_rated_videos(request):
     category_list = Category.objects.order_by('title')
-    rated_videos = Video.objects.order_by('-upvotes')[:10]
-    context_dict = {'categories': category_list, 'topratedvideos': rated_videos,}
+    rated_videos = Video.objects.all().order_by('-date_added')[:10]
+    context_dict = {'categories': category_list, 'topratedvideos': rated_videos}
     result_list = []
     query = ''
 
@@ -92,6 +94,7 @@ def top_rated_videos(request):
     response = render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
     return response
 
+
 @login_required
 def log_complaint(request):
     form = ComplaintForm()
@@ -99,15 +102,14 @@ def log_complaint(request):
     if request.method == 'POST':
         form = ComplaintForm(request.POST)
         if form.is_valid():
-            complaint = form.save(commit = False)
+            complaint = form.save(commit=False)
             complaint.user = request.user
             complaint.save()
-            
+
             return redirect('log_complaint')
         else:
             print(form.errors)
-            
-        
+
     category_list = Category.objects.order_by('title')
     context_dict = {'categories': category_list}
     response = render(request, 'jokeoverflow/log_complaint.html', context_dict)
@@ -122,13 +124,14 @@ def top_rated_jokes(request):
         rated_cat_jokes = Joke.objects.filter(category=cat).order_by('upvotes')[:5]
         cat_rated_dict[str(cat)] = rated_cat_jokes
 
-
     print(str(cat_rated_dict))
     comments = Comment.objects.all()
     users = UserProfile.objects.all()
-    context_dict = {'categories': category_list, 'cat_rated_jokes': cat_rated_dict, 'comments': comments, 'topratedjokes': rated_jokes, 'users': users}
+    context_dict = {'categories': category_list, 'cat_rated_jokes': cat_rated_dict, 'comments': comments,
+                    'topratedjokes': rated_jokes, 'users': users}
     response = render(request, 'jokeoverflow/top_rated_jokes.html', context_dict)
     return response
+
 
 @register.filter
 def get_item(dictionary, key):
@@ -147,11 +150,12 @@ def search(request):
     context_dictionary = {'previous_query': query, 'result_list': result_list}
     return render(request, 'jokeoverflow/top_rated_videos.html', context_dictionary)
 
+
 def register_profile(request):
     form = UserProfileForm()
 
     if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES)
+        form = UserProfileForm(request.POST)
         if form.is_valid():
             user_profile = form.save(commit=False)
             user_profile.user = request.user
@@ -161,10 +165,9 @@ def register_profile(request):
         else:
             print(form.errors)
 
-    context_dict = {'form':form}
+    context_dict = {'form': form}
 
     return render(request, 'jokeoverflow/register_profile.html', context_dict)
-
 
 
 @login_required
@@ -183,8 +186,119 @@ def auto_add_video(request):
         print('added')
         vid = Video.objects.get_or_create(title=title, url=url, embed_code=code,
                                           thumbnail=thumb, added_by=request.user)
-        videos = Video.objects.order_by('-upvotes')[:10]
-        category_list = Category.objects.order_by('title')
-        context_dict = {'categories': category_list, 'topratedvideos': videos, }
+    videos = Video.objects.all().order_by('-date_added')[:10]
+    category_list = Category.objects.order_by('title')
+    context_dict = {'categories': category_list, 'topratedvideos': videos, }
 
-        return render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
+    return render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
+
+
+def testingSC1(request, jid):
+    context_dict = {}
+
+    form = CommentForm()
+    joke = request.POST.get('joke')
+    userget = request.GET.get('user')
+    userpost = request.POST.get('user')
+    userrequest = request.user
+    #jokerequest = request.joke
+    #jokepass = joke_slug
+    joke = jid
+
+    try:
+        joke = Joke.objects.get(slug=request)
+    except Joke.DoesNotExist:
+        joke = None
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.joke = Joke.objects.filter(id=jid)[0]
+            comment.made_by = request.user
+            print(form.errors)
+
+    context_dict = {'form': form, 'jid':jid}
+
+    return render(request, 'jokeoverflow/testingSC1.html', context_dict)
+
+
+def add_comment_to_joke(request, joke_slug, user):
+    try:
+        joke = Joke.objects.get(slug=joke_slug)
+    except Joke.DoesNotExist:
+        joke = None
+
+    form = CommentForm()
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            if joke:
+                comment = form.save(commit=False)
+                comment.joke = joke
+                comment.made_by = user
+                comment.save()
+                return top_rated_jokes(request)
+            else:
+                print(form.errors)
+        context_dict = {'form': form, 'joke': joke, 'user': user}
+        return render(request, context_dict)
+
+    form = CommentForm()
+
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+        else:
+            print(form.errors)
+    return render(request, 'jokeoverflow/add_comment_to_joke.html', {'form': form})
+
+
+@login_required
+def upvote(request):
+    joke = None
+    if request.method == 'GET':
+        joke = request.GET['djoke']
+    upvotes = 0
+    if joke:
+        upjoke = Joke.objects.get(title=joke)
+        if upjoke:
+            if Voted.objects.filter(user=request.user, joke=upjoke).exists():
+                print('already voted')
+                upvotes = upjoke.upvotes
+                return HttpResponse(upvotes)
+            else:
+                voted = Voted.objects.get_or_create(user=request.user, joke=upjoke)[0]
+                voted.save()
+                upvotes = upjoke.upvotes + 1
+                upjoke.rating = upjoke.rating + 1
+                print("vote registered")
+                upjoke.upvotes = upvotes
+                upjoke.save()
+    return HttpResponse(upvotes)
+
+
+@login_required
+def downvote(request):
+    joke = None
+    print('here')
+    if request.method == 'GET':
+        joke = request.GET['djoke']
+    downvotes = 0
+    if joke:
+        downjoke = Joke.objects.get(title=joke)
+        if downjoke:
+            if Voted.objects.filter(user=request.user, joke=downjoke).exists():
+                print('already voted')
+                downvotes = downjoke.downvotes
+                return HttpResponse(downvotes)
+            else:
+                voted = Voted.objects.get_or_create(user=request.user, joke=downjoke)[0]
+                voted.save()
+                downvotes = downjoke.downvotes + 1
+                downjoke.rating = downjoke.rating - 1
+                print("vote registered")
+                downjoke.downvotes = downvotes
+                downjoke.save()
+    return HttpResponse(downvotes)

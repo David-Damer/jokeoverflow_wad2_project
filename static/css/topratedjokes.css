@@ -4,7 +4,6 @@ body {
 }
 
 body {
-  background-image: url("/static/images/background+pattern+design+33.jpg");
   color:black;
 }
 
@@ -44,9 +43,11 @@ h1{
 .sc-list-box{
 	border-width:4px;
 	background-color: rgba(255, 204, 0, 0.2);
-	border-radius: 20px;
+	background-color: rgba(255,204,0,0.3);
+	border-radius: 10px;
   	border-style: solid;
   	border-color: #ffcc00;
+  	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	
 }
 
@@ -194,7 +195,17 @@ opacity: 1;
 
 .pop-joke-text{
 	color:black;
-	background-color:#f1f1f1;
+	background-color:white;
+	border-width:2px;
+	border-color:#ffcc00;
+	border-style:solid;
+border-radius: 10px;
+padding: 25px 25px 25px 25px;
+}
+
+.pop-joke-text p{
+	color:black;
+	background-color:white;
 	border-width:2px;
 	border-color:#ffcc00;
 	border-style:solid;
@@ -276,16 +287,7 @@ overflow-x:hidden;
     cursor: pointer;
 }
 
-.comment-profile-pic{
-    width:100%;
-    border-right:1px solid #ccc;
-}
 
-.comment-profile-pic img{
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 .box-title{
     color:black;
@@ -302,12 +304,13 @@ font-size: 2vmax;
 }
 
 .list-box{
-
     margin-left:auto;
     margin-right:auto;
     border-spacing:100px;
     width:50%;
     margin:4%;
+ margin-left:auto;
+    margin-right:auto;
     /*background-color:red;*/
 
 }
@@ -316,4 +319,29 @@ font-size: 2vmax;
 .logo-top{
 width:100%;
 margin:0px;
+}
+
+.comment-profile-pic{
+    width:100%;
+    background-color:red;
+    border-right:1px solid #ccc;
+}
+
+.comment-profile-pic img{
+    width:20px;
+    height:30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.sc-com-profile-pic{
+    background-color:red;
+    height:20px;
+    width:20px;
+}
+
+
+.sc-heading-title p{
+    font-size:40px;
+    font-size: 2.5vmax;
 }
