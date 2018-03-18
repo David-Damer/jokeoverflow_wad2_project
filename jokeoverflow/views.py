@@ -127,24 +127,8 @@ def top_rated_jokes(request):
     print(str(cat_rated_dict))
     comments = Comment.objects.all()
     users = UserProfile.objects.all()
-
-    testjoke = Joke.objects.order_by('title')[0]
-
-    form = ComplaintForm(request.POST)
-    if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.made_by = request.user
-            comment.joke = Joke.objects.order_by('title')[0]
-            comment.save()
-
-            return redirect('home')
-        else:
-            print(form.errors)
-
     context_dict = {'categories': category_list, 'cat_rated_jokes': cat_rated_dict, 'comments': comments,
-                    'topratedjokes': rated_jokes, 'users': users, 'form': form}
+                    'topratedjokes': rated_jokes, 'users': users}
     response = render(request, 'jokeoverflow/top_rated_jokes.html', context_dict)
     return response
 
@@ -217,8 +201,8 @@ def testingSC1(request, jid):
     userget = request.GET.get('user')
     userpost = request.POST.get('user')
     userrequest = request.user
-    # jokerequest = request.joke
-    # jokepass = joke_slug
+    #jokerequest = request.joke
+    #jokepass = joke_slug
     joke = jid
 
     try:
@@ -234,7 +218,7 @@ def testingSC1(request, jid):
             comment.made_by = request.user
             print(form.errors)
 
-    context_dict = {'form': form, 'jid': jid}
+    context_dict = {'form': form, 'jid':jid}
 
     return render(request, 'jokeoverflow/testingSC1.html', context_dict)
 

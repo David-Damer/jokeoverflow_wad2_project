@@ -25,7 +25,7 @@ urlpatterns = [
     url(r'^log_complaint', views.log_complaint, name='log_complaint'),
     url(r'^faq/', views.faq, name='faq'),
 
-    url(r'^testingSC1/(?P<jid>\d+)/$', views.testingSC1, name='testingSC1'),
+    url(r'^testingSC1/', views.testingSC1, name='testingSC1'),
 
 
 
@@ -33,7 +33,6 @@ urlpatterns = [
     url(r'^user_profiles/', views.user_profiles, name='user_profiles'),
     url(r'^top_rated_videos/', views.top_rated_videos, name='top_rated_videos'),
     url(r'^top_rated_jokes/', views.top_rated_jokes, name='top_rated_jokes'),
-    url(r'^test', views.top_rated_jokes, name='top_rated_jokes'),
     url(r'^category/(?P<category_name_slug>[\w\-]+)/$',
         views.show_category, name='show_category'),
     url(r'register_profile/', views.register_profile, name='register_profile'),
@@ -44,6 +43,5 @@ urlpatterns = [
     url(r'^jokeoverflow/add_comment_to_joke/', views.add_comment_to_joke, name='add_comment_to_joke', ),
     url(r'^upvote/$', views.upvote, name='upvote'),
     url(r'^downvote/$', views.downvote, name='downvote')
-
 
 ]
