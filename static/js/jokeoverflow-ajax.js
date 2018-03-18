@@ -6,16 +6,15 @@ $('.video-add ').click(function () {
     var title = $(this).attr("data-title");
     var me = $(this);
     $.get('/jokeoverflow/add/',
-        {vid_id: id, url: url, code: code, thumb: thumb, title: title}, function(data){
-        me.hide();
-        $('#videos').innerHTML(data);
+        {vid_id: id, url: url, code: code, thumb: thumb, title: title}, function (data) {
+            me.hide();
 
         });
 });
 $(".vote").click(function () {
     var joke = $(this).attr('data-joke');
     console.log(this);
-    $.get('/jokeoverflow/upvote/', {djoke: joke}, function(data){
+    $.get('/jokeoverflow/upvote/', {djoke: joke}, function (data) {
         $('#u' + joke).html(data);
     });
 
@@ -23,7 +22,7 @@ $(".vote").click(function () {
 $(".down-vote").click(function () {
     var joke = $(this).attr('data-joke');
     console.log(this);
-    $.get('/jokeoverflow/downvote/', {djoke: joke}, function(data){
+    $.get('/jokeoverflow/downvote/', {djoke: joke}, function (data) {
         $('#d' + joke).html(data);
     });
 

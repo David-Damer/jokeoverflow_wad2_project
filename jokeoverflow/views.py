@@ -9,7 +9,8 @@ from django.shortcuts import redirect
 from jokeoverflow.youtube_search import *
 from django.template.defaulttags import register
 from django.http import HttpResponse
-
+from django.contrib import messages
+from jokeoverflow.calculate_age import calculate_age
 
 def home(request):
     category_list = Category.objects.order_by('title')
@@ -30,6 +31,10 @@ def about_us(request):
 
 def show_category(request, category_name_slug):
     context_dict = {}
+    age = 0
+    if request.user.is_authenticated:
+        prof = UserProfile.objects.filter(user=request.user)[0]
+        age = calculate_age(prof.date_of_birth)
 
     try:
         category_list = Category.objects.order_by('title')
@@ -38,7 +43,7 @@ def show_category(request, category_name_slug):
         recent_jokes = Joke.objects.filter(category=category).order_by('-date_added')[:2]
         all_jokes = Joke.objects.filter(category=category).order_by('-upvotes')
         context_dict = {'categories': category_list, 'category': category, 'topratedjokes': rated_jokes,
-                        'recentjokes': recent_jokes, 'alljokes': all_jokes, }
+                        'recentjokes': recent_jokes, 'alljokes': all_jokes, 'age': age }
     except Category.DoesNotExist:
         context_dict['category'] = None
         context_dict['topratedjokes'] = None
@@ -183,9 +188,12 @@ def auto_add_video(request):
         url = request.GET['url']
         code = request.GET['code']
         thumb = request.GET['thumb']
-        print('added')
-        vid = Video.objects.get_or_create(title=title, url=url, embed_code=code,
+        if not Video.objects.filter(embed_code=code).exists():
+            print('added')
+            vid = Video.objects.get_or_create(title=title, url=url, embed_code=code,
                                           thumbnail=thumb, added_by=request.user)
+        else:
+            print('Not added')
     videos = Video.objects.all().order_by('-date_added')[:10]
     category_list = Category.objects.order_by('title')
     context_dict = {'categories': category_list, 'topratedvideos': videos, }
@@ -266,6 +274,7 @@ def upvote(request):
         if upjoke:
             if Voted.objects.filter(user=request.user, joke=upjoke).exists():
                 print('already voted')
+
                 upvotes = upjoke.upvotes
                 return HttpResponse(upvotes)
             else:
@@ -276,13 +285,12 @@ def upvote(request):
                 print("vote registered")
                 upjoke.upvotes = upvotes
                 upjoke.save()
-    return HttpResponse(upvotes)
+                return HttpResponse(upvotes)
 
 
 @login_required
 def downvote(request):
     joke = None
-    print('here')
     if request.method == 'GET':
         joke = request.GET['djoke']
     downvotes = 0
@@ -301,4 +309,4 @@ def downvote(request):
                 print("vote registered")
                 downjoke.downvotes = downvotes
                 downjoke.save()
-    return HttpResponse(downvotes)
+                return HttpResponse(downvotes)
