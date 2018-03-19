@@ -84,7 +84,7 @@ def user_profiles(request):
 
 def top_rated_videos(request):
     category_list = Category.objects.order_by('title')
-    rated_videos = Video.objects.all().order_by('-date_added')[:10]
+    rated_videos = Video.objects.all().order_by('-date_added')[:5]
     context_dict = {'categories': category_list, 'topratedvideos': rated_videos}
     result_list = []
     query = ''
@@ -194,7 +194,7 @@ def auto_add_video(request):
                                           thumbnail=thumb, added_by=request.user)
         else:
             print('Not added')
-    videos = Video.objects.all().order_by('-date_added')[:10]
+    videos = Video.objects.all().order_by('-date_added')[:5]
     context_dict['topratedvideos'] = videos
     return render(request, 'jokeoverflow/video_update.html', context_dict)
 
