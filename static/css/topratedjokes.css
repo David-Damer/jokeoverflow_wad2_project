@@ -101,6 +101,9 @@ p{
 	border-width:2px;
 	border-style:solid;
         background: -o-linear-gradient(#fff, #999);
+        max-height:600px;
+        max-height:80%;
+        overflow-y:scroll;
     }
 
 
@@ -121,7 +124,6 @@ p{
 	text-decoration: underline;
 
 }
-
 
 
 
@@ -344,4 +346,26 @@ margin:0px;
 .sc-heading-title p{
     font-size:40px;
     font-size: 2.5vmax;
+}
+
+
+
+
+.charfield{
+background-color:blue;
+}
+
+.form-comment-text{
+background-color:red;
+}
+
+input[type=text]{
+background-color:green;
+}
+
+
+textarea{
+/*background-color:red;*/
+height:50px;
+width:100%;
 }
