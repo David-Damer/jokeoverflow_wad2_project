@@ -75,7 +75,7 @@
                                 </div>
                                 <br>
                                 <hr>
-                                <br>
+
                                 <div class="row">
                                     <div class="col-md-3 ">
                                         {% if user.is_authenticated %}
@@ -96,43 +96,35 @@
                                         <!--<img class = "vote-icon" src="{% static "images/icons/downvote.png" %}" alt="Downvote" />-->
                                         <div id="d{{ joke }}">{{ joke.downvotes }}</div>
                                     </div>
-                                    <div class="col-md-6 comments-container">
+                                    <div class="col-md-6"> <!--comments-container">-->
                                         {% if joke.comments.count == 1 %}
-
-
-
-
-                                            <br>{{ joke.comments.count }} Comment: <br>
+                                            {{ joke.comments.count }} Comment: <br>
                                         {% else %}
-
-                                            <br>{{ joke.comments.count }} Comments: <br>
+                                            {{ joke.comments.count }} Comments: <br>
                                         {% endif %}
                                         <div class = "comment-field">
                                             <hr>
                                             {% for comment in joke.comments.all %}
                                             <div class="row">
                                                 {% for user in users %}
-                                                        {% if comment.made_by == user.user %}
-                                                                <div style="background-color:blue;" class="col-md-3 comment-profile-pic">
-                                                                    <!--<img src="{{ user.user_picture}}" alt="No profile picture"}>-->
-                                                                    <img style="height:60px; width:60px;"
-                                                                         class="sc-com-profile-pic" style="float:right;"
-                                                                         src="{{ MEDIA_URL }}{{ user.user_picture }}"
-                                                                         alt="No profile picture" }>
-                                                                </div>
-                                                                <div class="col-md-9">
-                                                                    {{ comment.comment_text }}
-                                                                    <br>
-                                                                    <small>{{ comment.made_by }}</small>
-                                                                </div>
-                                                        {% endif %}
-                                                    {% endfor %}
-
+                                                {% if comment.made_by == user.user %}
+                                                <div style="background-color:blue;" class="col-md-3 comment-profile-pic">
+                                                    <!--<img src="{{ user.user_picture}}" alt="No profile picture"}>-->
+                                                    <img style="height:60px; width:60px;"
+                                                         class="sc-com-profile-pic" style="float:right;"
+                                                         src="{{ MEDIA_URL }}{{ user.user_picture }}"
+                                                         alt="No profile picture" }>
+                                                </div>
+                                                <div class="col-md-9">
+                                                    {{ comment.comment_text }}
+                                                    <br>
+                                                    <small>{{ comment.made_by }}</small>
+                                                </div>
+                                                {% endif %}
+                                                {% endfor %}
                                             </div>
+                                            <hr>
                                             {% endfor %}
-
-
-
                                         </div>
                                     </div>
 
@@ -140,16 +132,6 @@
                                 <br>
                                 <hr>
                                 <br>
-                                <div class = "row">
-                                    <div class=col-md-1">
-                                        {% for user in joke.made_by %}
-                                            USER = {{user}}
-
-                                        {% endfor %}
-
-
-                                    </div>
-                                </div>
 
                                 <div class="row">
                                     <div class="col-md-1">
@@ -182,6 +164,11 @@
                                     </div>
                                 </div>
                                 </p>
+
+
+
+
+
                                 </div>
                                 </div>
                             {% endfor %}
@@ -207,6 +194,7 @@
         {% if cat_rated_jokes %}
 
             {% for cat in categories %}
+                {% if  not cat.restricted  %}
                 <div class="col-md-5 list-box sc-list-box">
 
                     <p>
@@ -222,7 +210,7 @@
                 <br><br>
 
                 <br><br>
-
+                {% endif %}
             {% endfor %}
 
         {% endif %}
