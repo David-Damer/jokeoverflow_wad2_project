@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.decorators import login_required
 from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment
-from jokeoverflow.forms import UserProfileForm
+from jokeoverflow.forms import UserProfileForm, JokeForm, ComplaintForm
 from django.shortcuts import redirect
 from jokeoverflow.youtube_search import *
 from django.template.defaulttags import register
@@ -19,6 +19,31 @@ def home(request):
                     'recentjokes': recent_jokes, }
     response = render(request, 'jokeoverflow/home.html', context=context_dict)
     return response
+
+def add_joke(request, category_name_slug):
+    
+    category_list = Category.objects.order_by('title')
+    
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+    except Category.DoesNotExist:
+        category = None
+
+    form = JokeForm()
+    if request.method == 'POST':
+        form = JokeForm(request.POST)
+        if form.is_valid():
+            if category:
+                joke = form.save(commit=False)
+                joke.category = category
+                joke.views = 0
+                joke.save()
+                return show_category(request, category_name_slug)
+        else:
+            print(form.errors)
+
+    context_dict = {'form': form, 'category': category, 'categories': category_list}
+    return render(request, 'jokeoverflow/add_joke.html', context_dict)
 
 
 def about_us(request):
@@ -148,6 +173,7 @@ def search(request):
     return render(request, 'jokeoverflow/top_rated_videos.html', context_dictionary)
 
 def register_profile(request):
+    category_list = Category.objects.order_by('title')
     form = UserProfileForm()
 
     if request.method == 'POST':
@@ -161,7 +187,7 @@ def register_profile(request):
         else:
             print(form.errors)
 
-    context_dict = {'form':form}
+    context_dict = {'categories': category_list, 'form': form}
 
     return render(request, 'jokeoverflow/register_profile.html', context_dict)
 

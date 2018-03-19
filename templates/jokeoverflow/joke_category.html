@@ -41,6 +41,7 @@
 	  <div>
 		<h2> All {{ category }} Jokes </h2>
 			<p>
+				<a href="{% url 'jokeoverflow:add_joke' category.slug %}">Add Joke</a>
 				{% if alljokes %}
 					{% for joke in alljokes %}
 						<li>{{ joke.joke_text }} - {{ joke.rating }} rating</li>
