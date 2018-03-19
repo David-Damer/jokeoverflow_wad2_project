@@ -1,0 +1,29 @@
+{% extends 'jokeoverflow/base2.html' %}
+{% load staticfiles %}
+{% block title_block %}
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+    <!-- Bootstrap core CSS -->
+    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+
+	<!-- Custom styles for this template -->
+    <link href="{% static "css/home.css" %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block body_block %}
+	<h1>Comment Making</h1>
+	joke= {{ joke.slug }} <br>
+	joke id = {{ jid }} <br>
+	user= {{ user }}
+	<form method="post" action="." enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit"/>
+    </form>
+{% endblock %}

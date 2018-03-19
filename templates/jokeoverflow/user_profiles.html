@@ -1,33 +1,47 @@
 {% extends 'jokeoverflow/base2.html' %}
 {% load staticfiles %}
 {% block title_block %}
+    <title>JokeOverflow - {{user}}'s Page</title>
+
 {% endblock %}
 {% block body_block %}
-	<h1>Hello {{ user }}</h1>
-	<div>
-		<p>
-			{% if user_profiles %}
-				<ul class="list-group">
-					{% for user in user_profiles %}
-                        {% if user.user_picture %}
-                        <img width="64" height="64" src="{{ MEDIA_URL }}{{ user.user_picture }}"/>
-                        {% else %}
-                        <img width="64" height="64" src="{{ MEDIA_URL }}default.PNG" alt="No image available"/>
-                        {% endif %}
-						<li> {{ user.user }} - {{ user.user_bio }}</li>
-					{% endfor %}
-				</ul>
-			{% else %}
-				<strong>There are no User Profiles.</strong>
-			{% endif %}
-		</p>
-         </div>
+<h1 class = "text-center" ><u>Hello {{ user }}</u></h1>
+<br>
 
-	<h2>Your Jokes</h2>
-	<p>
+<h2 class="text-center">Your Jokes</h2>
+<p>
+    {{ user.date_of_birth }}
+<div class = "sc-jokes-table">
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Upvotes</th>
+        <th>Downvotes</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for joke in user.jokes.all %}
 
 
-	</p>		
+    <tr>
+        <td>{{ joke.title }}</td>
+        <td>{{ joke.category }}</td>
+        <td>{{ joke.upvotes }}</td>
+        <td>{{ joke.downvotes }}</td>
 
-	
+    </tr>
+    {% empty %}
+    <td>No jokes here yet :(</td>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+
+
+</p>
+<br>
+
+
 {% endblock %}

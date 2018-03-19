@@ -2,56 +2,64 @@
 {% load staticfiles %}
 
 {% block title_block %}
-	{{ category.name}}
+
+    <title>JokeOverflow - {{ category }}</title>
+
 {% endblock %}
 
 {% block body_block %}
-<div class="container">
-	<h1>This is the {{ category }} page</h1>
-	<div class="row">
-          <div class="col-md-6">
-            <h2> Most Liked Jokes </h2>
-		<p>
-			{% if user_jokes %}
-				<ul class="list-group">
-					{% for joke in user_jokes %}
-						 <li>{{ joke.title }} with {{ joke.rating }} likes</li>
-					{% endfor %}
-				</ul>
-			{% else %}
-				<strong>There are no jokes present.</strong>
-			{% endif %}
-		</p>
-          </div>
+    <div class="container">
+    <h1>This is the {{ category }} page</h1>
+    {% if  category.restricted and age < 18 %}
+    <strong>This category is restricted to the little'uns!</strong>
+    {% else %}
+        <div class="row">
+        <div class="col-md-6">
+        <h2> Most Liked Jokes </h2>
 
-	  <div class="col-md-6">
-            <h2> Recently Added Jokes </h2>
-		<p>
-			{% if recentjokes %}
-				<ul class="list-group">
-					{% for joke in recentjokes%}
-						 <li>{{ joke.title }} added {{ joke.date_added }}</li>
-					{% endfor %}
-				</ul>
-			{% else %}
-				<strong>There are no jokes present.</strong>
-			{% endif %}
-		</p>
-          </div>
-	  <div>
-		<h2> All {{ category }} Jokes </h2>
-			<p>
-				<a href="{% url 'jokeoverflow:add_joke' category.slug %}">Add Joke</a>
-				{% if alljokes %}
-					{% for joke in alljokes %}
-						<li>{{ joke.joke_text }} - {{ joke.rating }} rating</li>
-					{% endfor %}
-				{% else %}
-					<strong>There are no jokes present.</strong>
-				{% endif %}
-			</p>
+<p>
+    {% if user_jokes %}
+        <ul class="list-group">
+            {% for joke in user_jokes %}
+                <li>{{ joke.title }} with {{ joke.rating }} likes</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <strong>There are no jokes present.</strong>
+    {% endif %}
+</p>
+</div>
+
+<div class="col-md-6">
+    <h2> Recently Added Jokes </h2>
+    <p>
+        {% if recentjokes %}
+            <ul class="list-group">
+                {% for joke in recentjokes %}
+                    <li>{{ joke.title }} added {{ joke.date_added }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <strong>There are no jokes present.</strong>
+        {% endif %}
+    </p>
+</div>
+<div>
+    <h2> All {{ category }} Jokes </h2>
+    <p>
+	<a href="{% url 'jokeoverflow:add_joke' category.slug %}">Add Joke</a>
+        {% if alljokes %}
+            {% for joke in alljokes %}
+                <li>{{ joke.joke_text }} - {{ joke.rating }} rating</li>
+            {% endfor %}
+        {% else %}
+            <strong>There are no jokes present.</strong>
+        {% endif %}
+    </p>
 
 
-	</div>
-	</div>
+</div>
+</div>
+    </div>
+    {% endif %}
 {% endblock %}

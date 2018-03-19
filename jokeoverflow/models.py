@@ -22,8 +22,8 @@ class UserProfile(models.Model):
 class Video(models.Model):
     title = models.CharField(max_length=128, unique=True)
     added_by = models.ForeignKey(User)
-    url = models.URLField()
-    date_added = models.DateField(auto_now_add=True)
+    url = models.URLField(null=True)
+    date_added = models.DateTimeField(auto_now_add=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
@@ -63,7 +63,7 @@ class Joke(models.Model):
     downvotes = models.IntegerField(default=0)
     flagged = models.BooleanField(default=False)
     category = models.ForeignKey(Category)
-    added_by = models.ForeignKey(User)
+    added_by = models.ForeignKey(User, related_name='jokes')
     rating = models.IntegerField(default=0)
     slug = models.SlugField(unique=True)
 
@@ -79,15 +79,15 @@ class Comment(models.Model):
     comment_text = models.TextField(max_length=256, unique=False)
     made_by = models.ForeignKey(User)
     date_added = models.DateField(auto_now_add=True)
-    joke = models.ForeignKey(Joke)
+    joke = models.ForeignKey(Joke, related_name='comments')
 
     def __str__(self):
         return self.comment_text
 
 
 class Voted(models.Model):
-    joke = models.OneToOneField(Joke)
-    user = models.OneToOneField(User)
+    joke = models.ForeignKey(Joke)
+    user = models.ForeignKey(User)
 
     def __str__(self):
         return self.joke.title + " : Voted on by " + self.user.username
