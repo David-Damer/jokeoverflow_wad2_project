@@ -1,10 +1,9 @@
 # jokeoverflow_wad2_project
 	
+Emojis and emoji-picker are by jasonpang, TimBest, gdeglin, MasterGroosha and Doshibu
+at OneSignal. Github repository: https://github.com/OneSignal/emoji-picker
 
-For virtualenv to install all files in the requirements.txt file.
+Also youtube_search adapted from code from google at: https://developers.google.com/youtube/v3/docs/search/list#parameters
 
-    cd to the directory where requirements.txt is located
-    activate your virtualenv
-    run: pip install -r requirements.txt in your shell
+All user profile images are from google
 
-change to readme
