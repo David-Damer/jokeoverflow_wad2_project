@@ -12,7 +12,9 @@ TO DO
 [ ] Make Joke Form
 [ ] Search Joke Results
 [ ] Add Category Option
-[ ] Comments and Jokes show new lines
+[ ] Comments and Jokes show new lines (SAM)
+[ ] Registration Format (SAM)
+[ ] Login Format (SAM)
 
 CAN DO AFTER FRIDAY
 [ ] Logo (SAM)

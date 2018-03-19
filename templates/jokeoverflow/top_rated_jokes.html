@@ -74,6 +74,8 @@
                                     {# {{ joke.joke_text|linebreaks }} #}
                                 </div>
                                 <br>
+                                <hr>
+
                                 <div class="row">
                                     <div class="col-md-3 ">
                                         {% if user.is_authenticated %}
@@ -94,16 +96,11 @@
                                         <!--<img class = "vote-icon" src="{% static "images/icons/downvote.png" %}" alt="Downvote" />-->
                                         <div id="d{{ joke }}">{{ joke.downvotes }}</div>
                                     </div>
-                                    <div class="col-md-6 comments-container">
+                                    <div class="col-md-6"> <!--comments-container">-->
                                         {% if joke.comments.count == 1 %}
-
-
-
-
-                                            <br>{{ joke.comments.count }} Comment: <br>
+                                            {{ joke.comments.count }} Comment: <br>
                                         {% else %}
-
-                                            <br>{{ joke.comments.count }} Comments: <br>
+                                            {{ joke.comments.count }} Comments: <br>
                                         {% endif %}
                                         <div class = "comment-field">
                                             <hr>
