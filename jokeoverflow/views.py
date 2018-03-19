@@ -32,9 +32,10 @@ def about_us(request):
 def show_category(request, category_name_slug):
     context_dict = {}
     age = 0
-    if request.user.is_authenticated:
-        prof = UserProfile.objects.filter(user=request.user)[0]
-        age = calculate_age(prof.date_of_birth)
+    if not request.user.is_superuser:
+        if request.user.is_authenticated:
+            prof = UserProfile.objects.filter(user=request.user)[0]
+            age = calculate_age(prof.date_of_birth)
 
     try:
         category_list = Category.objects.order_by('title')
