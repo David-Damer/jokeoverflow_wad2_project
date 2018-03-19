@@ -292,7 +292,8 @@ def upvote(request):
                 print('already voted')
 
                 upvotes = upjoke.upvotes
-                return HttpResponse(upvotes)
+                msg = (upvotes.__str__() + " You can only vote once per joke!")
+                return HttpResponse(msg)
             else:
                 voted = Voted.objects.get_or_create(user=request.user, joke=upjoke)[0]
                 voted.save()
@@ -315,7 +316,8 @@ def downvote(request):
             if Voted.objects.filter(user=request.user, joke=downjoke).exists():
                 print('already voted')
                 downvotes = downjoke.downvotes
-                return HttpResponse(downvotes)
+                msg = (downvotes.__str__() + " You can only vote once per joke!")
+                return HttpResponse(msg)
             else:
                 voted = Voted.objects.get_or_create(user=request.user, joke=downjoke)[0]
                 voted.save()
