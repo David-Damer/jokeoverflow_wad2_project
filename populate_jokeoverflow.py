@@ -118,7 +118,7 @@ def populate():
         {'title': 'Lifts',
          'text': 'I\'m terrified of lifts....\nI\'m starting to take steps to avoid them.',
          'date_added': '2017-12-07',
-         'upvotes': 44, 'downvotes': 1, 'added_by': 'PatriciaWorker'},
+         'upvotes': 55, 'downvotes': 1, 'added_by': 'PatriciaWorker'},
         {'title': 'Sandwich',
          'text': 'A sandwich walks into a bar...\nThe bartender says "Sorry, we don\'t serve food here!.',
          'date_added': '2017-10-03',
@@ -126,15 +126,15 @@ def populate():
         {'title': 'Dentist',
          'text': 'What time do you go to the dentist?\nAt tooth-hurty!.',
          'date_added': '2017-10-03',
-         'upvotes': 12, 'downvotes': 9, 'added_by': 'SammyTheMan'},
+         'upvotes': 33, 'downvotes': 2, 'added_by': 'SammyTheMan'},
         {'title': 'Peanuts',
          'text': 'Two peanuts were walking down a street.\nOne was a salted.',
          'date_added': '2018-02-03',
-         'upvotes': 12, 'downvotes': 9, 'added_by': 'SammyTheMan'},
+         'upvotes': 18, 'downvotes': 4, 'added_by': 'SammyTheMan'},
         {'title': 'Calendar',
          'text': 'I had a job at the calendar factory but I got the sack for taking days off.',
          'date_added': '2018-02-03',
-         'upvotes': 12, 'downvotes': 9, 'added_by': 'WeeCraig'},
+         'upvotes': 21, 'downvotes': 8, 'added_by': 'WeeCraig'},
     ]
 
     adult_jokes = [
@@ -145,7 +145,7 @@ def populate():
         {'title': 'Santa',
          'text': 'Why does Santa have such a big sack?\nHe only comes once a year',
          'date_added': '2017-12-25',
-         'upvotes': 44, 'downvotes': 1, 'added_by': 'PatriciaWorker'},
+         'upvotes': 104, 'downvotes': 12, 'added_by': 'PatriciaWorker'},
         {'title': 'Lightbulb',
          'text': 'What\'s the difference between a lightbulb and a pregnant woman?\nYou can unscrew a lightbulb.',
          'date_added': '2017-07-25',
@@ -153,11 +153,11 @@ def populate():
         {'title': 'Wife',
          'text': 'What\' the difference between your wife and your job?\nAfter five years your job will still suck.',
          'date_added': '2017-08-22',
-         'upvotes': 12, 'downvotes': 9, 'added_by': 'WeeCraig'},
+         'upvotes': 19, 'downvotes': 9, 'added_by': 'WeeCraig'},
         {'title': 'Oral',
          'text': 'What\'s the difference between anal and oral sex?\nOral sex makes your day.\nAnal sex makes your hole weak.',
          'date_added': '2017-08-22',
-         'upvotes': 12, 'downvotes': 9, 'added_by': 'WeeCraig'},
+         'upvotes': 108, 'downvotes': 9, 'added_by': 'WeeCraig'},
     ]
 
     cats = {
