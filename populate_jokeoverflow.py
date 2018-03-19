@@ -225,6 +225,14 @@ def populate():
          'date_added': '2018-02-04'},
         {'text': 'This is older than me.', 'joke': 'Dr who joke', 'added_by': 'SammyTheMan',
          'date_added': '2018-02-02'},
+        {'text': 'This is older than me. And I\'m dead old!', 'joke': 'Lightbulb', 'added_by': 'EricCarpenter',
+         'date_added': '2018-02-02'},
+        {'text': 'OMG.\nROFL.\nLOL.', 'joke': 'Guns', 'added_by': 'PatriciaWorker',
+         'date_added': '2018-02-02'},
+        {'text': 'If this doesn\'t get me a girl, nothing will!', 'joke': 'Oral', 'added_by': 'WeeCraig',
+         'date_added': '2018-02-02'},
+        {'text': 'Ain\'t that the truth.', 'joke': 'Wife', 'added_by': 'SammyTheMan',
+         'date_added': '2018-02-02'},
 
     ]
     for cat, cat_data in cats.items():

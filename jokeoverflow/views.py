@@ -195,10 +195,8 @@ def auto_add_video(request):
         else:
             print('Not added')
     videos = Video.objects.all().order_by('-date_added')[:10]
-    category_list = Category.objects.order_by('title')
-    context_dict = {'categories': category_list, 'topratedvideos': videos, }
-
-    return render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
+    context_dict['topratedvideos'] = videos
+    return render(request, 'jokeoverflow/video_update.html', context_dict)
 
 
 def testingSC1(request, jid):
@@ -268,7 +266,6 @@ def upvote(request):
     joke = None
     if request.method == 'GET':
         joke = request.GET['djoke']
-    upvotes = 0
     if joke:
         upjoke = Joke.objects.get(title=joke)
         if upjoke:
@@ -293,7 +290,6 @@ def downvote(request):
     joke = None
     if request.method == 'GET':
         joke = request.GET['djoke']
-    downvotes = 0
     if joke:
         downjoke = Joke.objects.get(title=joke)
         if downjoke:
