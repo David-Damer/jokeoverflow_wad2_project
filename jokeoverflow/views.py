@@ -130,11 +130,29 @@ def top_rated_jokes(request):
         rated_cat_jokes = Joke.objects.filter(category=cat).order_by('upvotes')[:5]
         cat_rated_dict[str(cat)] = rated_cat_jokes
 
+
+    form = CommentForm(request.POST)
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.made_by = request.user
+            
+            comment.joke = Joke.objects.order_by('title')[0]
+            comment.save()
+
+            return redirect('home')
+        else:
+            print(form.errors)
+
+
+
+
     print(str(cat_rated_dict))
     comments = Comment.objects.all()
     users = UserProfile.objects.all()
     context_dict = {'categories': category_list, 'cat_rated_jokes': cat_rated_dict, 'comments': comments,
-                    'topratedjokes': rated_jokes, 'users': users}
+                    'topratedjokes': rated_jokes, 'users': users, 'form':form}
     response = render(request, 'jokeoverflow/top_rated_jokes.html', context_dict)
     return response
 

@@ -97,6 +97,9 @@
                                     <div class="col-md-6 comments-container">
                                         {% if joke.comments.count == 1 %}
 
+
+
+
                                             <br>{{ joke.comments.count }} Comment: <br>
                                         {% else %}
 
@@ -170,6 +173,13 @@
 
                                             <a href="{% url 'jokeoverflow:testingSC1' %}">Add a Comment on {{ joke }}</a>
 
+
+
+                                            <form id="comment_form" method="post" action="." >
+                                                {% csrf_token %}
+                                                {{ form.as_p }}
+                                                <input type="submit" value="Submit" joke-data="{{joke}}"/>
+                                            </form>
 
                                         </div>
                                     </div>
