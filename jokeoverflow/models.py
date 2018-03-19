@@ -58,7 +58,7 @@ class Category(models.Model):
 class Joke(models.Model):
     title = models.CharField(max_length=128)
     joke_text = models.TextField(max_length=256)
-    date_added = models.DateField(auto_now_add=True)
+    date_added = models.DateTimeField(auto_now_add=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
     flagged = models.BooleanField(default=False)
@@ -78,7 +78,7 @@ class Joke(models.Model):
 class Comment(models.Model):
     comment_text = models.TextField(max_length=256, unique=False)
     made_by = models.ForeignKey(User)
-    date_added = models.DateField(auto_now_add=True)
+    date_added = models.DateTimeField(auto_now_add=True)
     joke = models.ForeignKey(Joke, related_name='comments')
 
     def __str__(self):
