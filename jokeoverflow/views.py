@@ -11,6 +11,9 @@ from django.template.defaulttags import register
 from django.http import HttpResponse
 from django.contrib import messages
 from jokeoverflow.calculate_age import calculate_age
+from django.http import JsonResponse
+import json
+
 
 def home(request):
     category_list = Category.objects.order_by('title')
@@ -44,7 +47,7 @@ def show_category(request, category_name_slug):
         recent_jokes = Joke.objects.filter(category=category).order_by('-date_added')[:2]
         all_jokes = Joke.objects.filter(category=category).order_by('-upvotes')
         context_dict = {'categories': category_list, 'category': category, 'topratedjokes': rated_jokes,
-                        'recentjokes': recent_jokes, 'alljokes': all_jokes, 'age': age }
+                        'recentjokes': recent_jokes, 'alljokes': all_jokes, 'age': age}
     except Category.DoesNotExist:
         context_dict['category'] = None
         context_dict['topratedjokes'] = None
@@ -130,14 +133,13 @@ def top_rated_jokes(request):
         rated_cat_jokes = Joke.objects.filter(category=cat).order_by('upvotes')[:5]
         cat_rated_dict[str(cat)] = rated_cat_jokes
 
-
     form = CommentForm(request.POST)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.made_by = request.user
-            
+
             comment.joke = Joke.objects.order_by('title')[0]
             comment.save()
 
@@ -145,14 +147,11 @@ def top_rated_jokes(request):
         else:
             print(form.errors)
 
-
-
-
     print(str(cat_rated_dict))
     comments = Comment.objects.all()
     users = UserProfile.objects.all()
     context_dict = {'categories': category_list, 'cat_rated_jokes': cat_rated_dict, 'comments': comments,
-                    'topratedjokes': rated_jokes, 'users': users, 'form':form}
+                    'topratedjokes': rated_jokes, 'users': users, 'form': form}
     response = render(request, 'jokeoverflow/top_rated_jokes.html', context_dict)
     return response
 
@@ -210,7 +209,7 @@ def auto_add_video(request):
         if not Video.objects.filter(embed_code=code).exists():
             print('added')
             vid = Video.objects.get_or_create(title=title, url=url, embed_code=code,
-                                          thumbnail=thumb, added_by=request.user)
+                                              thumbnail=thumb, added_by=request.user)
         else:
             print('Not added')
     videos = Video.objects.all().order_by('-date_added')[:5]
@@ -226,8 +225,8 @@ def testingSC1(request, jid):
     userget = request.GET.get('user')
     userpost = request.POST.get('user')
     userrequest = request.user
-    #jokerequest = request.joke
-    #jokepass = joke_slug
+    # jokerequest = request.joke
+    # jokepass = joke_slug
     joke = jid
 
     try:
@@ -243,7 +242,7 @@ def testingSC1(request, jid):
             comment.made_by = request.user
             print(form.errors)
 
-    context_dict = {'form': form, 'jid':jid}
+    context_dict = {'form': form, 'jid': jid}
 
     return render(request, 'jokeoverflow/testingSC1.html', context_dict)
 
@@ -292,8 +291,8 @@ def upvote(request):
                 print('already voted')
 
                 upvotes = upjoke.upvotes
-                msg = (upvotes.__str__() + " You can only vote once per joke!")
-                return HttpResponse(msg)
+                msg = " You can only vote once per joke!"
+                return JsonResponse({"upvotes": upvotes, 'msg': msg})
             else:
                 voted = Voted.objects.get_or_create(user=request.user, joke=upjoke)[0]
                 voted.save()
@@ -302,7 +301,8 @@ def upvote(request):
                 print("vote registered")
                 upjoke.upvotes = upvotes
                 upjoke.save()
-                return HttpResponse(upvotes)
+                msg = "Vote registered!"
+                return JsonResponse({'upvotes': upvotes, 'msg': msg})
 
 
 @login_required
@@ -316,8 +316,8 @@ def downvote(request):
             if Voted.objects.filter(user=request.user, joke=downjoke).exists():
                 print('already voted')
                 downvotes = downjoke.downvotes
-                msg = (downvotes.__str__() + " You can only vote once per joke!")
-                return HttpResponse(msg)
+                msg = "You can only vote once per joke!"
+                return JsonResponse({"downvotes": downvotes, 'msg': msg})
             else:
                 voted = Voted.objects.get_or_create(user=request.user, joke=downjoke)[0]
                 voted.save()
@@ -326,4 +326,5 @@ def downvote(request):
                 print("vote registered")
                 downjoke.downvotes = downvotes
                 downjoke.save()
-                return HttpResponse(downvotes)
+                msg = "Vote Registered!"
+                return JsonResponse({'downvotes': downvotes, 'msg': msg})
