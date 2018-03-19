@@ -25,15 +25,15 @@ class UserForm(forms.ModelForm):
 
 class JokeForm(forms.ModelForm):
     title = forms.CharField(max_length=128, help_text='Give the joke a title.')
-    joke_text = forms.CharField(max_length=256, help_text='Tell us your joke!')
-    date_added = forms.DateField(widget=forms.HiddenInput)
+    joke_text = forms.CharField(widget=forms.Textarea, max_length=256, help_text='Tell us your joke!')
+    date_added = forms.DateTimeField(widget=forms.HiddenInput, required=False)
     upvotes = forms.IntegerField(widget=forms.HiddenInput, initial=0)
     downvotes = forms.IntegerField(widget=forms.HiddenInput, initial=0)
-    flagged = forms.BooleanField(widget=forms.HiddenInput, initial=False)
+    flagged = forms.BooleanField(widget=forms.HiddenInput, initial=False, required=False)
 
     class Meta:
         model = Joke
-        exclude = ('added_by', 'category',)
+        fields = ('title', 'joke_text')
 
 
 class VideoForm(forms.ModelForm):

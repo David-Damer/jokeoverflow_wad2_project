@@ -38,11 +38,13 @@ def add_joke(request, category_name_slug):
     form = JokeForm()
     if request.method == 'POST':
         form = JokeForm(request.POST)
+        user = request.user
+
         if form.is_valid():
             if category:
                 joke = form.save(commit=False)
                 joke.category = category
-                joke.views = 0
+                joke.added_by = user
                 joke.save()
                 return show_category(request, category_name_slug)
         else:
