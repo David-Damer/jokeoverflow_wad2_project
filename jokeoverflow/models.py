@@ -23,7 +23,7 @@ class Video(models.Model):
     title = models.CharField(max_length=128, unique=True)
     added_by = models.ForeignKey(User)
     url = models.URLField(null=True)
-    date_added = models.DateField(auto_now_add=True)
+    date_added = models.DateTimeField(auto_now_add=True)
     upvotes = models.IntegerField(default=0)
     downvotes = models.IntegerField(default=0)
     rating = models.IntegerField(default=0)
