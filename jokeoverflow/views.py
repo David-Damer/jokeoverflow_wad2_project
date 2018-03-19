@@ -13,6 +13,7 @@ from django.contrib import messages
 from jokeoverflow.calculate_age import calculate_age
 from django.http import JsonResponse
 import json
+from django.utils.timezone import now
 
 
 def home(request):
@@ -236,6 +237,8 @@ def auto_add_video(request):
                                               thumbnail=thumb, added_by=request.user)
         else:
             print('Not added')
+            vid = Video.objects.get(embed_code=code)
+            vid.date_added = now()
     videos = Video.objects.all().order_by('-date_added')[:5]
     context_dict['topratedvideos'] = videos
     return render(request, 'jokeoverflow/video_update.html', context_dict)
@@ -306,8 +309,11 @@ def add_comment_to_joke(request, joke_slug, user):
 @login_required
 def upvote(request):
     joke = None
+    uuser = None
     if request.method == 'GET':
         joke = request.GET['djoke']
+        uuser = request.user.username
+
     if joke:
         upjoke = Joke.objects.get(title=joke)
         if upjoke:
@@ -315,7 +321,7 @@ def upvote(request):
                 print('already voted')
 
                 upvotes = upjoke.upvotes
-                msg = " You can only vote once per joke!"
+                msg = (" You can only vote once per joke " + uuser + '!')
                 return JsonResponse({"upvotes": upvotes, 'msg': msg})
             else:
                 voted = Voted.objects.get_or_create(user=request.user, joke=upjoke)[0]
@@ -325,22 +331,24 @@ def upvote(request):
                 print("vote registered")
                 upjoke.upvotes = upvotes
                 upjoke.save()
-                msg = "Vote registered!"
+                msg = ("Vote Registered " + uuser + "!")
                 return JsonResponse({'upvotes': upvotes, 'msg': msg})
 
 
 @login_required
 def downvote(request):
     joke = None
+    uuser = None
     if request.method == 'GET':
         joke = request.GET['djoke']
+        uuser = request.user.username
     if joke:
         downjoke = Joke.objects.get(title=joke)
         if downjoke:
             if Voted.objects.filter(user=request.user, joke=downjoke).exists():
                 print('already voted')
                 downvotes = downjoke.downvotes
-                msg = "You can only vote once per joke!"
+                msg = ("You can only vote once per joke " + uuser + "!")
                 return JsonResponse({"downvotes": downvotes, 'msg': msg})
             else:
                 voted = Voted.objects.get_or_create(user=request.user, joke=downjoke)[0]
@@ -350,5 +358,5 @@ def downvote(request):
                 print("vote registered")
                 downjoke.downvotes = downvotes
                 downjoke.save()
-                msg = "Vote Registered!"
+                msg = ("Vote Registered " + uuser + "!")
                 return JsonResponse({'downvotes': downvotes, 'msg': msg})

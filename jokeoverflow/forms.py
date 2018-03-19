@@ -49,11 +49,12 @@ class VideoForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
-    comment_text = forms.CharField(max_length=256, help_text='Please enter your comments...', widget=forms.Textarea)
+    comment_text = forms.CharField(max_length=256, help_text='Please enter your comments...', widget=forms.TextInput)
 
     class Meta:
         model = Comment
         exclude = ('made_by', 'joke', 'date_added')
+
 
 
 class CategoryForm(forms.ModelForm):
@@ -61,7 +62,6 @@ class CategoryForm(forms.ModelForm):
     restricted = forms.BooleanField(widget=forms.HiddenInput(), initial=False)
     no_of_jokes = forms.IntegerField(widget=forms.HiddenInput(), initial=0)
     slug = forms.CharField(widget=forms.HiddenInput(), required=False)
-
     class Meta:
         model = Category
         fields = ('title',)

@@ -28,7 +28,6 @@ $(".vote").click(function () {
 });
 
 
-
 $(".down-vote").click(function () {
     var joke = $(this).attr('data-joke');
     console.log(this);
@@ -43,4 +42,12 @@ $(".down-vote").click(function () {
         }, 1000);
     });
 
+});
+$('.com').keydown(function (e) {
+    if (e.keyCode == 13) {
+        var joke = $(this).attr('data-fjoke');
+        alert('enter pressed');
+        $('#com' + joke).html('');
+
+    }
 });

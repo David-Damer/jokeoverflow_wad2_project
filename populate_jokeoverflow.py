@@ -233,7 +233,10 @@ def populate():
          'date_added': '2018-02-02'},
         {'text': 'Ain\'t that the truth.', 'joke': 'Wife', 'added_by': 'SammyTheMan',
          'date_added': '2018-02-02'},
-
+        {'text': 'Bloody hilarious', 'joke': 'Oral', 'added_by': 'EricCarpenter',
+         'date_added': '2018-02-02'},
+        {'text': 'I love it! The joke I mean.', 'joke': 'Oral', 'added_by': 'PatriciaWorker',
+         'date_added': '2018-02-02'},
     ]
     for cat, cat_data in cats.items():
         c = add_cat(cat, cat_data["restricted"], cat_data["num_jokes"])

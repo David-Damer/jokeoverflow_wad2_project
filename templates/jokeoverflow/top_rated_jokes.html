@@ -113,10 +113,18 @@
                                                         {% if comment.made_by == user.user %}
                                                                 <div style="background-color:blue;" class="col-md-3 comment-profile-pic">
                                                                     <!--<img src="{{ user.user_picture}}" alt="No profile picture"}>-->
+                                                                    {% if user.user_picture %}
                                                                     <img style="height:60px; width:60px;"
                                                                          class="sc-com-profile-pic" style="float:right;"
                                                                          src="{{ MEDIA_URL }}{{ user.user_picture }}"
                                                                          alt="No profile picture" }>
+                                                                        {% else %}
+                                                                        <img style="height:60px; width:60px;"
+                                                                         class="sc-com-profile-pic" style="float:right;"
+                                                                         src="{{ MEDIA_URL }}default.PNG"
+                                                                         alt="No profile picture" }>
+                                                                        {% endif %}
+
                                                                 </div>
                                                                 <div class="col-md-9">
                                                                     {{ comment.comment_text }}
@@ -152,9 +160,17 @@
                                         <div>
                                             {% for user in users %}
                                                 {% if user.user == joke.added_by %}
-                                                    <img style="height:60px; width:60px; float:right;"
-                                                         src="{{ MEDIA_URL }}{{ user.user_picture }}"
-                                                         alt="No profile picture" }>
+                                                    {% if user.user_picture %}
+                                                                    <img style="height:60px; width:60px;"
+                                                                         class="sc-com-profile-pic" style="float:right;"
+                                                                         src="{{ MEDIA_URL }}{{ user.user_picture }}"
+                                                                         alt="No profile picture" }>
+                                                                        {% else %}
+                                                                        <img style="height:60px; width:60px;"
+                                                                         class="sc-com-profile-pic" style="float:right;"
+                                                                         src="{{ MEDIA_URL }}default.PNG"
+                                                                         alt="No profile picture" }>
+                                                                        {% endif %}
                                                 {% endif %}
                                             {% endfor %}
                                         </div>
@@ -168,10 +184,11 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div>
-                                            <form id="comment_form" method="post" action="." >
-                                                {% csrf_token %}
-                                                {{ form.as_p }}
-                                                <input type="submit" value="Submit" joke-data="{{joke}}"/>
+                                            <form class="com" data-fjoke="{{ joke }}">
+                                                <input id="com{{ joke }}" type="text" data-emojiable="true"
+                                                       placeholder="Comment on {{ joke }}" joke-idata="{{joke}}"
+                                                       onkeypress="press(e)"
+                                                />
                                             </form>
 
                                         </div>
@@ -203,6 +220,7 @@
         {% if cat_rated_jokes %}
 
             {% for cat in categories %}
+                {% if not cat.restricted %}
                 <div class="col-md-5 list-box sc-list-box">
 
                     <p>
@@ -218,6 +236,7 @@
                 <br><br>
 
                 <br><br>
+                {% endif %}
 
             {% endfor %}
 
