@@ -21,7 +21,7 @@ class UserProfile(models.Model):
         
 class Video(models.Model):
     title = models.CharField(max_length=128, unique=True)
-    added_by = models.ForeignKey(User)
+    added_by = models.ForeignKey(User, related_name='videos')
     url = models.URLField(null=True)
     date_added = models.DateTimeField(auto_now_add=True)
     upvotes = models.IntegerField(default=0)
