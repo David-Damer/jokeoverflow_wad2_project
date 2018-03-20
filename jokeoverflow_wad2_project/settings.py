@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [STATIC_DIR, ]
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT = MEDIA_DIR
@@ -36,9 +36,9 @@ LOGIN_URL = '/accounts/login/'
 SECRET_KEY = '$c73*frg!uuy2k*)88c^#0pan_j@de1tbl!ofug43jpbmj-7d8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['wad2projectjokeoverflow.pythonanywhere.com']
+ALLOWED_HOSTS = ['wad2projectjokeoverflow.pythonanywhere.com', '127.0.0.1']
 
 # Application definition
 
