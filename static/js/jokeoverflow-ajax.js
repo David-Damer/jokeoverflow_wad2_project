@@ -43,8 +43,9 @@ $(".down-vote").click(function () {
     });
 
 });
-$(".btn").click(function(data){
-    alert(this.element.val());
+
+$(".com").submit(function(data){
+    alert(data[0]['data-fjoke']);
 
 
 
