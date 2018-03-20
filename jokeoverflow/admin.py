@@ -1,6 +1,6 @@
 from django.contrib import admin
 from jokeoverflow.models import Category, Video
-from jokeoverflow.models import UserProfile, Joke, Comment, Complaint
+from jokeoverflow.models import UserProfile, Joke, Comment, Complaint, CategoryRequest
 
 class CategoryAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug':('title',)}
@@ -14,4 +14,6 @@ admin.site.register(Comment)
 admin.site.register(Video)
 admin.site.register(Joke, JokeAdmin)
 admin.site.register(Complaint)
+admin.site.register(CategoryRequest)
+
 

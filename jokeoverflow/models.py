@@ -100,3 +100,11 @@ class Complaint(models.Model):
 
     def __str__(self):
         return self.complaint
+
+class CategoryRequest(models.Model):
+    new_category = forms.CharField(max_length=128, blank=False)
+    user = models.ForeignKey(User)
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.new_category
