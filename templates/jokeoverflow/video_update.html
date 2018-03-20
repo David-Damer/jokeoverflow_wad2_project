@@ -4,9 +4,7 @@
     {% for video in topratedvideos %}
         <hr>
         <h5>{{ video.title }}</h5>
-        <img class="thumbnail"
-             src="{{ video.thumbnail }}" alt="No thumbnail">
-        <iframe width="420" height="280" title="{{ video.title }}"
+        <iframe width="400" height="275" title="{{ video.title }}"
                 src={{ video.embed_code }}
                         allowfullscreen>
         </iframe>

@@ -1,8 +1,59 @@
 {% extends 'jokeoverflow/base2.html' %}
-{% block title_block %}
-    <title>JokeOverflow - About Us</title>
-
+{% load staticfiles %}
+{% block head_block %}
+<!-- Custom styles for this template -->
+<link href="{% static 'css/about_us.css' %}" rel="stylesheet">
 {% endblock %}
+{% block title_block %}
+<title>About Us</title>
+{% endblock %}
+
 {% block body_block %}
-	<h1>This is the ABOUT US page</h1>
+<div class="container">
+
+<div class="text-center sc-page-title">
+    <h1 class="text-center">
+        About JokeOverflow
+    </h1>
+</div>
+
+<div class="row">
+
+    <div class="col-md-1">
+    </div>
+
+    <div class="text-center col-md-6 sc-website-desc">
+        <p>
+            JokeOverflow is a website to give users a space to come and make, view and comment on jokes. You are able to
+            view jokes and videos other users upload, and if you register for an account you can vote, comment and
+            upload your own jokes or videos. Hope you enjoy your visit.
+        </p>
+    </div>
+
+    <div class="col-md-1">
+    </div>
+
+    <div class="col-md-3 sc-members-list-box">
+        <h2 class = "sc-block-title text-center">
+            Members
+        </h2>
+        <p class="sc-box-cont">
+            <br>
+            <strong>Sam Cook</strong> : Templates and CSS
+            <br>
+            <strong>David Damer</strong> : Models, JavaScript and AJAX
+            <br>
+            <strong>Joe Kadi</strong> : User Authentication and Unit Testing
+            <br>
+            <strong>Stuart McMillan</strong> : Views
+            <br>
+        </p>
+    </div>
+
+    <div class="col-md-1">
+
+    </div>
+</div>
+<br>
+</div>
 {% endblock %}

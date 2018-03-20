@@ -1,16 +1,16 @@
 {% extends 'jokeoverflow/base2.html' %}
 {% block title_block %}
-<title>JokeOverflow - Top Rated Videos</title>
+<title>JokeOverflow - Videos</title>
 
 {% endblock %}
 {% block body_block %}
 <div class="container">
-    <h1>This is the TOP RATED VIDEOS page</h1>
+
     <div class="row">
         <div class="col-md-12">
 
                 <div class="row">
-                    <div style="background-color:red;" class="col-md-4">
+                    <div class="col-md-4">
                         <h2> Recently Added Videos </h2>
                         <div id="videos">
                             {% if topratedvideos %}
@@ -18,9 +18,7 @@
                             {% for video in topratedvideos %}
                             <hr>
                             <h5>{{ video.title }}</h5>
-                            <img class="thumbnail"
-                                 src="{{ video.thumbnail }}" alt="No thumbnail">
-                            <iframe width="420" height="280" title="{{ video.title }}"
+                            <iframe width="400" height="275" title="{{ video.title }}"
                                     src={{ video.embed_code }}
                                     allowfullscreen>
                             </iframe>
