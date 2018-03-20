@@ -18,9 +18,9 @@
         <h2> Most Liked Jokes </h2>
 
 <p>
-    {% if user_jokes %}
+    {% if topratedjokes %}
         <ul class="list-group">
-            {% for joke in user_jokes %}
+            {% for joke in topratedjokes %}
                 <li>{{ joke.title }} with {{ joke.rating }} likes</li>
             {% endfor %}
         </ul>

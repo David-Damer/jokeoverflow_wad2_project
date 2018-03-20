@@ -9,7 +9,7 @@
 	        <h1>Add a Joke to {{ category.title }}</h1>
 	        <form id="page_form" method="post" action="/jokeoverflow/category/{{ category.slug }}/add_joke/">
 	            {% csrf_token %}
-	            {% for hidden in form.hidden_fields %}
+	 	    {% for hidden in form.hidden_fields %}
 	                {{ hidden }}
 	            {% endfor %}
 	            {% for field in form.visible_fields %}
