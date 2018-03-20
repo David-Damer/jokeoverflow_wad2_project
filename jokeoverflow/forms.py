@@ -72,4 +72,4 @@ class ComplaintForm(forms.ModelForm):
 
     class Meta:
         model = Complaint
-        exclude = ('user',)
+        exclude = ('user', 'date_added')
