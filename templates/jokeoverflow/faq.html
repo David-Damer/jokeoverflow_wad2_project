@@ -1,8 +1,82 @@
 {% extends 'jokeoverflow/base2.html' %}
+{% load staticfiles %}
+{% block head_block %}
+<!-- Custom styles for this template -->
+<link href="{% static 'css/faq.css' %}" rel="stylesheet">
+{% endblock %}
 {% block title_block %}
-    <title>JokeOverflow - FAQ</title>
-
+<title>FAQ</title>
 {% endblock %}
 {% block body_block %}
-	<h1>This is the FAQ page</h1>
+<div class="container">
+    <br>
+    <div class="text-center sc-page-title">
+        <h1 class="text-center">
+            Frequently Asked Questions
+        </h1>
+    </div>
+    <br>
+    <div class="sc-faq-table">
+        <table class="table table-bordered table-striped">
+            <thead>
+            <tr>
+                <th>Question</th>
+                <th>Answer</th>
+            </tr>
+            </thead>
+            <tbody class = "text-center">
+            <tr>
+                <td class="sc-faq-question">
+                    How do I make an account?
+                </td>
+                <td>
+                    Click on the button titled 'Register' in our navigation menu to be taken to the registration page. From there fill in your details, adding a profile picture if wanting, and the click submit. Your account should then be made and you will be brought to the home page signed in.
+                </td>
+            </tr>
+            <tr>
+                <td class="sc-faq-question">
+                    How do I report a joke?
+                </td>
+                <td>
+                    Use our 'Contact Us' page to send us an email. If you see a joke that you think should be restricted and is no, or a joke you think should be brought down, email us with the joke title and author, or joke ID and we will do our best to take it down as quickly as we can. We obviously take inappropriate behavoir very seriously and would be grateful for your help in identifying it.
+                </td>
+            </tr>
+            <tr>
+                <td class="sc-faq-question">
+                    How do add a joke?
+                </td>
+                <td>
+                    Navigate to the category's page that you would like to add a joke to and scroll down the page until you get to a link to a 'Add Joke' form, clicking on this will lead you to a page to fill out your joke information. Once you are done filling the form in, click submit and your joke will be added automatically.
+                </td>
+            </tr>
+            <tr>
+                <td class="sc-faq-question">
+                    How do I delete a joke?
+                </td>
+                <td>
+                    If you wish to delete one of your jokes, then navigagte to your own page, (form a link in the footer), there you should see a list of your jokes where there should be an option of deletion next to them. You cannot delete someone else's joke, but if you think it should be removed then you can report it and our admin will look at your complaint.
+                </td>
+            </tr>
+            <tr>
+                <td class="sc-faq-question">
+                    I want to make a joke but there's not a correct category?
+                </td>
+                <td>
+                    You are not able to add a new category by yourself, but we have given the option to request a new category. You can find a link to the form in the footer of each page, once opened a user can fill in the informaiton required and once an admin official has reviewed the request, it will either be accepted or rejected.
+                </td>
+            </tr>
+            <tr>
+                <td class="sc-faq-question">
+                    How do I add a video?
+                </td>
+                <td>
+                    If the user is logged in, on your top videos page, use the search bar to look for the video you want to add from youtube. Once found there should click on the 'Add Video' button adjacent which will add that video to our database.
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <br>
+
+</div>
 {% endblock %}
