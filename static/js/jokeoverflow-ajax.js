@@ -43,11 +43,11 @@ $(".down-vote").click(function () {
     });
 
 });
-$('.com').keydown(function (e) {
-    if (e.keyCode == 13) {
-        var joke = $(this).attr('data-fjoke');
-        alert('enter pressed');
-        $('#com' + joke).html('');
+$(".btn").click(function(data){
+    alert(this.element.val());
 
-    }
+
+
 });
+
+

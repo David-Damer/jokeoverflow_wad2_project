@@ -24,10 +24,10 @@ def home(request):
     response = render(request, 'jokeoverflow/home.html', context=context_dict)
     return response
 
+
 def add_joke(request, category_name_slug):
-    
     category_list = Category.objects.order_by('title')
-    
+
     try:
         category = Category.objects.get(slug=category_name_slug)
     except Category.DoesNotExist:
@@ -96,6 +96,7 @@ def latest_news(request):
     response = render(request, 'jokeoverflow/latest_news.html', context_dict)
     return response
 
+
 def user_profiles(request):
     category_list = Category.objects.order_by('title')
     user_profiles = UserProfile.objects.order_by('user')
@@ -121,6 +122,7 @@ def top_rated_videos(request):
     response = render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
     return response
 
+
 @login_required
 def log_complaint(request):
     form = ComplaintForm()
@@ -131,12 +133,11 @@ def log_complaint(request):
             complaint = form.save(commit = False)
             complaint.user = request.user
             complaint.save()
-            
+
             return redirect('log_complaint')
         else:
             print(form.errors)
-            
-        
+
     category_list = Category.objects.order_by('title')
     context_dict = {'form': form, 'categories': category_list}
     response = render(request, 'jokeoverflow/log_complaint.html', context_dict)
@@ -176,6 +177,7 @@ def top_rated_jokes(request):
                     'topratedjokes': rated_jokes, 'users': users, 'form':form}
     response = render(request, 'jokeoverflow/top_rated_jokes.html', context_dict)
     return response
+
 
 @register.filter
 def get_item(dictionary, key):
@@ -327,16 +329,18 @@ def upvote(request):
 @login_required
 def downvote(request):
     joke = None
+    uuser = None
     if request.method == 'GET':
         joke = request.GET['djoke']
+        uuser = request.user.username
     if joke:
         downjoke = Joke.objects.get(title=joke)
         if downjoke:
             if Voted.objects.filter(user=request.user, joke=downjoke).exists():
                 print('already voted')
                 downvotes = downjoke.downvotes
-                msg = (downvotes.__str__() + " You can only vote once per joke!")
-                return HttpResponse(msg)
+                msg = ("You can only vote once per joke " + uuser + "!")
+                return JsonResponse({"downvotes": downvotes, 'msg': msg})
             else:
                 voted = Voted.objects.get_or_create(user=request.user, joke=downjoke)[0]
                 voted.save()
@@ -345,4 +349,12 @@ def downvote(request):
                 print("vote registered")
                 downjoke.downvotes = downvotes
                 downjoke.save()
-                return HttpResponse(downvotes)
+                msg = ("Vote Registered " + uuser + "!")
+                return JsonResponse({'downvotes': downvotes, 'msg': msg})
+
+
+@login_required
+def add_comment(request):
+    joke = None
+    if request.method == 'GET':
+        pass
