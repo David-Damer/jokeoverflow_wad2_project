@@ -63,7 +63,7 @@
                     {% if categories %}
                         {% for cat in categories %}
                             <a class="dropdown-item"
-                               href="{% url 'jokeoverflow:show_category' cat.slug %}">{{ cat.title }} </a>
+                               href="{% url 'jokeoverflow:show_category' cat.slug %}">{{ cat.title }}</a>
                         {% endfor %}
                     {% endif %}
                 </div>
@@ -108,7 +108,8 @@
         {% endif %}
 
         <a href="{% url 'jokeoverflow:contact_us' %}">Contact Us</a> :
-        <a href="{% url 'jokeoverflow:faq' %}">FAQ</a>
+        <a href="{% url 'jokeoverflow:faq' %}">FAQ</a> :
+	<a href="{% url 'jokeoverflow:new_category' %}">Request New Category</a>
     </ul>
 
 </footer>

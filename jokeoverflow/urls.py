@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^about_us/', views.about_us, name='about_us'),
     url(r'^contact_us/', views.contact_us, name='contact_us'),
     url(r'^log_complaint', views.log_complaint, name='log_complaint'),
+    url(r'^new_category', views.new_category, name='new_category'),
     url(r'^faq/', views.faq, name='faq'),
     url(r'^testingSC1/', views.testingSC1, name='testingSC1'),
     url(r'^latest_news/', views.latest_news, name='latest_news'),
