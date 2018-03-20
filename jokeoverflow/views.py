@@ -26,10 +26,10 @@ def home(request):
     response = render(request, 'jokeoverflow/home.html', context=context_dict)
     return response
 
+
 def add_joke(request, category_name_slug):
-    
     category_list = Category.objects.order_by('title')
-    
+
     try:
         category = Category.objects.get(slug=category_name_slug)
     except Category.DoesNotExist:
@@ -105,6 +105,7 @@ def latest_news(request):
     response = render(request, 'jokeoverflow/latest_news.html', context_dict)
     return response
 
+
 def user_profiles(request):
     category_list = Category.objects.order_by('title')
     user_profiles = UserProfile.objects.order_by('user')
@@ -130,6 +131,7 @@ def top_rated_videos(request):
     response = render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
     return response
 
+
 @login_required
 def log_complaint(request):
     form = ComplaintForm()
@@ -140,12 +142,11 @@ def log_complaint(request):
             complaint = form.save(commit=False)
             complaint.user = request.user
             complaint.save()
-            
+
             return redirect('log_complaint')
         else:
             print(form.errors)
-            
-        
+
     category_list = Category.objects.order_by('title')
     context_dict = {'categories': category_list}
     response = render(request, 'jokeoverflow/log_complaint.html', context_dict)
@@ -181,6 +182,7 @@ def top_rated_jokes(request):
                     'topratedjokes': rated_jokes, 'users': users, 'form': form}
     response = render(request, 'jokeoverflow/top_rated_jokes.html', context_dict)
     return response
+
 
 @register.filter
 def get_item(dictionary, key):
@@ -362,3 +364,10 @@ def downvote(request):
                 downjoke.save()
                 msg = ("Vote Registered " + uuser + "!")
                 return JsonResponse({'downvotes': downvotes, 'msg': msg})
+
+
+@login_required
+def add_comment(request):
+    joke = None
+    if request.method == 'GET':
+        pass

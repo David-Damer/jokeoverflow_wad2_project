@@ -96,6 +96,7 @@ class Voted(models.Model):
 class Complaint(models.Model):
     user = models.ForeignKey(User)
     complaint = models.TextField(max_length=256, blank=False)
+    date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.complaint

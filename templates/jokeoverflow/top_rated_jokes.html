@@ -183,9 +183,11 @@
                                         <div>
                                             <form class="com" data-fjoke="{{ joke }}">
                                                 <input id="com{{ joke }}" type="text" data-emojiable="true"
-                                                       placeholder="Comment on {{ joke }}" joke-idata="{{joke}}"
-                                                       onkeypress="press(e)"
+                                                       placeholder="Comment on {{ joke }}" data-ijoke="{{joke}}"
                                                 />
+                                                <button class="btn btn-primary" type="submit" id="submit"
+                                                        value="Search">Add your comment</button>
+        </button>
                                             </form>
 
                                         </div>
