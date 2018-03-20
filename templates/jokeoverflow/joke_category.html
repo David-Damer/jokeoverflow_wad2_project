@@ -10,7 +10,7 @@
 {% block body_block %}
     <div class="container">
     <h1>This is the {{ category }} page</h1>
-    {% if  category.restricted and age < 18 %}
+    {% if  category.restricted and age < 18 and not request.user.is_superuser %}
     <strong>This category is restricted to the little'uns!</strong>
     {% else %}
         <div class="row">
