@@ -27,8 +27,13 @@ urlpatterns = [
     url(r'^faq/', views.faq, name='faq'),
     url(r'^testingSC1/', views.testingSC1, name='testingSC1'),
     url(r'^latest_news/', views.latest_news, name='latest_news'),
+<<<<<<< HEAD
     url(r'^user_profiles/(?P<username>[\w\-]+)/$', views.user_profiles, name='user_profiles'),
     url(r'^top_rated_videos/', views.top_rated_videos, name='top_rated_videos'),
+=======
+    url(r'^user_profiles/', views.user_profiles, name='user_profiles'),
+    url(r'^videos/', views.videos, name='videos'),
+>>>>>>> 563668f8f05ed175d66d938d600238352e43089f
     url(r'^top_rated_jokes/', views.top_rated_jokes, name='top_rated_jokes'),
     url(r'^category/(?P<category_name_slug>[\w\-]+)/$',
         views.show_category, name='show_category'),

@@ -115,23 +115,24 @@
                                                                          class="sc-com-profile-pic" style="float:right;"
                                                                          src="{{ MEDIA_URL }}{{ user.user_picture }}"
                                                                          alt="No profile picture" }>
-                                                                        {% else %}
+                                                                    {% else %}
                                                                         <img style="height:60px; width:60px;"
                                                                          class="sc-com-profile-pic" style="float:right;"
                                                                          src="{{ MEDIA_URL }}default.PNG"
                                                                          alt="No profile picture" }>
-                                                                        {% endif %}
-
+                                                                    {% endif %}
                                                                 </div>
-                                                                <div class="col-md-9">
+								<div class="col-md-9">
                                                                     {{ comment.comment_text }}
                                                                     <br>
                                                                     <small>{{ comment.made_by }}</small>
                                                                 </div>
                                                         {% endif %}
+
                                                     {% endfor %}
 
                                             </div>
+<hr>
                                             {% endfor %}
 
 
@@ -189,7 +190,7 @@
                                                 />
                                                 <button class="btn btn-primary"   type="submit" id="submit"
                                                         value="comment">Add your comment</button>
-        </button>
+        					</button>
                                             </form>
 
                                         </div>

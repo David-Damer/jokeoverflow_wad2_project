@@ -126,10 +126,10 @@ def user_profiles(request, username):
             {'categories': category_list, 'userprofile': userprofile, 'selecteduser': username, 'form': form})
 
 
-def top_rated_videos(request):
+def videos(request):
     category_list = Category.objects.order_by('title')
-    rated_videos = Video.objects.all().order_by('-date_added')[:5]
-    context_dict = {'categories': category_list, 'topratedvideos': rated_videos}
+    rec_added_videos = Video.objects.all().order_by('-date_added')[:5]
+    context_dict = {'categories': category_list, 'recaddedvideos': rec_added_videos}
     result_list = []
     query = ''
 
@@ -140,7 +140,7 @@ def top_rated_videos(request):
     context_dict['previous_query'] = query
     context_dict['result_list'] = result_list
 
-    response = render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
+    response = render(request, 'jokeoverflow/videos.html', context_dict)
     return response
 
 
