@@ -62,14 +62,14 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
                    aria-expanded="false">Categories</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                <ul class="dropdown-menu" aria-labelledby="dropdown01">
                     {% if categories %}
                         {% for cat in categories %}
-                            <a class="dropdown-item"
-                               href="{% url 'jokeoverflow:show_category' cat.slug %}">{{ cat.title }}</a>
+                               <li><a href="{% url 'jokeoverflow:show_category' cat.slug %}">{{ cat.title }}</a></li>
                         {% endfor %}
+			<li><a href="{% url 'jokeoverflow:new_category' %}">Req New Category</a></li>
                     {% endif %}
-                </div>
+                </ul>
             </li>
 
             {% if user.is_authenticated %}
@@ -112,7 +112,6 @@
 
         <a href="{% url 'jokeoverflow:contact_us' %}">Contact Us</a> :
         <a href="{% url 'jokeoverflow:faq' %}">FAQ</a> :
-	<a href="{% url 'jokeoverflow:new_category' %}">Request New Category</a>
     </ul>
 
 </footer>

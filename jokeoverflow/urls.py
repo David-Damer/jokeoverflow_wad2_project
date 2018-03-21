@@ -42,7 +42,6 @@ urlpatterns = [
     url(r'^downvote/$', views.downvote, name='downvote'),
     url(r'^video_update/$', views.auto_add_video, name='video_update'),
     url(r'^category/(?P<category_name_slug>[\w\-]+)/add_joke/$', views.add_joke, name='add_joke'),
-    url(r'^add_comment/$', views.add_comment, name='add_comment')
-
+    url(r'^add_comment/$', views.add_comment, name='add_comment'),
 ]
 
