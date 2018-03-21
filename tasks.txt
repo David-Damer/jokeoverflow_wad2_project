@@ -1,6 +1,6 @@
 TO DO
 [ ] Adult Jokes Restricted
-[ ] Pop-up add comments
+[X] Pop-up add comments
 [ ] Pop-up Upvote Button
 [ ] Pop-up Downvote Button
 [ ] Profile Registration

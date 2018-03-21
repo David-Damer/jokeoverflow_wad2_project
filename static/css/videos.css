@@ -44,7 +44,7 @@ padding:0;
 
 .sc-search-bar{
 width:90%;
-border:10px solid red;
+border:2px solid rgb(255,204,0);
 margin:auto;
 }
 
@@ -56,4 +56,8 @@ margin:auto;
 .sc-search-button{
     margin:auto;
 
+}
+
+.form-inline input.form-control[name="query"]{
+  width: 90%;
 }
