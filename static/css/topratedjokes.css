@@ -48,7 +48,9 @@ h1{
   	border-style: solid;
   	border-color: #ffcc00;
   	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	
+  	word-break:normal;
+  	min-width:200px;
+  	padding-top:30px;
 }
 
 .section-title{
@@ -148,7 +150,9 @@ p{
 
 .box-cont a:visited {
     background-color:pink;
-    color:blue;
+    color:gold;
+    color:rgb(204, 102, 0);
+    font-weight: bold;
     font-style: italic;
 
 }
@@ -375,10 +379,29 @@ height:50px;
 width:100%;
 }
 
+
+
 .sc-comment-text p{
     color:black;
 }
 
 .vote-icon hover{
 border:10px solid red;
+}
+
+
+.sc-page-desc{
+color:black;
+}
+
+.sc-all-jokes-box{
+max-height:400px;
+overflow-y:scroll;
+}
+
+.btn-submit{
+width:100%;
+marign-left:auto;
+margin-right:auto;
+display:block;
 }
