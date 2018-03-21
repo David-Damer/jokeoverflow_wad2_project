@@ -358,15 +358,13 @@ def add_comment(request):
     text = None
     if request.method == 'GET':
         joke = request.GET['joke']
-        print(joke)
         text = request.GET['text']
-        print(text)
         cjoke = Joke.objects.get(title=joke)
-        print(cjoke)
-        comment = Comment.objects.get_or_create(made_by=request.user, comment_text=text, joke=cjoke)[0]
-        print(comment)
+        if len(text) > 0:
+            comment = Comment.objects.get_or_create(made_by=request.user, comment_text=text, joke=cjoke)[0]
+            return HttpResponse('Comment added!')
 
-        return None
+        return HttpResponse('No comment!')
 
 
 
