@@ -28,11 +28,11 @@
                             <br>
                             <h5 class="text-center">{{ video.title }}</h5>
                             <br>
-                            <div class="row">
+                            <div class="sc-video embed-responsive embed-responsive-16by9">
                                 <iframe title="{{ video.title }}"
                                         src={{ video.embed_code }}
                                         allowfullscreen
-                                        class="sc-video">
+                                        class="sc-video-frame">
                                 </iframe>
                             </div>
                             <div class="text-center sc-video-info">
@@ -52,18 +52,20 @@
                     <h2 class="text-center sc-block-title">Add a Video</h2>
                     <div>
                         <br>
-                        <form class="form-inline" id="user_form"
+                        <form class="row form-inline" id="user_form"
                               method="POST" action="{% url 'jokeoverflow:top_rated_videos' %}">
                             {% csrf_token %}
-                            <div class="form-group">
-                                <input class="form-control" type="text" size="50"
+                            <div class="row col-md-12 sc-search form-group">
+                                <input class="sc-search-bar form-control" type="text" size="50"
                                        name="query" value="{{ previous_query }}" id="query"
                                        placeholder="Search YouTube"/>
-
                             </div>
-                            <button class="btn btn-primary" type="submit" id="submit"
+                            <br>
+                            <div class="row col-md-12">
+                            <button class="sc-search-button btn btn-primary" type="submit" id="submit"
                                     value="Search">Search YouTube
                             </button>
+                            </div>
                         </form>
                         <br>
                         <div>
@@ -106,6 +108,7 @@
                     {% else %}
                     <h2 class="text-center sc-block-title">You need to be logged in to add a video</h2>
                     {% endif %}
+                    <br>
                 </div>
             </div>
             <br>
