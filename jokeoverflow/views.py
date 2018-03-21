@@ -161,29 +161,10 @@ def top_rated_jokes(request):
         rated_cat_jokes = Joke.objects.filter(category=cat).order_by('upvotes')[:5]
         cat_rated_dict[str(cat)] = rated_cat_jokes
 
-
-    form = CommentForm(request.POST)
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.made_by = request.user
-            
-            comment.joke = Joke.objects.order_by('title')[0]
-            comment.save()
-
-            return redirect('home')
-        else:
-            print(form.errors)
-
-
-
-
-    print(str(cat_rated_dict))
     comments = Comment.objects.all()
     users = UserProfile.objects.all()
     context_dict = {'categories': category_list, 'cat_rated_jokes': cat_rated_dict, 'comments': comments,
-                    'topratedjokes': rated_jokes, 'users': users, 'form': form}
+                    'topratedjokes': rated_jokes, 'users': users}
     response = render(request, 'jokeoverflow/top_rated_jokes.html', context_dict)
     return response
 
@@ -374,8 +355,20 @@ def downvote(request):
 @login_required
 def add_comment(request):
     joke = None
+    text = None
     if request.method == 'GET':
-        pass
+        joke = request.GET['joke']
+        print(joke)
+        text = request.GET['text']
+        print(text)
+        cjoke = Joke.objects.get(title=joke)
+        print(cjoke)
+        comment = Comment.objects.get_or_create(made_by=request.user, comment_text=text, joke=cjoke)[0]
+        print(comment)
+
+        return None
+
+
 
 @login_required
 def new_category(request):
