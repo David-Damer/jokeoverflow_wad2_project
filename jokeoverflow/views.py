@@ -352,12 +352,22 @@ def downvote(request):
                 msg = ("Vote Registered " + uuser + "!")
                 return JsonResponse({'downvotes': downvotes, 'msg': msg})
 
-
 @login_required
 def add_comment(request):
     joke = None
+    text = None
     if request.method == 'GET':
-        pass
+        joke = request.GET['joke']
+        print(joke)
+        text = request.GET['text']
+        print(text)
+        cjoke = Joke.objects.get(title=joke)
+        print(cjoke)
+        comment = Comment.objects.get_or_create(made_by=request.user, comment_text=text, joke=cjoke)[0]
+        print(comment)
+
+        return None
+
 
 @login_required
 def new_category(request):

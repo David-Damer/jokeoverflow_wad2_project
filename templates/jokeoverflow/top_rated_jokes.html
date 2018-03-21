@@ -181,12 +181,14 @@
                                     </div>
                                     <div class="col-md-6">
                                         <div>
-                                            <form class="com" data-fjoke="{{ joke }}">
-                                                <input name="com{{ joke }}" id="com{{ joke }}" type="text" data-emojiable="true" value=""
-                                                       placeholder="Comment on {{ joke }}" data-ijoke="{{joke}}"
+                                            <form class="com" data-fjoke="{{ joke.title }}">
+                                                <input name="com{{ joke.title }}" id="com{{ joke.title }}" type="text" data-emojiable="true" value=""
+                                                       placeholder="Comment on {{ joke.title }}"
+                                                       data-emoji-input="unicode"
+                                                       data-ijoke="{{joke.title}}"
                                                 />
-                                                <button class="btn btn-primary" type="submit" id="submit"
-                                                        value="Search">Add your comment</button>
+                                                <button class="btn btn-primary"   type="submit" id="submit"
+                                                        value="comment">Add your comment</button>
         </button>
                                             </form>
 

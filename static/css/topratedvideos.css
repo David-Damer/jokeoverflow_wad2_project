@@ -1,0 +1,59 @@
+.sc-video-list-item{
+    border-width:5px;
+    border-color:rgb(255,204,0);
+    border-style:solid;
+    background-color:rgba(255,204,0,0.1);
+    border-radius:5px;
+}
+
+.sc-video-frame{
+    width:50%;
+    border:2px solid rgb(255,204,0);
+    margin:auto;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+.sc-video{
+    border-top:3px solid rgb(255,204,0);
+    border-bottom:3px solid rgb(255,204,0);
+}
+
+.sc-rec-video-list{
+    border-left:2px solid rgb(255,204,0);
+    border-right:2px solid rgb(255,204,0);
+}
+
+.sc-video-info{
+    align:center;
+    font-size:10px;
+}
+
+.sc-add-video-list{
+    border-left:2px solid rgb(255,204,0);
+    border-right:2px solid rgb(255,204,0);
+}
+
+.sc-search{
+width:90%;
+margin:auto;
+padding:0;
+
+}
+
+.sc-search-bar{
+width:90%;
+border:10px solid red;
+margin:auto;
+}
+
+.form-inline{
+width:100%;
+margin:auto;
+}
+
+.sc-search-button{
+    margin:auto;
+
+}
