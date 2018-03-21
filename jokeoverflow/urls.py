@@ -44,5 +44,6 @@ urlpatterns = [
     url(r'^category/(?P<category_name_slug>[\w\-]+)/add_joke/$', views.add_joke, name='add_joke'),
     url(r'^add_comment/$', views.add_comment, name='add_comment'),
 
+    
 ]
 
