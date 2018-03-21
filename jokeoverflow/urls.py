@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^faq/', views.faq, name='faq'),
     url(r'^testingSC1/', views.testingSC1, name='testingSC1'),
     url(r'^latest_news/', views.latest_news, name='latest_news'),
-    url(r'^user_profiles/', views.user_profiles, name='user_profiles'),
+    url(r'^user_profiles/(?P<username>[\w\-]+)/$', views.user_profiles, name='user_profiles'),
     url(r'^top_rated_videos/', views.top_rated_videos, name='top_rated_videos'),
     url(r'^top_rated_jokes/', views.top_rated_jokes, name='top_rated_jokes'),
     url(r'^category/(?P<category_name_slug>[\w\-]+)/$',
@@ -43,7 +43,7 @@ urlpatterns = [
     url(r'^video_update/$', views.auto_add_video, name='video_update'),
     url(r'^category/(?P<category_name_slug>[\w\-]+)/add_joke/$', views.add_joke, name='add_joke'),
     url(r'^add_comment/$', views.add_comment, name='add_comment'),
-
+    url(r'edit_profile/', views.edit_profile, name='edit_profile'),
     
 ]
 

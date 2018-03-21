@@ -107,7 +107,7 @@
 
 
         {% if user.is_authenticated %}
-            <a href="{% url 'jokeoverflow:user_profiles' %}">{{ user }}'s Page</a> :
+           <a href="{% url 'jokeoverflow:user_profiles' user.username %}">Profile</a>
         {% endif %}
 
         <a href="{% url 'jokeoverflow:contact_us' %}">Contact Us</a> :

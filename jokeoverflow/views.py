@@ -106,12 +106,24 @@ def latest_news(request):
     return response
 
 
-def user_profiles(request):
+@login_required
+def user_profiles(request, username):
+    userprofile = UserProfile.objects.order_by('user')
     category_list = Category.objects.order_by('title')
-    user_profiles = UserProfile.objects.order_by('user')
-    context_dict = {'categories': category_list, 'user_profiles': user_profiles}
-    response = render(request, 'jokeoverflow/user_profiles.html', context_dict)
-    return response
+
+    form = UserProfileForm(
+        {'picture': UserProfile.user_picture, 'bio': UserProfile.user_bio, 'date_of_birth': UserProfile.date_of_birth})
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('profile', user.username)
+        else:
+            print(form.errors)
+            
+    return render(request, 'jokeoverflow/user_profiles.html',
+            {'categories': category_list, 'userprofile': userprofile, 'selecteduser': username, 'form': form})
 
 
 def top_rated_videos(request):
@@ -205,6 +217,27 @@ def register_profile(request):
     context_dict = {'categories': category_list, 'form': form}
 
     return render(request, 'jokeoverflow/register_profile.html', context_dict)
+
+
+def edit_profile(request):
+    category_list = Category.objects.order_by('title')
+    form = UserProfileForm()
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            user_profile = form.save(commit=False)
+            user_profile.user = request.user
+            user_profile.save()
+
+            return redirect('home')
+        else:
+            print(form.errors)
+
+    context_dict = {'categories': category_list, 'form': form}
+
+    return render(request, 'jokeoverflow/edit_profile.html', context_dict)
+
 
 
 
