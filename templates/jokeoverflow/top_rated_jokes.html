@@ -58,8 +58,8 @@
                     {% if topratedjokes %}
                         <ul class="list-group joke-list">
                             {% for joke in topratedjokes %}
-                                <div class="box-cont">
-                                    <a href="#joke{{ joke.id }}">{{ joke.title }}</a>
+                                <div class="box-cont text-center">
+                                    <a href="#joke{{ joke.id }}">{{ joke.title }} ({{joke.category}})</a>
                                 </div>
                                 <div id="joke{{ joke.id }}" class="modalDialog">
                                     <div>

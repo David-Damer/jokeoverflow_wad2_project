@@ -15,6 +15,14 @@
     margin-right:auto;
 }
 
+.sc-all-video-frame{
+    width:50%;
+    border:2px solid rgb(255,204,0);
+    margin:auto;
+    display:block;
+    margin-left:auto;
+    margin-right:auto;}
+
 .sc-video{
     border-top:3px solid rgb(255,204,0);
     border-bottom:3px solid rgb(255,204,0);
@@ -61,3 +69,33 @@ margin:auto;
 .form-inline input.form-control[name="query"]{
   width: 90%;
 }
+
+.sc-videos-table{
+height:400px;
+overflow-y:scroll;
+overflow-x:scroll;
+width:100%;
+marign-left:auto;
+margin-right:auto;
+display:inline-block;
+}
+
+
+.sc-video-table-body{
+}
+
+.sc-vid-table-row{
+word-break: break-all;
+}
+
+.sc-block-title{
+    width:100%;
+    display:inline-block;
+}
+
+hr{
+color:red;
+border-color:rgb(255,204,0);
+}
+
+

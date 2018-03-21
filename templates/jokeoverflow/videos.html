@@ -62,9 +62,9 @@
                             </div>
                             <br>
                             <div class="row col-md-12">
-                            <button class="sc-search-button btn btn-primary" type="submit" id="submit"
-                                    value="Search">Search YouTube
-                            </button>
+                                <button class="sc-search-button btn btn-primary" type="submit" id="submit"
+                                        value="Search">Search YouTube
+                                </button>
                             </div>
                         </form>
                         <br>
@@ -115,6 +115,46 @@
             <br>
         </div>
     </div>
+    <br>
+    <hr>
+    <br>
+    <div class="row">
+        <h2 class="row text-center sc-block-title">All Videos</h2>
+        <br>
+        <hr>
+        <div class="sc-videos-table text-center table-responsive">
+            <table class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Video</th>
+                    <th>Title</th>
+                    <th>Date Added</th>
+                </tr>
+                </thead>
+                <tbody class = "sc-video-table-body">
+                {% for video in allvideos %}
+
+                <tr class="sc-vid-table-row">
+                    <td style="width:50%;">
+                        <iframe title="{{ video.title }}"
+                                src={{ video.embed_code }}
+                                allowfullscreen
+                                class="sc-video-frame sc-all-video-frame">
+                        </iframe>
+                    </td>
+                    <td>{{ video.title }}</td>
+                    <td>{{ video.date_added }}</td>
+
+                </tr>
+                {% empty %}
+                <td>No videos here yet :(</td>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <br>
 </div>
 {% endblock %}
 

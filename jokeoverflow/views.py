@@ -129,7 +129,11 @@ def user_profiles(request, username):
 def videos(request):
     category_list = Category.objects.order_by('title')
     rec_added_videos = Video.objects.all().order_by('-date_added')[:5]
-    context_dict = {'categories': category_list, 'recaddedvideos': rec_added_videos}
+    all_videos = Video.objects.all().order_by('title')
+    context_dict = {'categories': category_list,
+                    'recaddedvideos': rec_added_videos,
+                    'allvideos': all_videos,
+                    }
     result_list = []
     query = ''
 
