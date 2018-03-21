@@ -118,7 +118,7 @@ def user_profiles(request, username):
         form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
         if form.is_valid():
             form.save(commit=True)
-            return redirect('profile', user.username)
+            return redirect('profile', request.user.username)
         else:
             print(form.errors)
             
@@ -200,7 +200,7 @@ def search(request):
         if query:
             result_list = youtube_search(q=query)
     context_dictionary = {'previous_query': query, 'result_list': result_list}
-    return render(request, 'jokeoverflow/top_rated_videos.html', context_dictionary)
+    return render(request, 'jokeoverflow/videos.html', context_dictionary)
 
 
 def register_profile(request):

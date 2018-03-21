@@ -38,7 +38,7 @@ SECRET_KEY = '$c73*frg!uuy2k*)88c^#0pan_j@de1tbl!ofug43jpbmj-7d8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['wad2projectjokeoverflow.pythonanywhere.com', '127.0.0.1']
+ALLOWED_HOSTS = ['wad2projectjokeoverflow.pythonanywhere.com', '127.0.0.1', 'localhost']
 
 # Application definition
 
