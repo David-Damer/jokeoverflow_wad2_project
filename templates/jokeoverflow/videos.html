@@ -4,7 +4,7 @@
 <link href="{% static 'css/videos.css' %}" rel="stylesheet">
 {% endblock %}
 {% block title_block %}
-<title>Videos</title>
+Videos
 {% endblock %}
 {% block body_block %}
 <div class="container">
@@ -131,7 +131,7 @@
                     <th>Date Added</th>
                 </tr>
                 </thead>
-                <tbody class = "sc-video-table-body">
+                <tbody class="sc-video-table-body">
                 {% for video in allvideos %}
 
                 <tr class="sc-vid-table-row">
@@ -144,7 +144,6 @@
                     </td>
                     <td>{{ video.title }}</td>
                     <td>{{ video.date_added }}</td>
-
                 </tr>
                 {% empty %}
                 <td>No videos here yet :(</td>

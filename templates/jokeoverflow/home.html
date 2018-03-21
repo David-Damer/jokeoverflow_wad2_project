@@ -1,21 +1,13 @@
 {% extends 'jokeoverflow/base2.html' %}
 {% load staticfiles %}
-{% block title_block %}
+{% block head_block %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
-    <!-- Bootstrap core CSS -->
-    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="{% static "css/base.css" %}" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="{% static "css/home.css" %}" rel="stylesheet">
-
-    <title>JokeOverflow - Home</title>
-
+{% endblock %}
+{% block title_block %}
+Home
 {% endblock %}
 
 

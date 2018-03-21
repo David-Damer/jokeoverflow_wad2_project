@@ -207,16 +207,11 @@ padding: 25px 25px 25px 25px;
 .pop-joke-text p{
 	color:black;
 	background-color:white;
-	border-width:2px;
-	border-color:#ffcc00;
-	border-style:solid;
-border-radius: 10px;
-padding: 25px 25px 25px 25px;
 }
 
 .vote-icon{
-	width:40px;
-	height:40px;
+	width:48px;
+	height:48px;
 }
 
 #upvoteYES-image{
@@ -337,21 +332,23 @@ margin:0px;
 
 .comment-profile-pic{
     width:100%;
-    background-color:red;
     border-right:1px solid #ccc;
+    margin-left:auto;
+    marign-right:auto;
 }
 
 .comment-profile-pic img{
-    width:20px;
-    height:30px;
+    width:40px;
+    height:40px;
     margin-left: auto;
     margin-right: auto;
+    border:2px solid rgb(255,204,0);
 }
 
 .sc-com-profile-pic{
     background-color:red;
-    height:20px;
-    width:20px;
+    height:40px;
+    width:40px;
 }
 
 
@@ -368,16 +365,20 @@ background-color:blue;
 }
 
 .form-comment-text{
-background-color:red;
 }
 
-input[type=text]{
-background-color:green;
-}
 
 
 textarea{
 /*background-color:red;*/
 height:50px;
 width:100%;
+}
+
+.sc-comment-text p{
+    color:black;
+}
+
+.vote-icon hover{
+border:10px solid red;
 }
