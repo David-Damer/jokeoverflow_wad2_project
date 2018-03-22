@@ -24,6 +24,7 @@
         input[type=text]:focus {
             width: 100%;
         }
+
 </style>
 
 {% endblock %}
@@ -33,14 +34,15 @@ Top Rated Jokes
 
 {% block body_block %}
 <div class="container">
-
-    <div class="text-center sc-page-title">
-        <p>TOP RATED JOKES</p>
-    </div>
+    <br>
+    <h1 class="text-center form-signin-heading">
+        Top Rated Jokes
+    </h1>
+    <br>
     <div class="sc-page-desc text-center">
         Browse the creme de la creme of JokeOverflow
     </div>
-<br><br>
+    <br><br>
     <div class="row">
         <div class="col-md-3">
         </div>
@@ -76,7 +78,7 @@ Top Rated Jokes
                         <br>
                         <div class="pop-joke-text">
                             {#{{ joke.joke_text }}#}
-                             {{ joke.joke_text|linebreaks }}
+                            {{ joke.joke_text|linebreaks }}
                         </div>
                         <br>
                         <hr>
@@ -238,7 +240,7 @@ Top Rated Jokes
                         <br>
                         <div class="pop-joke-text">
                             {#{{ joke.joke_text }}#}
-                             {{ joke.joke_text|linebreaks }}
+                            {{ joke.joke_text|linebreaks }}
                         </div>
                         <br>
                         <hr>
@@ -362,9 +364,6 @@ Top Rated Jokes
                         </p>
                     </div>
                 </div>
-
-
-
 
 
                 {% endfor %}
