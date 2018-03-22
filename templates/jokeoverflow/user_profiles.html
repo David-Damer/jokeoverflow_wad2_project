@@ -37,6 +37,7 @@ JokeOverflow - {{user}}'s Page
         <th>Category</th>
         <th>Upvotes</th>
         <th>Downvotes</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -48,6 +49,7 @@ JokeOverflow - {{user}}'s Page
         <td>{{ joke.category }}</td>
         <td>{{ joke.upvotes }}</td>
         <td>{{ joke.downvotes }}</td>
+        <td><button class="video-remove btn btn-info btn-sm" data-video="{{ video }}" type="button" style="background: blue">Remove</button> </td>
 
     </tr>
     {% empty %}
@@ -73,6 +75,7 @@ JokeOverflow - {{user}}'s Page
         <th>Video</th>
         <th>Title</th>
         <th>Date Added</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -86,6 +89,7 @@ JokeOverflow - {{user}}'s Page
                             </iframe></td>
         <td>{{ video.title }}</td>
         <td>{{ video.date_added }}</td>
+        <td><button class="video-remove btn btn-info btn-sm" data-video="{{ video }}" type="button" style="background: blue">Remove</button> </td>
 
     </tr>
     {% empty %}

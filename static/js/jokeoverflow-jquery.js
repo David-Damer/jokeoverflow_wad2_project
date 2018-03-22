@@ -13,6 +13,20 @@ $(document).ready(function () {
         $(this).css({"background-color": "gold", "color": "black"});
     }, function () {
         $(this).css({"background-color": "blue", "color": 'white'});
+
+    });
+
+    $(".video-remove").hover(function () {
+        $(this).css({"background-color": "red", "color": "black"});
+    }, function () {
+        $(this).css({"background-color": "blue", "color": 'white'});
+
+    });
+    $(".joke-remove").hover(function () {
+        $(this).css({"background-color": "red", "color": "black"});
+    }, function () {
+        $(this).css({"background-color": "blue", "color": 'white'});
+
     });
     $(function () {
         // Initializes and creates emoji set from sprite sheet
@@ -26,20 +40,7 @@ $(document).ready(function () {
         // It can be called as many times as necessary; previously converted input fields will not be converted again
         window.emojiPicker.discover();
     });
-    // Google Analytics
-    // (function (i, s, o, g, r, a, m) {
-    //     i['GoogleAnalyticsObject'] = r;
-    //     i[r] = i[r] || function () {
-    //         (i[r].q = i[r].q || []).push(arguments)
-    //     }, i[r].l = 1 * new Date();
-    //     a = s.createElement(o),
-    //         m = s.getElementsByTagName(o)[0];
-    //     a.async = 1;
-    //     a.src = g;
-    //     m.parentNode.insertBefore(a, m)
-    // })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-    // ga('create', 'UA-49610253-3', 'auto');
-    // ga('send', 'pageview');
+
 
 });
 
