@@ -122,7 +122,7 @@ def latest_news(request):
 
 
 @login_required
-def user_profiles(request, username):
+def user_profiles(request):
     userprofile = UserProfile.objects.order_by('user')
     category_list = Category.objects.order_by('title')
 
@@ -139,7 +139,7 @@ def user_profiles(request, username):
             print(form.errors)
 
     return render(request, 'jokeoverflow/user_profiles.html',
-            {'categories': category_list, 'userprofile': userprofile, 'selecteduser': username, 'form': form})
+            {'categories': category_list, 'userprofile': userprofile,'form': form})
 
 
 def videos(request):
@@ -178,7 +178,7 @@ def top_rated_videos(request):
     context_dict['previous_query'] = query
     context_dict['result_list'] = result_list
 
-    response = render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
+    response = render(request, 'jokeoverflow/videos.html', context_dict)
     return response
 
 
@@ -357,37 +357,6 @@ def testingSC1(request, jid):
 
     return render(request, 'jokeoverflow/testingSC1.html', context_dict)
 
-
-def add_comment_to_joke(request, joke_slug, user):
-    try:
-        joke = Joke.objects.get(slug=joke_slug)
-    except Joke.DoesNotExist:
-        joke = None
-
-    form = CommentForm()
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            if joke:
-                comment = form.save(commit=False)
-                comment.joke = joke
-                comment.made_by = user
-                comment.save()
-                return top_rated_jokes(request)
-            else:
-                print(form.errors)
-        context_dict = {'form': form, 'joke': joke, 'user': user}
-        return render(request, context_dict)
-
-    form = CommentForm()
-
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            form.save(commit=True)
-        else:
-            print(form.errors)
-    return render(request, 'jokeoverflow/add_comment_to_joke.html', {'form': form})
 
 
 @login_required

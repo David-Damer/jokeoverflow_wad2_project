@@ -22,7 +22,7 @@ Register
         <br>
         <div class="form-container col-md-8">
             <br>
-            <form role="form-signin" method="post" action=".">
+            <form role="form-signin" method="post" action="." enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form|crispy}}
                 <br>

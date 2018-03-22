@@ -6,9 +6,10 @@
 {% block body_block %}
 	<div class='col-sm-6 col-sm-offset-3'>
     <h1 class="form-signin-heading">Create a Profile</h1>
-    <form role="form-signin"  method="post" action=".">
+    <form role="form-signin"  method="post" action="." enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form|crispy}}
+        <!--{{ form|crispy}} this doesn't allow us to upload images-->
+        {{ form.as_p }}
 
     <br>
     <input class='btn btn-primary' type="submit" value="submit"/>

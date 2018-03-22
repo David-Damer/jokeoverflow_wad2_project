@@ -12,7 +12,7 @@ class UserProfile(models.Model):
     # The additional attributes we wish to include
     date_of_birth = models.DateField(blank=False)
     user_bio = models.TextField(max_length=256)
-    user_picture = models.ImageField()
+    user_picture = models.ImageField(upload_to='profile_images')
     image_from = models.URLField()  # For acknowledging sources of images when populating with fake data
 
     def __str__(self):
@@ -76,7 +76,7 @@ class Joke(models.Model):
 
 
 class Comment(models.Model):
-    comment_text = models.TextField(max_length=256, unique=False)
+    comment_text = models.TextField(max_length=64, unique=False)
     made_by = models.ForeignKey(User)
     date_added = models.DateTimeField(auto_now_add=True)
     joke = models.ForeignKey(Joke, related_name='comments')
