@@ -211,7 +211,7 @@ def populate():
          'date_added': '2018-01-04'},
         {'text': 'You\'ve ruined xmas for me!', 'joke': 'Santa', 'added_by': 'SammyTheMan',
          'date_added': '2018-01-12'},
-        {'text': 'Really come on, try harder.', 'joke': 'Lifts', 'added_by': 'WeeCraig',
+        {'text': 'Really come on, try harder.\n Your parents would be ashamed.', 'joke': 'Lifts', 'added_by': 'WeeCraig',
          'date_added': '2017-12-30'},
         {'text': 'I feel sick after reading this.', 'joke': 'Hockey Joke', 'added_by': 'WeeCraig',
          'date_added': '2017-12-31'},

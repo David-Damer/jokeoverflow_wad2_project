@@ -1,11 +1,11 @@
 $(document).ready(function () {
     $(".vote").hover(function () {
-        $(this).animate({height: 56, width: 56}, 100);
+        $(this).animate({height: 64, width: 64}, 100);
     }, function () {
         $(this).animate({height: 48, width: 48}, 100);
     });
     $(".down-vote").hover(function () {
-        $(this).animate({height: 56, width: 56}, 100);
+        $(this).animate({height: 64, width: 64}, 100);
     }, function () {
         $(this).animate({height: 48, width: 48}, 100);
     });

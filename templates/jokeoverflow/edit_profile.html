@@ -1,0 +1,35 @@
+{% extends 'jokeoverflow/base2.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block title_block %}
+{{user}}'s Page
+{% endblock %}
+{% block body_block %}
+<div class="container">
+
+    <div align="center">
+        <h1 class="text-center"><u>Hello {{ user }}</u></h1>
+        <br>
+
+        <img src="{{ MEDIA_URL }}{{user.user_picture }}"
+             width="300"
+             height="300"
+             alt="{{selecteduser.username}}"/>
+
+    </div>
+
+    <div align="left">
+        <h2>Edit Profile</h2>
+        <br>
+        <form method="post" action="{% url jokeoverflow:user_profiles% }" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form|crispy}}
+
+            <input type="submit" value="Update" onclick=""/>
+        </form>
+
+    </div>
+    <div id="edit_profile"></div>
+
+</div>
+{% endblock %}

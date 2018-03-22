@@ -50,6 +50,7 @@ $(".com").submit(function (data) {
     var text = element.value;
     console.log(text);
     $.get('/jokeoverflow/add_comment/', {joke: joke, text: text}, function (data) {
+        $('#res' + joke).html(data);
 
     });
 

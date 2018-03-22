@@ -21,8 +21,12 @@
     <link rel="stylesheet" href={% static 'lib/css/emoji.css' %} >
 
 
-    {% block title_block %}
-    {% endblock %}
+
+    <title>
+        JokeOverflow -
+        {% block title_block %}
+        {% endblock %}
+    </title>
     {% block head_block %}
     {% endblock %}
 
@@ -108,11 +112,11 @@
 
 
         {% if user.is_authenticated %}
-            <a href="{% url 'jokeoverflow:user_profiles' %}">{{ user }}'s Page</a> :
+           <a href="{% url 'jokeoverflow:user_profiles' user.username %}">Profile</a> :
         {% endif %}
 
         <a href="{% url 'jokeoverflow:contact_us' %}">Contact Us</a> :
-        <a href="{% url 'jokeoverflow:faq' %}">FAQ</a> :
+        <a href="{% url 'jokeoverflow:faq' %}">FAQ</a>
     </ul>
 
 </footer>

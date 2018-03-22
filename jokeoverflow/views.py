@@ -11,6 +11,9 @@ from django.template.defaulttags import register
 from django.http import HttpResponse
 from django.contrib import messages
 from jokeoverflow.calculate_age import calculate_age
+from django.http import JsonResponse
+import json
+from django.utils.timezone import now
 
 
 
@@ -71,15 +74,21 @@ def about_us(request):
 
 def show_category(request, category_name_slug):
     context_dict = {}
+    age = 0
+    users = UserProfile.objects.all()
+    if not request.user.is_superuser:
+        if request.user.is_authenticated:
+            prof = UserProfile.objects.filter(user=request.user)[0]
+            age = calculate_age(prof.date_of_birth)
 
     try:
         category_list = Category.objects.order_by('title')
         category = Category.objects.get(slug=category_name_slug)
-        rated_jokes = Joke.objects.filter(category=category).order_by('-rating')[:2]
-        recent_jokes = Joke.objects.filter(category=category).order_by('-date_added')[:2]
+        rated_jokes = Joke.objects.filter(category=category).order_by('-rating')[:5]
+        recent_jokes = Joke.objects.filter(category=category).order_by('-date_added')[:5]
         all_jokes = Joke.objects.filter(category=category).order_by('-upvotes')
         context_dict = {'categories': category_list, 'category': category, 'topratedjokes': rated_jokes,
-                        'recentjokes': recent_jokes, 'alljokes': all_jokes, }
+                        'recentjokes': recent_jokes, 'alljokes': all_jokes, 'age': age, 'users': users}
     except Category.DoesNotExist:
         context_dict['category'] = None
         context_dict['topratedjokes'] = None
@@ -255,6 +264,24 @@ def register_profile(request):
 
     return render(request, 'jokeoverflow/register_profile.html', context_dict)
 
+def edit_profile(request):
+    category_list = Category.objects.order_by('title')
+    form = UserProfileForm()
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            user_profile = form.save(commit=False)
+            user_profile.user = request.user
+            user_profile.save()
+
+            return redirect('home')
+        else:
+            print(form.errors)
+
+    context_dict = {'categories': category_list, 'form': form}
+
+    return render(request, 'jokeoverflow/edit_profile.html', context_dict)
 
 
 @login_required
