@@ -16,7 +16,6 @@ import json
 from django.utils.timezone import now
 
 
-
 def home(request):
     category_list = Category.objects.order_by('title')
     rec_added_videos = Video.objects.order_by('-rating')
@@ -37,7 +36,7 @@ def home(request):
 
     users = UserProfile.objects.all()
     context_dict = {'categories': category_list, 'recaddedvideos': rec_added_videos, 'topratedjokes': rated_clean_short,
-                    'recentjokes': recent_clean_short, 'users':users }
+                    'recentjokes': recent_clean_short, 'users': users}
     response = render(request, 'jokeoverflow/home.html', context=context_dict)
     return response
 
@@ -141,7 +140,7 @@ def user_profiles(request):
             print(form.errors)
 
     return render(request, 'jokeoverflow/user_profiles.html',
-            {'categories': category_list, 'userprofile': userprofile,'form': form, 'users':users,})
+                  {'categories': category_list, 'userprofile': userprofile, 'form': form, 'users': users, })
 
 
 def videos(request):
@@ -169,7 +168,7 @@ def videos(request):
 def top_rated_videos(request):
     category_list = Category.objects.order_by('title')
     rated_videos = Video.objects.order_by('-upvotes')[:10]
-    context_dict = {'categories': category_list, 'topratedvideos': rated_videos,}
+    context_dict = {'categories': category_list, 'topratedvideos': rated_videos, }
     result_list = []
     query = ''
 
@@ -219,14 +218,13 @@ def top_rated_jokes(request):
         rated_cat_jokes = Joke.objects.filter(category=cat).order_by('upvotes')[:5]
         cat_rated_dict[str(cat)] = rated_cat_jokes
 
-
     form = CommentForm(request.POST)
     if request.method == 'POST':
         form = CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.made_by = request.user
-            
+
             comment.joke = Joke.objects.order_by('title')[0]
             comment.save()
 
@@ -234,14 +232,11 @@ def top_rated_jokes(request):
         else:
             print(form.errors)
 
-
-
-
     print(str(cat_rated_dict))
     comments = Comment.objects.all()
     users = UserProfile.objects.all()
     context_dict = {'categories': category_list, 'cat_rated_jokes': cat_rated_dict, 'comments': comments,
-                    'topratedjokes': rated_clean_short, 'users': users, 'form':form}
+                    'topratedjokes': rated_clean_short, 'users': users, 'form': form}
     response = render(request, 'jokeoverflow/top_rated_jokes.html', context_dict)
     return response
 
@@ -282,6 +277,7 @@ def register_profile(request):
     context_dict = {'categories': category_list, 'form': form}
 
     return render(request, 'jokeoverflow/register_profile.html', context_dict)
+
 
 def edit_profile(request):
     category_list = Category.objects.order_by('title')
@@ -329,7 +325,6 @@ def auto_add_video(request):
     return render(request, 'jokeoverflow/video_update.html', context_dict)
 
 
-
 def testingSC1(request, jid):
     context_dict = {}
 
@@ -338,8 +333,8 @@ def testingSC1(request, jid):
     userget = request.GET.get('user')
     userpost = request.POST.get('user')
     userrequest = request.user
-    #jokerequest = request.joke
-    #jokepass = joke_slug
+    # jokerequest = request.joke
+    # jokepass = joke_slug
     joke = jid
 
     try:
@@ -355,10 +350,9 @@ def testingSC1(request, jid):
             comment.made_by = request.user
             print(form.errors)
 
-    context_dict = {'form': form, 'jid':jid}
+    context_dict = {'form': form, 'jid': jid}
 
     return render(request, 'jokeoverflow/testingSC1.html', context_dict)
-
 
 
 @login_required
@@ -416,6 +410,7 @@ def downvote(request):
                 msg = ("Vote Registered " + uuser + "!")
                 return JsonResponse({'downvotes': downvotes, 'msg': msg})
 
+
 @login_required
 def add_comment(request):
     joke = None
@@ -430,7 +425,6 @@ def add_comment(request):
     return HttpResponse('No comment!')
 
 
-
 @login_required
 def new_category(request):
     form = CategoryRequestForm()
@@ -438,7 +432,7 @@ def new_category(request):
     if request.method == 'POST':
         form = CategoryRequestForm(request.POST)
         if form.is_valid():
-            new_category = form.save(commit = False)
+            new_category = form.save(commit=False)
             new_category = request.user
             new_category.save()
 
@@ -450,3 +444,24 @@ def new_category(request):
     context_dict = {'form': form, 'categories': category_list}
     response = render(request, 'jokeoverflow/new_category.html', context_dict)
     return response
+
+
+def video_remove(request):
+    rvideo = None
+    if request.method == 'GET':
+        rvideo = request.GET['video']
+        vid = Video.objects.get(title=rvideo)
+        vid.delete()
+
+    return render(request, 'jokeoverflow/video_remove.html')
+
+
+def joke_remove(request):
+    rjoke = None
+
+    if request.method == 'GET':
+        rjoke = request.GET['djoke']
+        joke = Joke.objects.get(title=rjoke)
+        joke.delete()
+
+    return render(request, 'jokeoverflow/joke_remove.html')
