@@ -90,6 +90,7 @@ text-decoration: underline;
 	color:black;
 	background-color: #ffd633
 	transition-duration: 100s;
+	white-space: normal;
 }
 
 .btn-80:hover{

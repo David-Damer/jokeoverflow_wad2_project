@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="{% static 'css/topratedjokes.css' %}" rel="stylesheet">
+<link href="{% static 'css/signin.css' %}" rel="stylesheet">
 {% endblock %}
 {% block title_block %}
 {{ category }}
@@ -26,13 +27,13 @@
     {% else %}
 
     <div class="row text-center">
-        <div class="col-md-3">
+        <div class="col-md-1">
         </div>
-        <div class="col-md-6">
-            <a class="btn-submit btn btn-lg btn-primary" href="{% url 'jokeoverflow:add_joke' category.slug %}">Add Joke
+        <div class="col-md-10">
+            <a class="btn-80 btn btn-lg btn-primary" href="{% url 'jokeoverflow:add_joke' category.slug %}">Add Joke
                 in {{category.title}}</a>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-1">
         </div>
     </div>
 
