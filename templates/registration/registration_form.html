@@ -1,31 +1,47 @@
 {% extends "jokeoverflow/base2.html" %}
 {% load staticfiles %}
 {% load crispy_forms_tags %}
-{% block title_block %}
-	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    
+{% block head_block %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap core CSS -->
-    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="{% static 'css/base.css'' %}" rel="stylesheet">
-
-	<!-- Custom styles for this template -->
-    <link href="{% static 'css/register.css' %}" rel="stylesheet">
+<!-- Custom styles for this template -->
+<link href="{% static 'css/register.css' %}" rel="stylesheet">
 
 {% endblock %}
+{% block title_block %}
+Register
+{% endblock %}
 {% block body_block %}
+<div class="container">
+    <div>
+        <br>
+        <h1 class="text-center form-signin-heading">
+            Register
+        </h1>
+        <br>
+        <div class="form-container col-md-8">
+            <br>
+            <form role="form-signin" method="post" action=".">
+                {% csrf_token %}
+                {{ form|crispy}}
+                <br>
+                <div class="text-center">
+                    <input class='text-center btn btn-80 btn-primary' type="submit" value="Submit"/>
+                </div>
+                <br>
+            </form>
+        </div>
+        <br>
+    </div>
 
-<div class='col-sm-6 col-sm-offset-3'>
-    <h1 class="form-signin-heading">Register Now</h1>
-    <form role="form-signin"  method="post" action=".">
-        {% csrf_token %}
-        {{ form|crispy}}
-
-    <input class='btn btn-primary' type="submit" value="submit"/>
+    <hr>
+    <div class="bottom-text text-center">
+        <p>
+            Already got an account?
+            <a href="{% url 'auth_login' %}">Log in</a>
+        </p>
+    </div>
     <br>
-    </form>
 </div>
 {% endblock %}
