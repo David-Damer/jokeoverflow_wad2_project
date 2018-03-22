@@ -91,7 +91,7 @@ Top Rated Jokes
                             </div>
                             <div class="col-md-3 ">
                                 {% if user.is_authenticated %}
-                                <input class="vote sc-vote-icon down-vote" type="image"
+                                <input class="down-vote sc-vote-icon down-vote" type="image"
                                        src="{% static 'images/icons/downvote2.png' %}" alt="Upvote" width="48"
                                        height="48" title="Dislike this joke" data-joke="{{ joke }}">
                                 <!--<img class = "vote-icon" src="{% static "images/icons/downvote.png" %}" alt="Downvote" />-->

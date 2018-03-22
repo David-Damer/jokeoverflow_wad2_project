@@ -119,6 +119,7 @@ def user_profiles(request, username):
         if form.is_valid():
             form.save(commit=True)
             return redirect('profile', request.user.username)
+
         else:
             print(form.errors)
             
