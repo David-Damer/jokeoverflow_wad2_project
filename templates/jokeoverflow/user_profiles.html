@@ -1,12 +1,30 @@
 {% extends 'jokeoverflow/base2.html' %}
 {% load staticfiles %}
+{% load crispy_forms_tags %}
 {% block title_block %}
-    <title>JokeOverflow - {{user}}'s Page</title>
-
+JokeOverflow - {{user}}'s Page
 {% endblock %}
 {% block body_block %}
+
+
+<div align="center">
 <h1 class = "text-center" ><u>Hello {{ user }}</u></h1>
 <br>
+<img src="{{ MEDIA_URL }}{{userprofile.user_picture }}"
+     width="300"
+     height="300"
+     alt="{{selecteduser.username}}" />
+    
+<br/>
+    
+<div>
+    
+<div align="left">
+    <h3>DOB: </h3> {{ UserProfile.date_of_birth }}
+    <br>
+    <h3>Bio: </h3> {{ UserProfile.user_bio }}
+
+<div id="edit_profile"></div>
 
 <h2 class="text-center">Your Jokes</h2>
 <p>
@@ -79,12 +97,10 @@
 
 </p>
 <br>
-
-
-
-
-
 <br>
-
-
+<div align="right">
+<a href="{% url 'jokeoverflow:edit_profile' %}">Edit Profile</a>
+</div>
+    
+<br>
 {% endblock %}

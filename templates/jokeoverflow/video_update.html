@@ -1,17 +1,25 @@
 <!DOCTYPE html>
-{% if topratedvideos %}
-
-    {% for video in topratedvideos %}
-        <hr>
-        <h5>{{ video.title }}</h5>
-        <iframe width="400" height="275" title="{{ video.title }}"
-                src={{ video.embed_code }}
-                        allowfullscreen>
-        </iframe>
-        <hr>
-
-    {% endfor %}
-{% else %}
-    <strong>We ain't got no vids man!!</strong>
-{% endif %}
+  {% if topratedvideos %}
+                        {% for video in topratedvideos %}
+                        <br>
+                        <div class="sc-video-list-item">
+                            <br>
+                            <h5 class="text-center">{{ video.title }}</h5>
+                            <br>
+                            <div class="sc-video embed-responsive embed-responsive-16by9">
+                                <iframe title="{{ video.title }}"
+                                        src={{ video.embed_code }}
+                                        allowfullscreen
+                                        class="sc-video-frame">
+                                </iframe>
+                            </div>
+                            <div class="text-center sc-video-info">
+                                <p class="text-center">Added by {{ video.added_by }}</p>
+                            </div>
+                            <br>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <strong>We ain't got no vids man!!</strong>
+                        {% endif %}
 

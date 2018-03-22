@@ -48,7 +48,9 @@ h1{
   	border-style: solid;
   	border-color: #ffcc00;
   	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	
+  	word-break:normal;
+  	min-width:200px;
+  	padding-top:30px;
 }
 
 .section-title{
@@ -148,7 +150,9 @@ p{
 
 .box-cont a:visited {
     background-color:pink;
-    color:blue;
+    color:gold;
+    color:rgb(204, 102, 0);
+    font-weight: bold;
     font-style: italic;
 
 }
@@ -207,16 +211,11 @@ padding: 25px 25px 25px 25px;
 .pop-joke-text p{
 	color:black;
 	background-color:white;
-	border-width:2px;
-	border-color:#ffcc00;
-	border-style:solid;
-border-radius: 10px;
-padding: 25px 25px 25px 25px;
 }
 
 .vote-icon{
-	width:40px;
-	height:40px;
+	width:48px;
+	height:48px;
 }
 
 #upvoteYES-image{
@@ -282,8 +281,6 @@ border-radius:2px;
     font-size:30px;
     font-weight:bold;
     font-decoration:underline;
-
-
 }
 
 
@@ -337,21 +334,23 @@ margin:0px;
 
 .comment-profile-pic{
     width:100%;
-    background-color:red;
     border-right:1px solid #ccc;
+    margin-left:auto;
+    marign-right:auto;
 }
 
 .comment-profile-pic img{
-    width:20px;
-    height:30px;
+    width:40px;
+    height:40px;
     margin-left: auto;
     margin-right: auto;
+    border:2px solid rgb(255,204,0);
 }
 
 .sc-com-profile-pic{
     background-color:red;
-    height:20px;
-    width:20px;
+    height:40px;
+    width:40px;
 }
 
 
@@ -368,16 +367,39 @@ background-color:blue;
 }
 
 .form-comment-text{
-background-color:red;
 }
 
-input[type=text]{
-background-color:green;
-}
 
 
 textarea{
 /*background-color:red;*/
 height:50px;
 width:100%;
+}
+
+
+
+.sc-comment-text p{
+    color:black;
+}
+
+.vote-icon hover{
+border:10px solid red;
+}
+
+
+.sc-page-desc{
+color:black;
+}
+
+.sc-all-jokes-box{
+max-height:400px;
+overflow-y:scroll;
+}
+
+.btn-submit{
+width:100%;
+marign-left:auto;
+margin-right:auto;
+display:block;
 }

@@ -63,6 +63,7 @@ def about_us(request):
 def show_category(request, category_name_slug):
     context_dict = {}
     age = 0
+    users = UserProfile.objects.all()
     if not request.user.is_superuser:
         if request.user.is_authenticated:
             prof = UserProfile.objects.filter(user=request.user)[0]
@@ -71,11 +72,11 @@ def show_category(request, category_name_slug):
     try:
         category_list = Category.objects.order_by('title')
         category = Category.objects.get(slug=category_name_slug)
-        rated_jokes = Joke.objects.filter(category=category).order_by('-rating')[:2]
-        recent_jokes = Joke.objects.filter(category=category).order_by('-date_added')[:2]
+        rated_jokes = Joke.objects.filter(category=category).order_by('-rating')[:5]
+        recent_jokes = Joke.objects.filter(category=category).order_by('-date_added')[:5]
         all_jokes = Joke.objects.filter(category=category).order_by('-upvotes')
         context_dict = {'categories': category_list, 'category': category, 'topratedjokes': rated_jokes,
-                        'recentjokes': recent_jokes, 'alljokes': all_jokes, 'age': age}
+                        'recentjokes': recent_jokes, 'alljokes': all_jokes, 'age': age, 'users': users}
     except Category.DoesNotExist:
         context_dict['category'] = None
         context_dict['topratedjokes'] = None
@@ -106,18 +107,34 @@ def latest_news(request):
     return response
 
 
-def user_profiles(request):
+@login_required
+def user_profiles(request, username):
+    userprofile = UserProfile.objects.order_by('user')
     category_list = Category.objects.order_by('title')
-    user_profiles = UserProfile.objects.order_by('user')
-    context_dict = {'categories': category_list, 'user_profiles': user_profiles}
-    response = render(request, 'jokeoverflow/user_profiles.html', context_dict)
-    return response
+
+    form = UserProfileForm(
+        {'picture': UserProfile.user_picture, 'bio': UserProfile.user_bio, 'date_of_birth': UserProfile.date_of_birth})
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('profile', request.user.username)
+        else:
+            print(form.errors)
+            
+    return render(request, 'jokeoverflow/user_profiles.html',
+            {'categories': category_list, 'userprofile': userprofile, 'selecteduser': username, 'form': form})
 
 
-def top_rated_videos(request):
+def videos(request):
     category_list = Category.objects.order_by('title')
-    rated_videos = Video.objects.all().order_by('-date_added')[:5]
-    context_dict = {'categories': category_list, 'topratedvideos': rated_videos}
+    rec_added_videos = Video.objects.all().order_by('-date_added')[:5]
+    all_videos = Video.objects.all().order_by('title')
+    context_dict = {'categories': category_list,
+                    'recaddedvideos': rec_added_videos,
+                    'allvideos': all_videos,
+                    }
     result_list = []
     query = ''
 
@@ -128,7 +145,7 @@ def top_rated_videos(request):
     context_dict['previous_query'] = query
     context_dict['result_list'] = result_list
 
-    response = render(request, 'jokeoverflow/top_rated_videos.html', context_dict)
+    response = render(request, 'jokeoverflow/videos.html', context_dict)
     return response
 
 
@@ -184,7 +201,7 @@ def search(request):
         if query:
             result_list = youtube_search(q=query)
     context_dictionary = {'previous_query': query, 'result_list': result_list}
-    return render(request, 'jokeoverflow/top_rated_videos.html', context_dictionary)
+    return render(request, 'jokeoverflow/videos.html', context_dictionary)
 
 
 def register_profile(request):
@@ -205,6 +222,27 @@ def register_profile(request):
     context_dict = {'categories': category_list, 'form': form}
 
     return render(request, 'jokeoverflow/register_profile.html', context_dict)
+
+
+def edit_profile(request):
+    category_list = Category.objects.order_by('title')
+    form = UserProfileForm()
+
+    if request.method == 'POST':
+        form = UserProfileForm(request.POST, request.FILES)
+        if form.is_valid():
+            user_profile = form.save(commit=False)
+            user_profile.user = request.user
+            user_profile.save()
+
+            return redirect('home')
+        else:
+            print(form.errors)
+
+    context_dict = {'categories': category_list, 'form': form}
+
+    return render(request, 'jokeoverflow/edit_profile.html', context_dict)
+
 
 
 
@@ -358,15 +396,13 @@ def add_comment(request):
     text = None
     if request.method == 'GET':
         joke = request.GET['joke']
-        print(joke)
         text = request.GET['text']
-        print(text)
         cjoke = Joke.objects.get(title=joke)
-        print(cjoke)
-        comment = Comment.objects.get_or_create(made_by=request.user, comment_text=text, joke=cjoke)[0]
-        print(comment)
+        if len(text) > 0:
+            comment = Comment.objects.get_or_create(made_by=request.user, comment_text=text, joke=cjoke)[0]
+            return HttpResponse('Comment added!')
 
-        return None
+        return HttpResponse('No comment!')
 
 
 

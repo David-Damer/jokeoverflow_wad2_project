@@ -7,4 +7,5 @@ venv*
 *__pycache__*
 desktop.ini
 0001_initial.py
-settings.py
+*settings.py
+.DS_STORE

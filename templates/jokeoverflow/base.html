@@ -4,69 +4,135 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<meta name="description" content="">
-	<meta name="author" content="">
-   	<link rel="icon" href="{% static 'images/favicon.png' %}">
-    <div>
-        <img src="{% static "images/logo.png" %}" alt="Logo"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{% static 'images/favicon4.png' %}">
+    <div class="row logo-top" fixed-top>
+        <img src="{% static "images/logo2.png" %}" class="img-responsive logo-img" alt="Logo"/>
     </div>
-	
+    <!-- Bootstrap core CSS -->
+    <!-- <link rel="stylesheet" href="{% static "css/core.css" %}" /> -->
+    <link href="http://v4-alpha.getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static "css/base.css" %}"/>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href={% static 'lib/css/emoji.css' %} >
+
+
     {% block title_block %}
     {% endblock %}
+    {% block head_block %}
+    {% endblock %}
+
 </head>
 <body>
-<div>
-    <h1>JOKE OVERFLOW </h1>
-</div>
-<div class="navbar">
-    <ul>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'jokeoverflow:home' %}">Home</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'jokeoverflow:top_rated_jokes' %}">Top Rated Jokes</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'jokeoverflow:top_rated_videos' %}">Top Rated Videos</a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-               aria-expanded="false">Categories</a>
-            <div class="dropdown-menu" aria-labelledby="dropdown01">
-                {% if categories %}
-                    {% for cat in categories %}
-                        <li><a class="dropdown-item"
-                               href="{% url 'jokeoverflow:show_category' cat.slug %}">{{ cat.title }} </a></li>
-                    {% endfor %}
-                {% endif %}
-		</div>
 
-    </ul>
-</div>
-</li>
 
+<nav class="navbar navbar-toggleable-md navbar-inverse  bg-inverse">
+
+    <button class="navbar-toggler navbar-toggler-right hidden-lg-up"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbar"
+            aria-controls="navbar"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand menu-icon" href="{% url 'jokeoverflow:home' %}">
+        <img class="menu-img" border=5px alt="Icon" src="{% static "images/favicon4.PNG" %}">
+    </a>
+    <!--<img class="navbar-brand menu-icon" href="{% url 'jokeoverflow:home' %}" src="{% static "images/favicon4.png" %}"
+    <a class="navbar-brand" href="{% url 'jokeoverflow:home' %}">Joke Overflow</a>
+    -->
+
+    <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'jokeoverflow:home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'jokeoverflow:top_rated_jokes' %}">Top Rated Jokes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'jokeoverflow:top_rated_videos' %}">Top Rated Videos</a>
+            </li>
+
+            {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'auth_logout' %}?next=/jokeoverflow/">Logout</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'registration_register' %}">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'auth_login' %}">Login</a>
+                </li>
+            {% endif %}
+        </ul>
+    </div>
+</nav>
+
+
+<div class="container-fluid">
+    <br>
+    <div class="row">
+        <div class="col-sm-12 offset-sm-0 col-md-12 offset-md-0 main">
+            {% block body_block %}{% endblock %}
+        </div>
+    </div>
 </div>
-<div>
-    {% block body_block %}
-    {% endblock %}
-</div>
-<div>
+
+
+<footer class="container">
+
     <ul>
+        <a href="{% url 'jokeoverflow:latest_news' %}">Latest News</a> :
+        <a class="footer-link" href="{% url 'jokeoverflow:about_us' %}">About Us</a> :
+
+
         {% if user.is_authenticated %}
-            <li><a href="{% url 'auth_logout' %}?next=/jokeoverflow/">Logout</a></li>
-        {% else %}
-            <li><a href="{% url 'registration_register' %}">Register</a></li>
-            <li><a href="{% url 'auth_login' %}">Login</a></li>
+            <a href="{% url 'jokeoverflow:user_profiles' %}">{{ user }}'s Page</a> :
         {% endif %}
-        <li><a href="{% url 'jokeoverflow:latest_news' %}">Latest News</a></li>
-        <li><a href="{% url 'jokeoverflow:about_us' %}">About Us</a></li>
-        <li>User Profile</li>
-        <li><a href="{% url 'jokeoverflow:contact_us' %}">Contact Us</a></li>
-        <li><a href="{% url 'jokeoverflow:faq' %}">FAQ</a></li>
+
+        <a href="{% url 'jokeoverflow:contact_us' %}">Contact Us</a> :
+        <a href="{% url 'jokeoverflow:faq' %}">FAQ</a> :
+	<a href="{% url 'jokeoverflow:new_category' %}">Request New Category</a>
     </ul>
-</div>
+
+</footer>
+
+<!-- Bootstrap core JavaScript
+	================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js">
+</script>
+<script
+        src="http://v4-alpha.getbootstrap.com/dist/js/bootstrap.min.js">
+</script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script
+        src=
+                "http://v4-alpha.getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js">
+</script>
+<script
+        src="{% static "js/jokeoverflow-jquery.js" %}">
+</script>
+<script
+        src="{% static "js/jquery-3.3.1.min.js " %}">
+</script>
+<script src="{% static 'lib/js/config.js' %}"></script>
+<script src="{% static 'lib/js/util.js' %}"></script>
+<script src="{% static 'lib/js/jquery.emojiarea.js' %}"></script>
+<script src="{% static 'lib/js/emoji-picker.js' %}"></script>
+<script
+        src="{% static "js/jokeoverflow-ajax.js" %}">
+</script>
+
 </body>
 </html>
 

@@ -1,8 +1,8 @@
 TO DO
-[ ] Adult Jokes Restricted
-[ ] Pop-up add comments
-[ ] Pop-up Upvote Button
-[ ] Pop-up Downvote Button
+[i] Adult Jokes Restricted
+[X] Pop-up add comments
+[i] Pop-up Upvote Button
+[i] Pop-up Downvote Button
 [ ] Profile Registration
 [ ] Top Videos Page Formatting (SAM)
 [ ] Category Formatting (SAM)

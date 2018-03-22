@@ -1,0 +1,160 @@
+{% extends 'jokeoverflow/base2.html' %}
+{% load staticfiles %}
+{% block head_block %}
+<link href="{% static 'css/videos.css' %}" rel="stylesheet">
+{% endblock %}
+{% block title_block %}
+Videos
+{% endblock %}
+{% block body_block %}
+<div class="container">
+    <br>
+    <div class="text-center sc-page-title">
+        <h1 class="text-center">
+            Videos
+        </h1>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-5 sc-rec-video-list">
+                    <h2 class="text-center sc-block-title"> Recently Added Videos </h2>
+                    <div class="sc-video-list" id="videos">
+                        {% if recaddedvideos %}
+                        {% for video in recaddedvideos%}
+                        <br>
+                        <div class="sc-video-list-item">
+                            <br>
+                            <h5 class="text-center">{{ video.title }}</h5>
+                            <br>
+                            <div class="sc-video embed-responsive embed-responsive-16by9">
+                                <iframe title="{{ video.title }}"
+                                        src={{ video.embed_code }}
+                                        allowfullscreen
+                                        class="sc-video-frame">
+                                </iframe>
+                            </div>
+                            <div class="text-center sc-video-info">
+                                <p class="text-center">Added by {{ video.added_by }}</p>
+                            </div>
+                            <br>
+                        </div>
+                        {% endfor %}
+                        {% else %}
+                        <strong>We ain't got no vids man!!</strong>
+                        {% endif %}
+                    </div>
+                    <br>
+                </div>
+                <div class="col-md-7  sc-add-video-list">
+                    {% if user.is_authenticated %}
+                    <h2 class="text-center sc-block-title">Add a Video</h2>
+                    <div>
+                        <br>
+                        <form class="row form-inline" id="user_form"
+                              method="POST" action="{% url 'jokeoverflow:videos' %}">
+                            {% csrf_token %}
+                            <div class="row col-md-12 sc-search form-group">
+                                <input class="sc-search-bar form-control" type="text" size="50"
+                                       name="query" value="{{ previous_query }}" id="query"
+                                       placeholder="Search YouTube"/>
+                            </div>
+                            <br>
+                            <div class="row col-md-12">
+                                <button class="sc-search-button btn btn-primary" type="submit" id="submit"
+                                        value="Search">Search YouTube
+                                </button>
+                            </div>
+                        </form>
+                        <br>
+                        <div>
+                            {% if result_list %}
+                            <h3>Results</h3>
+                            <!-- Display sea4rch results in an ordered list -->
+                            <div class="list-group">
+                                {% for result in result_list %}
+                                <div class="list-group-item">
+                                    <h6 class="list-group-item-heading">
+                                        <a title="Click to watch!"
+                                           href="https://www.youtube.com/embed/{{ result.id }}">
+                                            <img class="thumbnail"
+                                                 src="{{ result.thumbnail.url }}"
+                                                 alt="No thumbnail">
+                                            {{ result.title }}
+                                        </a>
+                                    </h6>
+                                    <p class="list-group-item-text">
+                                        {{ result.description }}
+                                    </p>
+                                    {% if user.is_authenticated %}
+                                    <br>
+                                    <button data-id="{{ result.id }}" data-title="{{ result.title }}"
+                                            data-code="https://www.youtube.com/embed/{{ result.id }}"
+                                            data-added-by="{{ user }}" data-url="None"
+                                            data-thumb="{{ result.thumbnail.url }}"
+                                            class="video-add btn btn-info btn-sm" type="button" style="background: blue"
+                                            title="Add a video">
+                                        Add
+                                    </button>
+                                    <br>
+                                    {% endif %}
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% else %}
+                    <h2 class="text-center sc-block-title">You need to be logged in to add a video</h2>
+                    {% endif %}
+                    <br>
+                </div>
+            </div>
+            <br>
+            <br>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="row">
+        <h2 class="row text-center sc-block-title">All Videos</h2>
+        <br>
+        <hr>
+        <div class="sc-videos-table text-center table-responsive">
+            <table class="table table-bordered table-striped" style="width:100%">
+                <thead>
+                <tr>
+                    <th>Video</th>
+                    <th>Title</th>
+                    <th>Date Added</th>
+                </tr>
+                </thead>
+                <tbody class="sc-video-table-body">
+                {% for video in allvideos %}
+
+                <tr class="sc-vid-table-row">
+                    <td style="width:50%;">
+                        <iframe title="{{ video.title }}"
+                                src={{ video.embed_code }}
+                                allowfullscreen
+                                class="sc-video-frame sc-all-video-frame">
+                        </iframe>
+                    </td>
+                    <td>{{ video.title }}</td>
+                    <td>{{ video.date_added }}</td>
+                </tr>
+                {% empty %}
+                <td>No videos here yet :(</td>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <br>
+    <br>
+</div>
+{% endblock %}
+
+
