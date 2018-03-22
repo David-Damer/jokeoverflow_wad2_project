@@ -326,7 +326,7 @@ def auto_add_video(request):
     context_dict['topratedvideos'] = videos
     return render(request, 'jokeoverflow/video_update.html', context_dict)
 
-    
+
 
 def testingSC1(request, jid):
     context_dict = {}
