@@ -97,8 +97,8 @@ p{
         padding: 5px 20px 13px 20px;
         border-radius: 10px;
         background: #fff;
-        background: -moz-linear-gradient(#fff5cc, #ffffff);
-       background: -webkit-linear-gradient(#fff5cc, #fff);
+        background: -moz-linear-gradient(#ffeb99, #ffffff);
+       background: -webkit-linear-gradient(#ffeb99, #fff);
 	border-color:#ffcc00;
 	border-width:2px;
 	border-style:solid;
@@ -348,7 +348,7 @@ margin:0px;
 }
 
 .sc-com-profile-pic{
-    background-color:red;
+    background-color:rgb(255,204,0);
     height:40px;
     width:40px;
 }

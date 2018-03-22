@@ -2,27 +2,39 @@
 {% load staticfiles %}
 {% load crispy_forms_tags %}
 {% block title_block %}
-JokeOverflow - {{user}}'s Page
+{{user}}'s Page
 {% endblock %}
 {% block body_block %}
 
 
 <div align="center">
-<h1 class = "text-center" ><u>Hello {{ user }}</u></h1>
-<br>
-<img src="{{ MEDIA_URL }}{{userprofile.user_picture }}"
-     width="300"
-     height="300"
-     alt="{{selecteduser.username}}" />
-    
-<br/>
-    
-<div>
-    
-<div align="left">
-    <h3>DOB: </h3> {{ UserProfile.date_of_birth }}
+    <h1 class="text-center"><u>Hello {{ user }}</u></h1>
     <br>
-    <h3>Bio: </h3> {{ UserProfile.user_bio }}
+    <img src="{{ MEDIA_URL }}{{userprofile.user_picture }}"
+         width="300"
+         height="300"
+         alt="{{selecteduser.username}}"/>
+    <br/>
+
+    <div>
+
+        <div class="text-center">
+            {% for useri in users %}
+            {% if useri.user == user %}
+            {% if useri.user_picture %}
+
+            <img style="height:256px;; width:256px;"
+                 class="sc-com-profile-pic"
+                 src="{{ MEDIA_URL }}{{ useri.user_picture }}"
+                 alt="{{useri.user}}" }>
+            {% else %}
+            <img style="height:256px; width:256px; margin-left:auto; margin-right:auto;"
+                 class="sc-com-profile-pic" style="float:right;"
+                 src="{{ MEDIA_URL }}profile_images/../../media/default.PNG"
+                 alt="No profile picture" }>
+            {% endif %}
+            <br>
+            <br>
 
 <div id="edit_profile"></div>
 
@@ -51,20 +63,19 @@ JokeOverflow - {{user}}'s Page
         <td>{{ joke.downvotes }}</td>
         <td><button class="video-remove btn btn-info btn-sm" data-video="{{ video }}" type="button" style="background: blue">Remove</button> </td>
 
-    </tr>
-    {% empty %}
-    <td>No jokes here yet :(</td>
-    {% endfor %}
-    </tbody>
-</table>
-</div>
-</p>
+                </tr>
+                {% empty %}
+                <td>No jokes here yet :(</td>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </p>
 
 
-
-<br>
-<hr>
-<br>
+        <br>
+        <hr>
+        <br>
 
 <h2 class="text-center">Your Videos</h2>
 <p>
@@ -91,23 +102,24 @@ JokeOverflow - {{user}}'s Page
         <td>{{ video.date_added }}</td>
         <td><button class="video-remove btn btn-info btn-sm" data-video="{{ video }}" type="button" style="background: blue">Remove</button> </td>
 
-    </tr>
-    {% empty %}
-    <td>No videos here yet :(</td>
-    {% endfor %}
-    </tbody>
-</table>
-</div>
+                </tr>
+                {% empty %}
+                <td>No videos here yet :(</td>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-</p>
-<br>
-<br>
-<div align="right">
-<a href="{% url 'jokeoverflow:edit_profile' %}">Edit Profile</a>
-</div>
-    
-<br>
-</div>
+        </p>
+        <br>
+        <br>
+
+        <div align="right">
+            <a href="{% url 'jokeoverflow:edit_profile' %}">Edit Profile</a>
+        </div>
+
+        <br>
+    </div>
 </div>
 </div>
 {% endblock %}
