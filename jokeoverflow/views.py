@@ -19,7 +19,7 @@ from django.utils.timezone import now
 
 def home(request):
     category_list = Category.objects.order_by('title')
-    rated_videos = Video.objects.order_by('-rating')
+    rec_added_videos = Video.objects.order_by('-rating')
     all_jokes = Joke.objects.order_by('-rating')
     rated_clean_jokes = []
     for joke in all_jokes:
@@ -35,8 +35,9 @@ def home(request):
             recent_clean_jokes.append(joke)
     recent_clean_short = recent_clean_jokes[:5]
 
-    context_dict = {'categories': category_list, 'topratedvideos': rated_videos, 'topratedjokes': rated_clean_short,
-                    'recentjokes': recent_clean_short, }
+    users = UserProfile.objects.all()
+    context_dict = {'categories': category_list, 'recaddedvideos': rec_added_videos, 'topratedjokes': rated_clean_short,
+                    'recentjokes': recent_clean_short, 'users':users }
     response = render(request, 'jokeoverflow/home.html', context=context_dict)
     return response
 
@@ -125,6 +126,7 @@ def latest_news(request):
 def user_profiles(request):
     userprofile = UserProfile.objects.order_by('user')
     category_list = Category.objects.order_by('title')
+    users = UserProfile.objects.all().order_by('user')
 
     form = UserProfileForm(
         {'picture': UserProfile.user_picture, 'bio': UserProfile.user_bio, 'date_of_birth': UserProfile.date_of_birth})
@@ -139,7 +141,7 @@ def user_profiles(request):
             print(form.errors)
 
     return render(request, 'jokeoverflow/user_profiles.html',
-            {'categories': category_list, 'userprofile': userprofile,'form': form})
+            {'categories': category_list, 'userprofile': userprofile,'form': form, 'users':users,})
 
 
 def videos(request):

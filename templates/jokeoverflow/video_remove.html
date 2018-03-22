@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<table class="table table-bordered table-striped" style="width:100%">
+    <thead>
+    <tr>
+        <th>Video</th>
+        <th>Title</th>
+        <th>Date Added</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for video in user.videos.all %}
+
+
+    <tr>
+        <td><iframe width="420" height="280" title="{{ video.title }}"
+                                    src={{ video.embed_code }}
+                                    allowfullscreen>
+                            </iframe></td>
+        <td>{{ video.title }}</td>
+        <td>{{ video.date_added }}</td>
+        <td><button class="video-remove btn btn-info btn-sm" data-video="{{ video }}" type="button" style="background: blue">Remove</button> </td>
+
+    </tr>
+    {% empty %}
+    <td>No videos here yet :(</td>
+    {% endfor %}
+    </tbody>
+</table>
+</div>

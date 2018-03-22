@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="{% static 'css/topratedjokes.css' %}" rel="stylesheet">
+<link href="{% static 'css/signin.css' %}" rel="stylesheet">
 {% endblock %}
 {% block title_block %}
 {{ category }}
@@ -25,16 +26,18 @@
     <strong>This category is restricted to the little'uns!</strong>
     {% else %}
 
+    {% if user.is_authenticated %}
     <div class="row text-center">
-        <div class="col-md-3">
+        <div class="col-md-1">
         </div>
-        <div class="col-md-6">
-            <a class="btn-submit btn btn-lg btn-primary" href="{% url 'jokeoverflow:add_joke' category.slug %}">Add Joke
+        <div class="col-md-10">
+            <a class="btn-80 btn btn-lg btn-primary" href="{% url 'jokeoverflow:add_joke' category.slug %}">Add Joke
                 in {{category.title}}</a>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-1">
         </div>
     </div>
+    {% endif %}
 
     <div class="row">
         <div class="col-md-5 list-box sc-list-box ">
@@ -76,7 +79,7 @@
                             </div>
                             <div class="col-md-3 ">
                                 {% if user.is_authenticated %}
-                                <input class="vote sc-vote-icon down-vote" type="image"
+                                <input class="down-vote sc-vote-icon down-vote" type="image"
                                        src="{% static 'images/icons/downvote2.png' %}" alt="Upvote" width="48"
                                        height="48" title="Dislike this joke" data-joke="{{ joke }}">
                                 <!--<img class = "vote-icon" src="{% static "images/icons/downvote.png" %}" alt="Downvote" />-->
@@ -228,7 +231,7 @@
                             </div>
                             <div class="col-md-3 ">
                                 {% if user.is_authenticated %}
-                                <input class="vote sc-vote-icon down-vote" type="image"
+                                <input class="down-vote sc-vote-icon down-vote" type="image"
                                        src="{% static 'images/icons/downvote2.png' %}" alt="Upvote" width="48"
                                        height="48" title="Dislike this joke" data-joke="{{ joke }}">
                                 <!--<img class = "vote-icon" src="{% static "images/icons/downvote.png" %}" alt="Downvote" />-->
@@ -382,7 +385,7 @@
                             </div>
                             <div class="col-md-3 ">
                                 {% if user.is_authenticated %}
-                                <input class="vote sc-vote-icon down-vote" type="image"
+                                <input class="down-vote sc-vote-icon down-vote" type="image"
                                        src="{% static 'images/icons/downvote2.png' %}" alt="Upvote" width="48"
                                        height="48" title="Dislike this joke" data-joke="{{ joke }}">
                                 <!--<img class = "vote-icon" src="{% static "images/icons/downvote.png" %}" alt="Downvote" />-->
