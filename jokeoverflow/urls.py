@@ -28,10 +28,9 @@ urlpatterns = [
     url(r'^testingSC1/', views.testingSC1, name='testingSC1'),
     url(r'^latest_news/', views.latest_news, name='latest_news'),
     url(r'^user_profiles/', views.user_profiles, name='user_profiles'),
-    url(r'^videos/', views.videos, name='videos'),
+    url(r'^top_rated_videos/', views.top_rated_videos, name='top_rated_videos'),
     url(r'^top_rated_jokes/', views.top_rated_jokes, name='top_rated_jokes'),
-    url(r'^category/(?P<category_name_slug>[\w\-]+)/$',
-        views.show_category, name='show_category'),
+    url(r'^category/(?P<category_name_slug>[\w\-]+)/$', views.show_category, name='show_category'),
     url(r'register_profile/', views.register_profile, name='register_profile'),
     url(r'^add/$', views.auto_add_video, name='auto_add_video'),
     url(r'^jokeoverflow/#joke(?P<pk>\d+)/comment/$', views.add_comment_to_joke, name='add_comment_to_joke'),
@@ -43,7 +42,7 @@ urlpatterns = [
     url(r'^video_update/$', views.auto_add_video, name='video_update'),
     url(r'^category/(?P<category_name_slug>[\w\-]+)/add_joke/$', views.add_joke, name='add_joke'),
     url(r'^add_comment/$', views.add_comment, name='add_comment'),
-
+    url(r'^videos/', views.videos, name='videos'),
     
 ]
 
