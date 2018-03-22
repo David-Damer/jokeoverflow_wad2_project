@@ -4,21 +4,21 @@ TO DO
 [i] Pop-up Upvote Button
 [i] Pop-up Downvote Button
 [ ] Profile Registration
-[ ] Top Videos Page Formatting (SAM)
-[ ] Category Formatting (SAM)
-[ ] Home Page Formatting (SAM)
+[X] Top Videos Page Formatting
+[X] Category Formatting
+[X] Home Page Formatting
 [ ] Contact Us Form
 [ ] Send Complaint Form
 [ ] Make Joke Form
 [ ] Search Joke Results
-[ ] Add Category Option
-[ ] Comments and Jokes show new lines (SAM)
-[ ] Registration Format (SAM)
-[ ] Login Format (SAM)
+[X] Add Category Option
+[X] Comments and Jokes show new lines
+[ ] Registration Format
+[ ] Login Format
 
 CAN DO AFTER FRIDAY
-[ ] Logo (SAM)
-[ ] Favicon (SAM)
+[X] Logo
+[X] Favicon
 [ ] Admin User
 [ ] Latest News Posts
 [ ] Make News Form

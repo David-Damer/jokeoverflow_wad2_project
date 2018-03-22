@@ -126,6 +126,7 @@ def latest_news(request):
 def user_profiles(request):
     userprofile = UserProfile.objects.order_by('user')
     category_list = Category.objects.order_by('title')
+    users = UserProfile.objects.all().order_by('user')
 
     form = UserProfileForm(
         {'picture': UserProfile.user_picture, 'bio': UserProfile.user_bio, 'date_of_birth': UserProfile.date_of_birth})
@@ -140,7 +141,7 @@ def user_profiles(request):
             print(form.errors)
 
     return render(request, 'jokeoverflow/user_profiles.html',
-            {'categories': category_list, 'userprofile': userprofile,'form': form})
+            {'categories': category_list, 'userprofile': userprofile,'form': form, 'users':users,})
 
 
 def videos(request):
