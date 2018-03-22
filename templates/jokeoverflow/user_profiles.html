@@ -10,11 +10,6 @@
 <div align="center">
     <h1 class="text-center"><u>Hello {{ user }}</u></h1>
     <br>
-    <img src="{{ MEDIA_URL }}{{userprofile.user_picture }}"
-         width="300"
-         height="300"
-         alt="{{selecteduser.username}}"/>
-    <br/>
 
     <div>
 
@@ -33,99 +28,103 @@
                  src="{{ MEDIA_URL }}profile_images/../../media/default.PNG"
                  alt="No profile picture" }>
             {% endif %}
-        {% endif %}
-        {% endfor %}
+            {% endif %}
+
+            {% endfor %}
             <br>
             <br>
+            <div id="edit_profile"></div>
 
-<div id="edit_profile"></div>
-
-<h2 class="text-center">Your Jokes</h2>
-<p>
-    {{ user.date_of_birth }}
-<div class = "sc-jokes-table">
-        <div id="joketable">
-<table class="table table-bordered table-striped" style="width:100%">
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Category</th>
-        <th>Upvotes</th>
-        <th>Downvotes</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for joke in user.jokes.all %}
+            <h2 class="text-center">Your Jokes</h2>
+            <div class="sc-jokes-table">
+                <table class="table table-bordered table-striped" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Category</th>
+                        <th>Upvotes</th>
+                        <th>Downvotes</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for joke in user.jokes.all %}
 
 
-    <tr>
-        <td>{{ joke.title }}</td>
-        <td>{{ joke.category }}</td>
-        <td>{{ joke.upvotes }}</td>
-        <td>{{ joke.downvotes }}</td>
-        <td><button class="joke-remove btn btn-info btn-sm" data-joke="{{ joke }}" type="button" style="background: blue">Remove</button> </td>
+                    <tr>
+                        <td>{{ joke.title }}</td>
+                        <td>{{ joke.category }}</td>
+                        <td>{{ joke.upvotes }}</td>
+                        <td>{{ joke.downvotes }}</td>
+                        <td>
+                            <button class="video-remove btn btn-info btn-sm" data-video="{{ video }}" type="button"
+                                    style="background: blue">Remove
+                            </button>
+                        </td>
 
-                </tr>
-                {% empty %}
-                <td>No jokes here yet :(</td>
-                {% endfor %}
-                </tbody>
-            </table>
-
-        </p>
-
-
-        <br>
-        <hr>
-        <br>
-        </div>
-        </div>
-<h2 class="text-center">Your Videos</h2>
-<p>
-<div class = "sc-videos-table">
-        <div id="videotable">
-<table class="table table-bordered table-striped" style="width:100%">
-    <thead>
-    <tr>
-        <th>Video</th>
-        <th>Title</th>
-        <th>Date Added</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for video in user.videos.all %}
+                    </tr>
+                    {% empty %}
+                    <td>No jokes here yet :(</td>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            </p>
 
 
-    <tr>
-        <td><iframe width="420" height="280" title="{{ video.title }}"
+            <br>
+            <hr>
+            <br>
+
+            <h2 class="text-center">Your Videos</h2>
+            <p>
+            <div class="sc-videos-table">
+                <table class="table table-bordered table-striped" style="width:100%">
+                    <thead>
+                    <tr>
+                        <th>Video</th>
+                        <th>Title</th>
+                        <th>Date Added</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for video in user.videos.all %}
+
+
+                    <tr>
+                        <td>
+                            <iframe width="420" height="280" title="{{ video.title }}"
                                     src={{ video.embed_code }}
                                     allowfullscreen>
-                            </iframe></td>
-        <td>{{ video.title }}</td>
-        <td>{{ video.date_added }}</td>
-        <td><button class="video-remove btn btn-info btn-sm" data-video="{{ video }}" type="button" style="background: blue">Remove</button> </td>
+                            </iframe>
+                        </td>
+                        <td>{{ video.title }}</td>
+                        <td>{{ video.date_added }}</td>
+                        <td>
+                            <button class="video-remove btn btn-info btn-sm" data-video="{{ video }}" type="button"
+                                    style="background: blue">Remove
+                            </button>
+                        </td>
 
-                </tr>
-                {% empty %}
-                <td>No videos here yet :(</td>
-                {% endfor %}
-                </tbody>
-            </table>
+                    </tr>
+                    {% empty %}
+                    <td>No videos here yet :(</td>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            </p>
+            <br>
+            <br>
+
+            <div align="right">
+                <a href="{% url 'jokeoverflow:edit_profile' %}">Edit Profile</a>
+            </div>
+
+            <br>
         </div>
-        </div>
-
-        </p>
-        <br>
-        <br>
-
-        <div align="right">
-            <a href="{% url 'jokeoverflow:edit_profile' %}">Edit Profile</a>
-        </div>
-
-        <br>
     </div>
-</div>
 </div>
 {% endblock %}
