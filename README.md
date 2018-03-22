@@ -7,3 +7,4 @@ Also youtube_search adapted from code from google at: https://developers.google.
 
 All user profile images are from google
 
+Bootstrap was used for css styling and was acquired from:https://getbootstrap.com/
