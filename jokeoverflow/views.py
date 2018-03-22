@@ -193,7 +193,7 @@ def log_complaint(request):
             complaint.user = request.user
             complaint.save()
 
-            return redirect('log_complaint')
+            return redirect('home')
         else:
             print(form.errors)
 
