@@ -38,7 +38,7 @@
 
             <h3>DOB: {{useri.date_of_birth}}</h3>
             <br>
-            <h3>Bio: {{useri.user_bio}}</h3>
+            <h3>Bio: {{useri.user_bio|linebreaks}}</h3>
             {% endif %}
             {{ user.date_of_birth }}
             {% endfor %}
