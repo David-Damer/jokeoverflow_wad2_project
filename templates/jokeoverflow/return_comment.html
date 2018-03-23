@@ -1,0 +1,26 @@
+{% load staticfiles %}
+<div class="row">
+                                        {% for user in users %}
+                                        {% if comment.made_by == user.user %}
+                                        <div class="col-md-2 comment-profile-pic">
+                                            <!--<img src="{{ user.user_picture}}" alt="No profile picture"}>-->
+                                            {% if user.user_picture %}
+                                            <img style="height:64px;; width:64px;"
+                                                 class="sc-com-profile-pic"
+                                                 src="{{ MEDIA_URL }}{{ user.user_picture }}"
+                                                 alt="No profile picture" }>
+                                            {% else %}
+                                            <img style="height:60px; width:60px; margin-left:auto; margin-right:auto;"
+                                                 class="sc-com-profile-pic" style="float:right;"
+                                                 src="{{ MEDIA_URL }}default.png"
+                                                 alt="No profile picture" }>
+                                            {% endif %}
+                                        </div>
+                                        <div class="sc-comment-text col-md-10">
+                                            {{ comment.comment_text|linebreaks }}
+                                            <small>{{ comment.made_by }}</small>
+                                        </div>
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <hr>

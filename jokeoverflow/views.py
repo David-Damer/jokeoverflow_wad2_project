@@ -420,7 +420,10 @@ def add_comment(request):
         text = request.GET['text']
         cjoke = Joke.objects.get(title=joke)
         comment = Comment.objects.get_or_create(made_by=request.user, comment_text=text, joke=cjoke)[0]
-        return HttpResponse('Comment added!')
+        users = UserProfile.objects.all()
+        context_dict = {'comment': comment, 'users': users}
+        response = render(request, 'jokeoverflow/return_comment.html', context_dict)
+        return response
 
     return HttpResponse('No comment!')
 
@@ -464,4 +467,4 @@ def joke_remove(request):
         joke = Joke.objects.get(title=rjoke)
         joke.delete()
 
-    return render(request, 'jokeoverflow/joke_remove.html',{})
+    return render(request, 'jokeoverflow/joke_remove.html', {})
