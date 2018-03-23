@@ -15,3 +15,12 @@
  color:black;
  }
 
+.sc-log-link a{
+color:black;
+font-size:24px;
+text-decoration:underline;
+}
+
+.sc-log-link a:hover{
+color:rgb(255,204,0);
+}

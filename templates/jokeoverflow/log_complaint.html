@@ -1,21 +1,38 @@
 {% extends 'jokeoverflow/base2.html' %}
 {% load staticfiles %}
+{% block head_block %}
+<!-- Custom styles for this template -->
+<link href="{% static 'css/forms.css' %}" rel="stylesheet">
+{% endblock %}
 {% block title_block %}
-    <title>JokeOverflow - Log Complaint</title>
+Log Complaint
 {% endblock %}
 {% block body_block %}
-<h1>This is the LOG A COMPLAINT page</h1>
-	<form id="page_form" method="post" action="/jokeoverflow/log_complaint/">
-		{% csrf_token %}
-	 	    {% for hidden in form.hidden_fields %}
-	                {{ hidden }}
-	            {% endfor %}
-	            {% for field in form.visible_fields %}
-	                {{ field.errors }}
-	                {{ field.help_text }}
-	                {{ field }}
-	 	    {% endfor %}
-	        <input type="submit" name="submit" value="Add Complaint" />
-	        </form>
-			
+<div class="container text-center">
+    <div>
+        <br>
+        <h1 class="text-center form-signin-heading">
+            Log a Complaint
+        </h1>
+        <div class="form-container  center-block col-md-8 text-center">
+            <br>
+            <form id="page_form" method="post" action="/jokeoverflow/log_complaint/">
+                {% csrf_token %}
+                {% for hidden in form.hidden_fields %}
+                {{ hidden }}
+                {% endfor %}
+                {% for field in form.visible_fields %}
+                {{ field.errors }}
+                {{ field.help_text }}
+                {{ field }}<br>
+                {% endfor %}
+                <br>
+                <input class='btn btn-80 btn-primary' type="submit" name="submit" value="Add Complaint"/>
+            </form>
+            <br>
+        </div>
+    </div>
+    <br>
+</div>
+
 {% endblock %}
