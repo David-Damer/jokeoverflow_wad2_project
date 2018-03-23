@@ -74,7 +74,4 @@ $(".joke-remove").click(function (data) {
     });
 
 });
-<<<<<<< HEAD
-=======
 
->>>>>>> 52dea1cdc02826380a771106a5958440209979cb
