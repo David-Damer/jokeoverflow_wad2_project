@@ -25,9 +25,15 @@
             {% else %}
             <img style="height:256px; width:256px; margin-left:auto; margin-right:auto;"
                  class="sc-com-profile-pic" style="float:right;"
-                 src="{{ MEDIA_URL }}profile_images/../../media/default.PNG"
+                 src="{{ MEDIA_URL }}profile_images/../../media/default.png"
                  alt="No profile picture" }>
             {% endif %}
+            <br><br>
+            <h3>DOB: {{useri.date_of_birth}}</h3>
+            <br>
+
+            <h3>Bio: {{useri.user_bio|linebreaks}}</h3>
+
             {% endif %}
 
             {% endfor %}

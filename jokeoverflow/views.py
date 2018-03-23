@@ -18,7 +18,7 @@ from django.utils.timezone import now
 
 def home(request):
     category_list = Category.objects.order_by('title')
-    rec_added_videos = Video.objects.order_by('-rating')
+    rec_added_videos = Video.objects.order_by('-date_added')[:5]
     all_jokes = Joke.objects.order_by('-rating')
     rated_clean_jokes = []
     for joke in all_jokes:
@@ -215,7 +215,7 @@ def top_rated_jokes(request):
     rated_clean_short = rated_clean_jokes[:5]
     cat_rated_dict = {}
     for cat in category_list:
-        rated_cat_jokes = Joke.objects.filter(category=cat).order_by('upvotes')[:5]
+        rated_cat_jokes = Joke.objects.filter(category=cat).order_by('-rating')[:5]
         cat_rated_dict[str(cat)] = rated_cat_jokes
 
     form = CommentForm(request.POST)
