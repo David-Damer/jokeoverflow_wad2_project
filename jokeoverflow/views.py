@@ -453,7 +453,7 @@ def video_remove(request):
         vid = Video.objects.get(title=rvideo)
         vid.delete()
 
-    return render(request, 'jokeoverflow/video_remove.html')
+    return render(request, 'jokeoverflow/video_remove.html', {})
 
 
 def joke_remove(request):
@@ -464,4 +464,4 @@ def joke_remove(request):
         joke = Joke.objects.get(title=rjoke)
         joke.delete()
 
-    return render(request, 'jokeoverflow/joke_remove.html')
+    return render(request, 'jokeoverflow/joke_remove.html',{})
