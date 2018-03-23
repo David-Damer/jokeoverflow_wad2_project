@@ -269,7 +269,7 @@ Top Rated Jokes
                                 {% endif %}
                                 <div id="d{{ joke }}">{{ joke.downvotes }}</div>
                             </div>
-                            <div class="col-md-6"> <!--comments-container">-->
+                            <div class="col-md-6" id="comment-container"> <!--comments-container">-->
                                 {% if joke.comments.count == 1 %}
                                 {{ joke.comments.count }} Comment: <br>
                                 {% else %}

@@ -1,36 +1,43 @@
 <!DOCTYPE html>
-<table class="table table-bordered table-striped" style="width:100%">
-    <thead>
-    <tr>
-        <th>Title</th>
-        <th>Category</th>
-        <th>Upvotes</th>
-        <th>Downvotes</th>
-        <th></th>
-    </tr>
-    </thead>
-    <tbody>
-    {% for joke in user.jokes.all %}
+{% load staticfiles %}
+  <table class="table table-bordered table-striped" style="width:100%">
+                            <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Category</th>
+                                <th>Upvotes</th>
+                                <th>Downvotes</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for joke in user.jokes.all %}
 
 
-    <tr>
-        <td>{{ joke.title }}</td>
-        <td>{{ joke.category }}</td>
-        <td>{{ joke.upvotes }}</td>
-        <td>{{ joke.downvotes }}</td>
-        <td><button class="joke-remove btn btn-info btn-sm" data-video="{{ video }}" type="button" style="background: blue">Remove</button> </td>
+                                <tr>
+                                    <td>{{ joke.title }}</td>
+                                    <td>{{ joke.category }}</td>
+                                    <td>{{ joke.upvotes }}</td>
+                                    <td>{{ joke.downvotes }}</td>
+                                    <td>
+                                        <button class="joke-remove btn btn-info btn-sm" data-joke="{{ joke }}"
+                                                type="button"
+                                                style="background: blue">Remove
+                                        </button>
+                                    </td>
 
-                </tr>
-                {% empty %}
-                <td>No jokes here yet :(</td>
-                {% endfor %}
-                </tbody>
-            </table>
-
-        </p>
-
-
-        <br>
-        <hr>
-        <br>
-        </div>
+                                </tr>
+                            {% empty %}
+                                <td>No jokes here yet :(</td>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+<script
+        src="{% static "js/jokeoverflow-jquery.js" %}">
+</script>
+<script
+        src="{% static "js/jquery-3.3.1.min.js" %}">
+</script>
+<script
+        src="{% static "js/jokeoverflow-ajax.js" %}">
+</script>

@@ -74,13 +74,14 @@ Home
                                 {% endif %}
                                 <div id="d{{ joke }}">{{ joke.downvotes }}</div>
                             </div>
-                            <div class="col-md-6"> <!--comments-container">-->
+
+                            <div class="col-md-6">
                                 {% if joke.comments.count == 1 %}
                                 {{ joke.comments.count }} Comment: <br>
                                 {% else %}
                                 {{ joke.comments.count }} Comments: <br>
                                 {% endif %}
-                                <div class="comment-field">
+                                <div class="comment-field" id="comment-container">
                                     <hr>
                                     {% for comment in joke.comments.all %}
                                     <div class="row">

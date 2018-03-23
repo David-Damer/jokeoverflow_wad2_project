@@ -418,9 +418,13 @@ def add_comment(request):
     if request.method == 'GET':
         joke = request.GET['joke']
         text = request.GET['text']
-        cjoke = Joke.objects.get(title=joke)
-        comment = Comment.objects.get_or_create(made_by=request.user, comment_text=text, joke=cjoke)[0]
-        return HttpResponse('Comment added!')
+        if not len(text) == 0:
+            cjoke = Joke.objects.get(title=joke)
+            comment = Comment.objects.get_or_create(made_by=request.user, comment_text=text, joke=cjoke)[0]
+            users = UserProfile.objects.all()
+            context_dict = {'comment': comment, 'users': users}
+            response = render(request, 'jokeoverflow/return_comment.html', context_dict)
+            return response
 
     return HttpResponse('No comment!')
 
@@ -464,4 +468,7 @@ def joke_remove(request):
         joke = Joke.objects.get(title=rjoke)
         joke.delete()
 
-    return render(request, 'jokeoverflow/joke_remove.html',{})
+    userprofile = UserProfile.objects.order_by('user')
+    users = UserProfile.objects.all().order_by('user')
+
+    return render(request, 'jokeoverflow/joke_remove.html', {'userprofile': userprofile, 'users': users})

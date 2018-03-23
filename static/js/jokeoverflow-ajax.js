@@ -44,14 +44,21 @@ $(".down-vote").click(function () {
 
 });
 
-$(".com").submit(function (data) {
+$(".com").submit(function (event) {
+
+    event.preventDefault();
     var joke = $(this).attr('data-fjoke');
     var element = document.getElementById("com" + joke);
     var text = element.value;
     console.log(text);
     $.get('/jokeoverflow/add_comment/', {joke: joke, text: text}, function (data) {
-        $('#res' + joke).html(data);
+        $('#comment-container').append(data);
+        var height = 0;
+        $('#comment-container').children(function(){
+    height += parseInt($(this).height());
+});
 
+        console.log(height);
     });
 
 
@@ -67,8 +74,8 @@ $(".video-remove").click(function (data) {
 $(".joke-remove").click(function (data) {
     var joke = $(this).attr('data-joke');
     console.log(joke);
-    $.get('/jokeoverflow/joke_remove/', { djoke: joke }, function (data) {
-        $("#joketable").html(data);
+    $.get('/jokeoverflow/joke_remove/', {djoke: joke}, function (data) {
+        $('#joketable').html(data);
 
 
     });
