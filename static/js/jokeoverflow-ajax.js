@@ -75,7 +75,7 @@ $(".joke-remove").click(function (data) {
     var joke = $(this).attr('data-joke');
     console.log(joke);
     $.get('/jokeoverflow/joke_remove/', {djoke: joke}, function (data) {
-        $("#joketable").html(data);
+        $('#joketable').html(data);
 
 
     });
