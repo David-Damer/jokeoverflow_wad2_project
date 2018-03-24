@@ -53,12 +53,7 @@ $(".com").submit(function (event) {
     console.log(text);
     $.get('/jokeoverflow/add_comment/', {joke: joke, text: text}, function (data) {
         $('#comment-container').append(data);
-        var height = 0;
-        $('#comment-container').children(function(){
-    height += parseInt($(this).height());
-});
-
-        console.log(height);
+        console.log(data);
     });
 
 
