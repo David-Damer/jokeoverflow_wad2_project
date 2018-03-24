@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load jokeoverflow_template_tags %}
 
 <html>
 <head lang="en">
@@ -101,6 +102,8 @@
 
 <div class="container-fluid">
     <br>
+    {% get_joke_list %}
+
     <div class="row">
         <div class="col-sm-12 offset-sm-0 col-md-12 offset-md-0 main">
             {% block body_block %}{% endblock %}

@@ -1,6 +1,11 @@
 {% extends 'jokeoverflow/base2.html' %}
 {% load staticfiles %}
+{% load jokeoverflow_template_tags %}
+
+
 {% block head_block %}
+<meta charset="UTF-8"/>
+
 <!-- Custom styles for this template -->
 <link href="{% static 'css/topratedjokes.css' %}" rel="stylesheet">
 <link href="{% static 'css/home.css' %}" rel="stylesheet">
@@ -27,149 +32,16 @@ Home
     <br>
 
     <div class="row">
+
+
+    </div>
+    <div class="row">
         <div class="col-md-5 list-box sc-list-box">
             <div class="box-title text-center sc-heading-title"><p>Recently Added Jokes</p></div>
             {% if recentjokes %}
             <ul class="list-group joke-list">
                 {% for joke in recentjokes %}
-                <div class="box-cont text-center">
-                    <a href="#joke{{ joke.id }}">{{ joke.title }} ({{joke.category}})</a>
-                </div>
-                <div id="joke{{ joke.id }}" class="modalDialog">
-                    <div>
-                        <a href="#close" title="Close" class="close">&times;</a>
-                        <br>
-                        <div class="pop-joke-title text-center">
-                            {{ joke.title }}
-                        </div>
-                        <br>
-                        <div class="pop-joke-text">
-                            {#{{ joke.joke_text }}#}
-                            {{ joke.joke_text|linebreaks }}
-                        </div>
-                        <br>
-                        <hr>
-                        <div class="row">
-                            <div class="col-md-3 ">
-                                {% if user.is_authenticated %}
-                                <input class="vote sc-vote-icon vote" type="image"
-                                       src="{% static 'images/icons/upvote2.png' %}" alt="Upvote"
-                                       width="48" height="48" title="Like this joke" data-joke="{{ joke }}">
-                                <!--<img class = "vote-icon" src="{% static "images/icons/upvoteYES.PNG" %}" alt="Upvote" />-->
-                                {% else %}
-                                <img class="sc-vote-icon vote-icon" src="{% static 'images/icons/upvote2a.png' %}"
-                                     alt="Upvote"/>
-                                {% endif %}
-                                <div id="u{{ joke }}">{{ joke.upvotes }}</div>
-                            </div>
-                            <div class="col-md-3 ">
-                                {% if user.is_authenticated %}
-                                <input class="down-vote sc-vote-icon down-vote" type="image"
-                                       src="{% static 'images/icons/downvote2.png' %}" alt="Upvote" width="48"
-                                       height="48" title="Dislike this joke" data-joke="{{ joke }}">
-                                <!--<img class = "vote-icon" src="{% static "images/icons/downvote.png" %}" alt="Downvote" />-->
-                                {% else %}
-                                <img class="sc-vote-icon vote-icon" src="{% static 'images/icons/downvote2a.png' %}"
-                                     alt="Downvote"/>
-                                {% endif %}
-                                <div id="d{{ joke }}">{{ joke.downvotes }}</div>
-                            </div>
-
-                            <div class="col-md-6">
-                                {% if joke.comments.count == 1 %}
-                                {{ joke.comments.count }} Comment: <br>
-                                {% else %}
-                                {{ joke.comments.count }} Comments: <br>
-                                {% endif %}
-                                <div class="comment-field" id="comment-container">
-                                    <hr>
-                                    {% for comment in joke.comments.all %}
-                                    <div class="row">
-                                        {% for user in users %}
-                                        {% if comment.made_by == user.user %}
-                                        <div class="col-md-2 comment-profile-pic">
-                                            <!--<img src="{{ user.user_picture}}" alt="No profile picture"}>-->
-                                            {% if user.user_picture %}
-                                            <img style="height:64px;; width:64px;"
-                                                 class="sc-com-profile-pic"
-                                                 src="{{ MEDIA_URL }}{{ user.user_picture }}"
-                                                 alt="No profile picture" }>
-                                            {% else %}
-                                            <img style="height:60px; width:60px; margin-left:auto; margin-right:auto;"
-                                                 class="sc-com-profile-pic" style="float:right;"
-                                                 src="{{ MEDIA_URL }}profile_images/../../media/default.png"
-                                                 alt="No profile picture" }>
-                                            {% endif %}
-                                        </div>
-                                        <div class="sc-comment-text col-md-10">
-                                            {{ comment.comment_text|linebreaks }}
-                                            <small>{{ comment.made_by }}</small>
-                                        </div>
-                                        {% endif %}
-                                        {% endfor %}
-                                    </div>
-                                    <hr>
-                                    {% endfor %}
-                                </div>
-                            </div>
-                        </div>
-                        <br>
-
-                        <div class="row">
-                            <div class="col-md-1">
-                                <div>
-                                    {% for user in users %}
-                                    {% if user.user == joke.added_by %}
-                                    {% if user.user_picture %}
-                                    <img style="height:60px; width:60px;"
-                                         class="sc-com-profile-pic" style="float:right;"
-                                         src="{{ MEDIA_URL }}{{ user.user_picture }}"
-                                         alt="No profile picture" }>
-                                    {% else %}
-                                    <img style="height:60px; width:60px;"
-                                         class="sc-com-profile-pic" style="float:right;"
-                                         src="{{ MEDIA_URL }}profile_images/../../media/default.png"
-                                         alt="No profile picture" }>
-                                    {% endif %}
-                                    {% endif %}
-                                    {% endfor %}
-                                </div>
-                            </div>
-                            <div class="col-md-5">
-                                <div>
-                                    Joke Author: <strong>{{ joke.added_by }}</strong>
-                                    <br>
-                                    Date Added: <strong>{{ joke.date_added }}</strong>
-                                </div>
-                            </div>
-                            {% if user.is_authenticated %}
-                            <div class="col-md-6">
-                                <div>
-                                    <form class="com" data-fjoke="{{ joke.title }}">
-                                        <input name="com{{ joke.title }}" id="com{{ joke.title }}" type="text"
-                                               data-emojiable="true" value=""
-                                               placeholder="Comment on {{ joke.title }}"
-                                               data-emoji-input="unicode"
-                                               data-ijoke="{{joke.title}}"
-                                        />
-                                        <button class="btn btn-primary" type="submit" id="submit"
-                                                value="comment">Add your comment
-                                        </button>
-
-                                        <p id="res{{ joke }}"></p>
-                                        </button>
-
-                                        </button>
-
-                                    </form>
-
-                                </div>
-                            </div>
-                            {% endif %}
-                        </div>
-                        </p>
-                    </div>
-                </div>
+                {% get_joke_list joke %}
                 {% endfor %}
             </ul>
             {% endif %}

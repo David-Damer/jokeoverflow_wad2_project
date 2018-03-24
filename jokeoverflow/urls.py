@@ -15,6 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from jokeoverflow import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 app_name = 'jokeoverflow'
 urlpatterns = [
@@ -43,5 +46,5 @@ urlpatterns = [
     url(r'edit_profile/', views.edit_profile, name='edit_profile'),
     url(r'^video_remove/$', views.video_remove, name='video_remove'),
     url(r'^joke_remove/$', views.joke_remove, name='joke_remove'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
