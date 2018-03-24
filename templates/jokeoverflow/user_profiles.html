@@ -1,6 +1,12 @@
 {% extends 'jokeoverflow/base2.html' %}
 {% load staticfiles %}
+{% load jokeoverflow_template_tags %}
+
 {% load crispy_forms_tags %}
+{% block head_block %}
+<link href="{% static 'css/topratedjokes.css' %}" rel="stylesheet">
+
+{% endblock %}
 {% block title_block %}
     {{ user }}'s Page
 {% endblock %}
@@ -59,7 +65,9 @@
 
 
                                 <tr>
-                                    <td>{{ joke.title }}</td>
+                                    <td>
+                                        {% get_joke_pop joke user%}
+                                    </td>
                                     <td>{{ joke.category }}</td>
                                     <td>{{ joke.upvotes }}</td>
                                     <td>{{ joke.downvotes }}</td>

@@ -1,10 +1,12 @@
 {% load staticfiles %}
+{% load jokeoverflow_template_tags %}
+
 
     {% if jokes %}
     {% for joke in jokes %}
     {% if joke == act_joke %}
     <div class="box-cont text-center">
-        <a href="#joke{{ joke.id }}">{{ joke.title }} ({{joke.category}})</a>
+        <a href="#joke{{ joke.id }}">{{ joke.title }}</a>
     </div>
     <div id="joke{{ joke.id }}" class="modalDialog">
         <div>
@@ -59,18 +61,16 @@
                             {% for useri in users %}
                             {% if comment.made_by == useri.user %}
                             <div class="col-md-2 comment-profile-pic">
-                                {{ useri.date_of_birth }}
                                 <!--<img src="{{ user.user_picture}}" alt="No profile picture"}>-->
                                 {% if useri.user_picture %}
-                                <h5>yes</h5>
                                 <img style="height:64px;; width:64px;"
                                      class="sc-com-profile-pic"
-                                     src="{{ MEDIA_URL }}{{ useri.user_picture }}"
+                                     src="{% get_media_prefix %}{{ useri.user_picture }}"
                                      alt="No profile picture" }>
                                 {% else %}
                                 <img style="height:60px; width:60px; margin-left:auto; margin-right:auto;"
                                      class="sc-com-profile-pic" style="float:right;"
-                                     src="{{ MEDIA_URL }}profile_images/../../media/default.png"
+                                     src="{% get_media_prefix %}profile_images/../../media/default.png"
                                      alt="No profile picture" }>
                                 {% endif %}
                             </div>
@@ -96,12 +96,12 @@
                         {% if useri.user_picture %}
                         <img style="height:60px; width:60px;"
                              class="sc-com-profile-pic" style="float:right;"
-                             src="{{ MEDIA_URL }}{{ useri.user_picture }}"
+                             src="{% get_media_prefix %}{{ useri.user_picture }}"
                              alt="No profile picture" }>
                         {% else %}
                         <img style="height:60px; width:60px;"
                              class="sc-com-profile-pic" style="float:right;"
-                             src="{{ MEDIA_URL }}profile_images/../../media/default.png"
+                             src="{% get_media_prefix %}profile_images/../../media/default.png"
                              alt="No profile picture" }>
                         {% endif %}
                         {% endif %}
