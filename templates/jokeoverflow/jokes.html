@@ -22,7 +22,7 @@
             <hr>
             <div class="row">
                 <div class="col-md-3 ">
-                    {% if user.is_authenticated %}
+                    {% if act_user.is_authenticated %}
                     <input class="vote sc-vote-icon vote" type="image"
                            src="{% static 'images/icons/upvote2.png' %}" alt="Upvote"
                            width="48" height="48" title="Like this joke" data-joke="{{ joke }}">
@@ -34,9 +34,9 @@
                     <div id="u{{ joke }}">{{ joke.upvotes }}</div>
                 </div>
                 <div class="col-md-3 ">
-                    {% if user.is_authenticated %}
+                    {% if act_user.is_authenticated %}
                     <input class="down-vote sc-vote-icon down-vote" type="image"
-                           src="{% static 'images/icons/downvote2.png' %}" alt="Upvote" width="48"
+                           src="{% static 'images/icons/downvote2.png' %}" alt="Downvote" width="48"
                            height="48" title="Dislike this joke" data-joke="{{ joke }}">
                     <!--<img class = "vote-icon" src="{% static "images/icons/downvote.png" %}" alt="Downvote" />-->
                     {% else %}
@@ -108,14 +108,24 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <div>
-                        Joke Author: <strong>{{ joke.added_by }}</strong>
+                        JokeAuthor: <strong>{{ joke.added_by }}</strong>
                         <br>
                         Date Added: <strong>{{ joke.date_added }}</strong>
                     </div>
                 </div>
-                {% if user.is_authenticated %}
+
+                {% if act_user.is_authenticated %}
+                <div class="col-md-1">
+                    <div>
+                        <input class="flag sc-vote-icon" type="image"
+                               src="{% static 'images/icons/flag-icon.png' %}" alt="Flag"
+                               width="48" height="48"
+                               id="flag{{ joke }}"  title="Flag this joke"
+                               data-fjoke="{{ joke }}">
+                    </div>
+                </div>
                 <div class="col-md-6">
                     <div>
                         <form class="com" data-fjoke="{{ joke.title }}">

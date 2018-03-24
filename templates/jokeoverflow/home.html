@@ -41,7 +41,7 @@ Home
             {% if recentjokes %}
             <ul class="list-group joke-list">
                 {% for joke in recentjokes %}
-                {% get_joke_list joke %}
+                {% get_joke_pop joke user %}
                 {% endfor %}
             </ul>
             {% endif %}
