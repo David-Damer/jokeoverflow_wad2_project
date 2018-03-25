@@ -38,8 +38,9 @@
             <h3>DOB: {{ useri.date_of_birth }}</h3>
             <br>
 
+            <div style="word-wrap: break-word;">
             <h3>Bio: {{ useri.user_bio|linebreaks }}</h3>
-
+            </div>
             {% endif %}
 
             {% endfor %}
@@ -138,7 +139,7 @@
     </p>
     <br>
 
-    {% if user.is_authenticated %}
+    {% if user.is_staff %}
     <br>
     <hr>
     <br>

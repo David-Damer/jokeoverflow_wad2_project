@@ -13,13 +13,13 @@ TO DO
 [ ] Search Joke Results
 [X] Add Category Option
 [X] Comments and Jokes show new lines
-[ ] Registration Format
-[ ] Login Format
+[X] Registration Format
+[X] Login Format
 [ ] Internal Commentry
 [ ] Edit Profile
 [X] Logo
 [X] Favicon
-[ ] Admin User
+[X] Admin User
 [X] Latest News Posts
 [X] Make News Form
 [X] Diverse Population Script
