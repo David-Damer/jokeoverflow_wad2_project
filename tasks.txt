@@ -3,30 +3,29 @@ TO DO
 [X] Pop-up add comments
 [i] Pop-up Upvote Button
 [i] Pop-up Downvote Button
-[ ] Profile Registration
+[X] Profile Registration
 [X] Top Videos Page Formatting
 [X] Category Formatting
 [X] Home Page Formatting
-[ ] Contact Us Form
-[ ] Send Complaint Form
-[ ] Make Joke Form
+[X] Contact Us Form
+[X] Send Complaint Form
+[X] Make Joke Form
 [ ] Search Joke Results
 [X] Add Category Option
 [X] Comments and Jokes show new lines
 [ ] Registration Format
 [ ] Login Format
-
-CAN DO AFTER FRIDAY
+[ ] Internal Commentry
+[ ] Edit Profile
 [X] Logo
 [X] Favicon
 [ ] Admin User
-[ ] Latest News Posts
-[ ] Make News Form
-[ ] Diverse Population Script
-
-
-
-
+[X] Latest News Posts
+[X] Make News Form
+[X] Diverse Population Script
+[ ] Unit Tests
+[ ] Submit Sources
+[ ] CSS and JS Seperate
 
 
 

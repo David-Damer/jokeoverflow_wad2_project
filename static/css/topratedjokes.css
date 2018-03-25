@@ -400,3 +400,8 @@ marign-left:auto;
 margin-right:auto;
 display:block;
 }
+
+.sc-complaints-table{
+max-height:300px;
+overflow-y:scroll;
+}

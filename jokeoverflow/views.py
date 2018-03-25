@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.decorators import login_required
-from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment, Voted
+from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment, Voted, Complaint
 from jokeoverflow.forms import UserProfileForm, JokeForm, CategoryRequestForm
 from jokeoverflow.forms import CommentForm, ComplaintForm
 from django.shortcuts import redirect
@@ -127,6 +127,11 @@ def user_profiles(request):
     category_list = Category.objects.order_by('title')
     users = UserProfile.objects.all().order_by('user')
 
+    complaints = Complaint.objects.all().order_by('-date_added')
+    all_jokes = Joke.objects.all().order_by('id')
+    flagged_jokes = Joke.objects.filter(flagged=True).order_by('id');
+
+
     form = UserProfileForm(
         {'picture': UserProfile.user_picture, 'bio': UserProfile.user_bio, 'date_of_birth': UserProfile.date_of_birth})
 
@@ -140,7 +145,8 @@ def user_profiles(request):
             print(form.errors)
 
     return render(request, 'jokeoverflow/user_profiles.html',
-                  {'categories': category_list, 'userprofile': userprofile, 'form': form, 'users': users, })
+                  {'categories': category_list, 'userprofile': userprofile, 'form': form, 'users': users,
+                   'complaints':complaints, 'alljokes':all_jokes, 'flaggedjokes':flagged_jokes })
 
 
 def videos(request):
