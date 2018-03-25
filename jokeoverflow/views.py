@@ -4,11 +4,8 @@ from django.contrib.auth.models import AbstractUser, User
 from django.contrib.auth.decorators import login_required
 from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment, Voted
 from jokeoverflow.forms import UserProfileForm, EditProfileForm, JokeForm, CategoryRequestForm
-<<<<<<< HEAD
-=======
 from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment, Voted, Complaint
 from jokeoverflow.forms import UserProfileForm, JokeForm, CategoryRequestForm
->>>>>>> 3bca9c2e147f754e6524259f813947eedfc5527b
 from jokeoverflow.forms import CommentForm, ComplaintForm
 from django.shortcuts import redirect
 from jokeoverflow.youtube_search import *
@@ -139,16 +136,10 @@ def user_profiles(request):
     category_list = Category.objects.order_by('title')
     users = UserProfile.objects.all().order_by('user')
 
-<<<<<<< HEAD
-    
-=======
     complaints = Complaint.objects.all().order_by('-date_added')
     all_jokes = Joke.objects.all().order_by('id')
     flagged_jokes = Joke.objects.filter(flagged=True).order_by('id');
 
-
-
->>>>>>> 3bca9c2e147f754e6524259f813947eedfc5527b
     form = UserProfileForm(
         {'picture': UserProfile.user_picture, 'bio': UserProfile.user_bio, 'date_of_birth': UserProfile.date_of_birth})
 
