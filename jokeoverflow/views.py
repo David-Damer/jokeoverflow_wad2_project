@@ -1,14 +1,9 @@
 from django.shortcuts import render
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser, User
 from django.contrib.auth.decorators import login_required
-<<<<<<< HEAD
 from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment, Voted
 from jokeoverflow.forms import UserProfileForm, EditProfileForm, JokeForm, CategoryRequestForm
-=======
-from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment, Voted, Complaint
-from jokeoverflow.forms import UserProfileForm, JokeForm, CategoryRequestForm
->>>>>>> 108e4768eac7287df1c68bd46be33551a287164f
 from jokeoverflow.forms import CommentForm, ComplaintForm
 from django.shortcuts import redirect
 from jokeoverflow.youtube_search import *
@@ -19,7 +14,6 @@ from jokeoverflow.calculate_age import calculate_age
 from django.http import JsonResponse
 import json
 from django.utils.timezone import now
-from django.http import HttpResponseRedirect
 
 
 
@@ -127,6 +121,12 @@ def latest_news(request):
     response = render(request, 'jokeoverflow/latest_news.html', context_dict)
     return response
 
+def delete_user(request):
+    context = {}
+    u = User.objects.get(username=request.user.username)
+    u.delete()      
+    
+    return render(request, 'jokeoverflow/delete_confirm.html', context)
 
 @login_required
 def user_profiles(request):
@@ -134,15 +134,7 @@ def user_profiles(request):
     category_list = Category.objects.order_by('title')
     users = UserProfile.objects.all().order_by('user')
 
-<<<<<<< HEAD
     
-=======
-    complaints = Complaint.objects.all().order_by('-date_added')
-    all_jokes = Joke.objects.all().order_by('id')
-    flagged_jokes = Joke.objects.filter(flagged=True).order_by('id');
-
-
->>>>>>> 108e4768eac7287df1c68bd46be33551a287164f
     form = UserProfileForm(
         {'picture': UserProfile.user_picture, 'bio': UserProfile.user_bio, 'date_of_birth': UserProfile.date_of_birth})
 
@@ -156,8 +148,7 @@ def user_profiles(request):
             print(form.errors)
 
     return render(request, 'jokeoverflow/user_profiles.html',
-                  {'categories': category_list, 'userprofile': userprofile, 'form': form, 'users': users,
-                   'complaints':complaints, 'alljokes':all_jokes, 'flaggedjokes':flagged_jokes })
+                  {'categories': category_list, 'userprofile': userprofile, 'form': form, 'users': users, })
 
 def edit_profile(request):
     category_list = Category.objects.order_by('title')

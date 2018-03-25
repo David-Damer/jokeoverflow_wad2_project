@@ -32,15 +32,15 @@
 
         {% endfor %}
     </div>
-
-    <div align="left">
-        <h2>Edit Profile</h2>
+    <br>
+    <div align="center">
+        <h2>Edit Your Profile</h2>
         <br>
         <form method="POST" action="/jokeoverflow/edit_profile/" class="" >
 
             {% csrf_token %}
-            {{ form.as_p }}
-
+            {{ form|crispy}}
+            <br>
             <button type="submit">Save</button>
         </form>
 

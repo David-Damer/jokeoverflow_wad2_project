@@ -9,7 +9,7 @@
     <form role="form-signin"  method="post" action="." enctype="multipart/form-data">
         {% csrf_token %}
         <!--{{ form|crispy}} this doesn't allow us to upload images-->
-        {{ form.as_p }}
+        {{ form|crispy }}
 
     <br>
     <input class='btn btn-primary' type="submit" value="submit"/>

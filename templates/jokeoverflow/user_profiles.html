@@ -35,11 +35,11 @@
                  alt="No profile picture" }>
             {% endif %}
             <br><br>
-            <h3>DOB: {{ useri.date_of_birth }}</h3>
+            <h3>Born on {{ useri.date_of_birth }}</h3>
             <br>
 
             <div style="word-wrap: break-word;">
-            <h3>Bio: {{ useri.user_bio|linebreaks }}</h3>
+            <h3>{{ useri.user_bio|linebreaks }}</h3>
             </div>
             {% endif %}
 
@@ -217,8 +217,20 @@
     <br>
 
     <div align="right">
-        <a href="{% url 'jokeoverflow:edit_profile' %}">Edit Profile</a>
+    <button onclick="deletePost()">Delete Account</button>
+    <a href="{% url 'jokeoverflow:edit_profile' %}"><button >Edit Profile</button></a>
     </div>
+    <br>
+
+    <script>
+        function deletePost() {
+            var ask = window.confirm("Are you sure you want to delete this account?");
+            if (ask) {
+                window.location.href = "{% url 'jokeoverflow:delete_user' %}";
+
+            }
+        }
+    </script>
 
     <br>
 </div>

@@ -1,0 +1,28 @@
+{% extends 'jokeoverflow/base2.html' %}
+{% load staticfiles %}
+{% load jokeoverflow_template_tags %}
+
+
+{% block head_block %}
+<meta charset="UTF-8"/>
+
+<!-- Custom styles for this template -->
+<link href="{% static 'css/topratedjokes.css' %}" rel="stylesheet">
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
+
+<!--<link href="{% static 'css/home.css' %}" rel="stylesheet">-->
+{% endblock %}
+{% block title_block %}
+Delete Account
+{% endblock %}
+
+
+{% block body_block %}
+
+<div align='center'>
+
+<h1>Your account has successfully been deleted</h1>
+
+</div>
+
+{% endblock %}
