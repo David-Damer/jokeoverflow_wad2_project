@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.decorators import login_required
 from jokeoverflow.models import Category, Video, Joke, UserProfile, Comment, Voted
-from jokeoverflow.forms import UserProfileForm, JokeForm, CategoryRequestForm
+from jokeoverflow.forms import UserProfileForm, EditProfileForm, JokeForm, CategoryRequestForm
 from jokeoverflow.forms import CommentForm, ComplaintForm
 from django.shortcuts import redirect
 from jokeoverflow.youtube_search import *
@@ -14,6 +14,8 @@ from jokeoverflow.calculate_age import calculate_age
 from django.http import JsonResponse
 import json
 from django.utils.timezone import now
+from django.http import HttpResponseRedirect
+
 
 
 def home(request):
@@ -127,6 +129,7 @@ def user_profiles(request):
     category_list = Category.objects.order_by('title')
     users = UserProfile.objects.all().order_by('user')
 
+    
     form = UserProfileForm(
         {'picture': UserProfile.user_picture, 'bio': UserProfile.user_bio, 'date_of_birth': UserProfile.date_of_birth})
 
@@ -141,6 +144,28 @@ def user_profiles(request):
 
     return render(request, 'jokeoverflow/user_profiles.html',
                   {'categories': category_list, 'userprofile': userprofile, 'form': form, 'users': users, })
+
+def edit_profile(request):
+    category_list = Category.objects.order_by('title')
+    users = UserProfile.objects.all().order_by('user')
+    userprofile = UserProfile.objects.order_by('user')
+    form = EditProfileForm(request.POST or None, {'picture': UserProfile.user_picture, 'bio': UserProfile.user_bio })
+
+    if request.method == 'POST':
+        form = EditProfileForm(request.POST or None, {'picture': UserProfile.user_picture, 'bio': UserProfile.user_bio })
+        if form.is_valid():
+            obj = UserProfile.objects.get(user=request.user)
+            obj.user_picture = form.cleaned_data['user_picture']
+            obj.user_bio = form.cleaned_data['user_bio']
+            obj.save()
+ 
+            return redirect('/jokeoverflow/user_profiles/')
+        else:
+            print(form.errors)
+
+    context_dict = {'categories': category_list, 'form': form, 'users':users }
+
+    return render(request, 'jokeoverflow/edit_profile.html', context_dict)
 
 
 def videos(request):
@@ -277,27 +302,6 @@ def register_profile(request):
     context_dict = {'categories': category_list, 'form': form}
 
     return render(request, 'jokeoverflow/register_profile.html', context_dict)
-
-
-def edit_profile(request):
-    category_list = Category.objects.order_by('title')
-    form = UserProfileForm()
-
-    if request.method == 'POST':
-        form = UserProfileForm(request.POST, request.FILES)
-        if form.is_valid():
-            user_profile = form.save(commit=False)
-            user_profile.user = request.user
-            user_profile.save()
-
-            return redirect('home')
-        else:
-            print(form.errors)
-
-    context_dict = {'categories': category_list, 'form': form}
-
-    return render(request, 'jokeoverflow/edit_profile.html', context_dict)
-
 
 @login_required
 def auto_add_video(request):

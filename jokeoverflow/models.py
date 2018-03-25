@@ -14,7 +14,7 @@ class UserProfile(models.Model):
     user_bio = models.TextField(max_length=256)
     user_picture = models.ImageField(upload_to='profile_images')
     image_from = models.URLField()  # For acknowledging sources of images when populating with fake data
-
+  
     def __str__(self):
         return self.user.username
 

@@ -14,7 +14,12 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         exclude = ('user',)
 
+class EditProfileForm(forms.Form):
+    user_bio = forms.CharField(widget=forms.Textarea, max_length=256, required=False)
+    user_picture = forms.ImageField(required=False)
+    image_from = forms.URLField(widget=forms.HiddenInput(), required=False)
 
+    
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
 
