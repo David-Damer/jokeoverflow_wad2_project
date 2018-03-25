@@ -54,7 +54,7 @@
                     {% else %}
                     {{ joke.comments.count }} Comments: <br>
                     {% endif %}
-                    <div class="comment-field" id="comment-container">
+                    <div class="comment-field" id="comment-container{{ joke }}">
                         <hr>
                         {% for comment in joke.comments.all %}
                         <div class="row">
@@ -70,7 +70,7 @@
                                 {% else %}
                                 <img style="height:60px; width:60px; margin-left:auto; margin-right:auto;"
                                      class="sc-com-profile-pic" style="float:right;"
-                                     src="{% get_media_prefix %}profile_images/../../media/default.png"
+                                     src="{% get_media_prefix %}profile_images/../../media/default.PNG"
                                      alt="No profile picture" }>
                                 {% endif %}
                             </div>
@@ -101,7 +101,7 @@
                         {% else %}
                         <img style="height:60px; width:60px;"
                              class="sc-com-profile-pic" style="float:right;"
-                             src="{% get_media_prefix %}profile_images/../../media/default.png"
+                             src="{% get_media_prefix %}profile_images/../../media/default.PNG"
                              alt="No profile picture" }>
                         {% endif %}
                         {% endif %}
@@ -141,9 +141,7 @@
                             </button>
 
                             <p id="res{{ joke }}"></p>
-                            </button>
 
-                            </button>
 
                         </form>
 
