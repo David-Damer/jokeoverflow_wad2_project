@@ -45,14 +45,13 @@ $(".down-vote").click(function () {
 });
 
 $(".com").submit(function (event) {
-
     event.preventDefault();
     var joke = $(this).attr('data-fjoke');
     var element = document.getElementById("com" + joke);
     var text = element.value;
     console.log(text);
     $.get('/jokeoverflow/add_comment/', {joke: joke, text: text}, function (data) {
-        $('#comment-container').append(data);
+        $('#comment-container' + joke ).append(data);
         console.log(data);
     });
 

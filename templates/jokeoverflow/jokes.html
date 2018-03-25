@@ -54,7 +54,7 @@
                     {% else %}
                     {{ joke.comments.count }} Comments: <br>
                     {% endif %}
-                    <div class="comment-field" id="comment-container">
+                    <div class="comment-field" id="comment-container{{ joke }}">
                         <hr>
                         {% for comment in joke.comments.all %}
                         <div class="row">
@@ -141,9 +141,7 @@
                             </button>
 
                             <p id="res{{ joke }}"></p>
-                            </button>
 
-                            </button>
 
                         </form>
 
