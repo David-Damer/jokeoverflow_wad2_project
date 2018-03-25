@@ -28,6 +28,12 @@ $(document).ready(function () {
         $(this).css({"background-color": "blue", "color": 'white'});
 
     });
+    $('.flag').hover(function() {
+        $(this).animate({height: 32, width: 32},50);
+    }, function(){
+        $(this).animate({height: 30, width:30},50);
+    });
+
     $(function () {
         // Initializes and creates emoji set from sprite sheet
         window.emojiPicker = new EmojiPicker({

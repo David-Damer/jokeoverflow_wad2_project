@@ -472,3 +472,17 @@ def joke_remove(request):
     users = UserProfile.objects.all().order_by('user')
 
     return render(request, 'jokeoverflow/joke_remove.html', {'userprofile': userprofile, 'users': users})
+
+def flag(request):
+    fjoke = None
+    if request.method == 'GET':
+        fjoke = request.GET['fjoke']
+        joke = Joke.objects.get(title=fjoke)
+        if not joke.flagged:
+            print('flagging')
+            joke.flagged = True
+            joke.save()
+        else:
+            print('already flagged')
+
+    return HttpResponse('Flagged')

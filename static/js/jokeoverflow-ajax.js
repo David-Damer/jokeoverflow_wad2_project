@@ -76,4 +76,15 @@ $(".joke-remove").click(function (data) {
     });
 
 });
+$(".flag").click(function (data) {
+    var joke = $(this).attr('data-fjoke');
+    console.log(joke);
+    $.get('/jokeoverflow/flag/', {fjoke: joke}, function (data) {
+        $('#resp' + joke).html(data);
+        setTimeout(function () {
+            $('#resp' + joke).html('')
+        }, 750);
+    });
+});
+
 
