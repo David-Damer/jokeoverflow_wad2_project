@@ -49,11 +49,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    {% if joke.comments.count == 1 %}
-                    {{ joke.comments.count }} Comment: <br>
-                    {% else %}
-                    {{ joke.comments.count }} Comments: <br>
-                    {% endif %}
+
                     <div class="comment-field" id="comment-container{{ joke }}">
                         <hr>
                         {% for comment in joke.comments.all %}
