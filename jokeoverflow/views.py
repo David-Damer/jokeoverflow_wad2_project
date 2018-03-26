@@ -81,10 +81,16 @@ def show_category(request, category_name_slug):
     context_dict = {}
     age = 0
     users = UserProfile.objects.all()
+
+    # Check if user is under 18
     if not request.user.is_superuser:
         if request.user.is_authenticated:
             prof = UserProfile.objects.filter(user=request.user)[0]
             age = calculate_age(prof.date_of_birth)
+
+    # Allow superusers to see all categories
+    if request.user.is_superuser:
+        age = 100
 
     try:
         category_list = Category.objects.order_by('title')
@@ -314,7 +320,7 @@ def register_profile(request):
     return render(request, 'jokeoverflow/register_profile.html', context_dict)
 
 @login_required
-def auto_add_video(request):
+def auto_add_video(request):  # Ajax view to add video
     url = None
     code = None
     thumb = None
@@ -370,7 +376,7 @@ def testingSC1(request, jid):
 
 
 @login_required
-def upvote(request):
+def upvote(request):  # Ajax view
     joke = None
     uuser = None
     if request.method == 'GET':
@@ -380,7 +386,7 @@ def upvote(request):
     if joke:
         upjoke = Joke.objects.get(title=joke)
         if upjoke:
-            if Voted.objects.filter(user=request.user, joke=upjoke).exists():
+            if Voted.objects.filter(user=request.user, joke=upjoke).exists():  # Check if user has already voted on joke
                 print('already voted')
 
                 upvotes = upjoke.upvotes
@@ -399,7 +405,7 @@ def upvote(request):
 
 
 @login_required
-def downvote(request):
+def downvote(request):  # Ajax view
     joke = None
     uuser = None
     if request.method == 'GET':
@@ -408,7 +414,7 @@ def downvote(request):
     if joke:
         downjoke = Joke.objects.get(title=joke)
         if downjoke:
-            if Voted.objects.filter(user=request.user, joke=downjoke).exists():
+            if Voted.objects.filter(user=request.user, joke=downjoke).exists():  # Check if user has already voted on joke
                 print('already voted')
                 downvotes = downjoke.downvotes
                 msg = ("You can only vote once per joke " + uuser + "!")
@@ -426,13 +432,13 @@ def downvote(request):
 
 
 @login_required
-def add_comment(request):
+def add_comment(request):  # Ajax view
     joke = None
     text = None
     if request.method == 'GET':
         joke = request.GET['joke']
         text = request.GET['text']
-        if not len(text) == 0:
+        if not len(text) == 0:  # Make sure comment is not empty
             cjoke = Joke.objects.get(title=joke)
             comment = Comment.objects.get_or_create(made_by=request.user, comment_text=text, joke=cjoke)[0]
             users = UserProfile.objects.all()
@@ -440,7 +446,6 @@ def add_comment(request):
             response = render(request, 'jokeoverflow/return_comment.html', context_dict)
             return response
 
-    return HttpResponse('No comment!')
 
 
 @login_required
@@ -464,7 +469,7 @@ def new_category(request):
     return response
 
 
-def video_remove(request):
+def video_remove(request):  # Ajax view
     rvideo = None
     if request.method == 'GET':
         rvideo = request.GET['video']
@@ -474,7 +479,7 @@ def video_remove(request):
     return render(request, 'jokeoverflow/video_remove.html', {})
 
 
-def joke_remove(request):
+def joke_remove(request):  # Ajax view
     rjoke = None
 
     if request.method == 'GET':
@@ -487,7 +492,7 @@ def joke_remove(request):
 
     return render(request, 'jokeoverflow/joke_remove.html', {'userprofile': userprofile, 'users': users})
 
-def flag(request):
+def flag(request):  # Ajax view
     fjoke = None
     if request.method == 'GET':
         fjoke = request.GET['fjoke']

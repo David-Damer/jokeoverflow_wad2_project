@@ -1,3 +1,4 @@
+// add video from search results
 $('.video-add ').click(function () {
     var id = $(this).attr("data-id");
     var url = $(this).attr("data-url");
@@ -12,6 +13,7 @@ $('.video-add ').click(function () {
 
         });
 });
+// for up voting
 $(".vote").click(function () {
     var joke = $(this).attr('data-joke');
     console.log(this);
@@ -27,7 +29,7 @@ $(".vote").click(function () {
     });
 });
 
-
+// for down voting
 $(".down-vote").click(function () {
     var joke = $(this).attr('data-joke');
     console.log(this);
@@ -43,20 +45,21 @@ $(".down-vote").click(function () {
     });
 
 });
-
+// Adds a comment and updates comments
 $(".com").submit(function (event) {
     event.preventDefault();
     var joke = $(this).attr('data-fjoke');
     var element = document.getElementById("com" + joke);
     var text = element.value;
     $.get('/jokeoverflow/add_comment/', {joke: joke, text: text}, function (data) {
-        $('#comment-container' + joke).append(data).scrollTop(outerHeight*10000);
-        $('.emoji-wysiwyg-editor').html('');
+        $('#comment-container' + joke).append(data).scrollTop(outerHeight*10000);// Should work for a while to scroll to the most recently added comment
+        $('.emoji-wysiwyg-editor').html('');  // clears the textbox
 
     });
 
 
 });
+// removes a video from database and updates profile page
 $(".video-remove").click(function (data) {
     var video = $(this).attr('data-video');
     console.log(video);
@@ -65,6 +68,7 @@ $(".video-remove").click(function (data) {
     });
 
 });
+// removes a joke from database and updates profile page
 $(".joke-remove").click(function (data) {
     var joke = $(this).attr('data-joke');
     console.log(joke);
@@ -75,6 +79,7 @@ $(".joke-remove").click(function (data) {
     });
 
 });
+// flags joke
 $(".flag").click(function (data) {
     var joke = $(this).attr('data-fjoke');
     console.log(joke);

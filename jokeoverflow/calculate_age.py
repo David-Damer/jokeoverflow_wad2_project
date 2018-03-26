@@ -1,5 +1,8 @@
 from datetime import date
-
+'''
+function to calculate registered users age
+to restrict unsuitable content
+'''
 
 def calculate_age(date_of_birth):
     today = date.today()

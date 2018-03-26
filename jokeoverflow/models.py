@@ -51,10 +51,6 @@ class Category(models.Model):
         return self.title
 
 
-#  OneToOneField classes used to automatically become the primary key on a model.
-#  This is no longer true (although you can manually pass in the primary_key argument if you like).
-#  Thus, it’s now possible to have multiple fields of type OneToOneField on a single model.
-
 class Joke(models.Model):
     title = models.CharField(max_length=128)
     joke_text = models.TextField(max_length=256)

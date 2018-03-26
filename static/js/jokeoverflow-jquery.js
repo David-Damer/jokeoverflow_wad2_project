@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    // button effects and animations
     $(".vote").hover(function () {
         $(this).animate({height: 64, width: 64}, 100);
     }, function () {
@@ -33,7 +34,7 @@ $(document).ready(function () {
     }, function(){
         $(this).animate({height: 30, width:30},50);
     });
-
+    // emoji-picker initializer
     $(function () {
         // Initializes and creates emoji set from sprite sheet
         window.emojiPicker = new EmojiPicker({
