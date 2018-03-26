@@ -16,14 +16,14 @@ TO DO
 [X] Registration Format
 [X] Login Format
 [ ] Internal Commentry
-[ ] Edit Profile
+[X] Edit Profile
 [X] Logo
 [X] Favicon
 [X] Admin User
 [X] Latest News Posts
 [X] Make News Form
 [X] Diverse Population Script
-[ ] Unit Tests
+[X] Unit Tests
 [ ] Submit Sources
 [ ] CSS and JS Seperate
 
