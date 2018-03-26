@@ -50,7 +50,8 @@ $(".com").submit(function (event) {
     var element = document.getElementById("com" + joke);
     var text = element.value;
     $.get('/jokeoverflow/add_comment/', {joke: joke, text: text}, function (data) {
-        $('#comment-container' + joke).append(data).scrollTop(outerHeight*1000);
+        $('#comment-container' + joke).append(data).scrollTop(outerHeight*10000);
+        $('.emoji-wysiwyg-editor').html('');
 
     });
 
