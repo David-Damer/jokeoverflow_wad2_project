@@ -344,37 +344,6 @@ def auto_add_video(request):  # Ajax view to add video
     context_dict['topratedvideos'] = videos
     return render(request, 'jokeoverflow/video_update.html', context_dict)
 
-
-def testingSC1(request, jid):
-    context_dict = {}
-
-    form = CommentForm()
-    joke = request.POST.get('joke')
-    userget = request.GET.get('user')
-    userpost = request.POST.get('user')
-    userrequest = request.user
-    # jokerequest = request.joke
-    # jokepass = joke_slug
-    joke = jid
-
-    try:
-        joke = Joke.objects.get(slug=request)
-    except Joke.DoesNotExist:
-        joke = None
-
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.joke = Joke.objects.filter(id=jid)[0]
-            comment.made_by = request.user
-            print(form.errors)
-
-    context_dict = {'form': form, 'jid': jid}
-
-    return render(request, 'jokeoverflow/testingSC1.html', context_dict)
-
-
 @login_required
 def upvote(request):  # Ajax view
     joke = None
@@ -445,7 +414,6 @@ def add_comment(request):  # Ajax view
             context_dict = {'comment': comment, 'users': users}
             response = render(request, 'jokeoverflow/return_comment.html', context_dict)
             return response
-
 
 
 @login_required
