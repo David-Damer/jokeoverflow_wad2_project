@@ -44,14 +44,14 @@ def populate():
         usrprof = add_profile(user=usr, date_of_birth=dob, user_bio=bio, user_picture=picture)
 
     knock_knock_jokes = [
-        {'title': 'Dr who joke', 'text': 'Knock knock.\nWho\'s there?\nDr.\nDr who?\nNo, Dr Jones.',
+        {'title': 'Dr', 'text': 'Knock knock.\nWho\'s there?\nDr.\nDr who?\nNo, Dr Jones.',
          'date_added': '2018-01-01',
          'upvotes': 5, 'downvotes': 7, 'added_by': 'PatriciaWorker'},
-        {'title': 'Canoe Joke',
+        {'title': 'Canoe',
          'text': 'Knock knock.\nWho\'s there?\nCanoe.\nCanoe who?\nCanoe help with my homework?.',
          'date_added': '2018-01-08',
          'upvotes': 10, 'downvotes': 2, 'added_by': 'SammyTheMan'},
-        {'title': 'Iva Joke',
+        {'title': 'Iva',
          'text': 'Knock knock.\nWho\'s there?\nIva.\nIva who?\nIva sore hand from knocking.',
          'date_added': '2017-07-08',
          'upvotes': 12, 'downvotes': 9, 'added_by': 'WeeCraig'},
@@ -66,14 +66,14 @@ def populate():
     ]
 
     yo_mama_jokes = [
-        {'title': 'Fat mama joke', 'text': 'Yo mama so fat, she doesn\'t need the internet; she already world wide!',
+        {'title': 'Fat', 'text': 'Yo mama so fat, she doesn\'t need the internet; she already world wide!',
          'date_added': '2017-09-18',
          'upvotes': 5, 'downvotes': 7, 'added_by': 'EricCarpenter'},
-        {'title': 'Hockey Joke',
+        {'title': 'Hockey',
          'text': 'Yo mama is like a hockey player, she only showers after three periods.',
          'date_added': '2017-11-14',
          'upvotes': 3, 'downvotes': 5, 'added_by': 'SammyTheMan'},
-        {'title': 'Ugly Joke',
+        {'title': 'Ugly',
          'text': 'Yo mama so ugly, she tried to enter an ugliness competition and they said "No professionals".',
          'date_added': '2017-10-10',
          'upvotes': 9, 'downvotes': 5, 'added_by': 'WeeCraig'},
@@ -138,7 +138,7 @@ def populate():
     ]
 
     adult_jokes = [
-        {'title': 'Rubik\'s cube',
+        {'title': 'Rubik\'s',
          'text': 'What do a penis and a Rubik\'s cube have in common?\nThe more you play with it the harder it gets.',
          'date_added': '2017-02-28',
          'upvotes': 5, 'downvotes': 7, 'added_by': 'EricCarpenter'},
@@ -193,7 +193,7 @@ def populate():
 
     ]
     comments = [
-        {'text': 'This is hilarious, tell me another!', 'joke': 'Dr who joke', 'added_by': 'WeeCraig',
+        {'text': 'This is hilarious, tell me another!', 'joke': 'Dr', 'added_by': 'WeeCraig',
          'date_added': '2018-02-02'},
         {'text': 'Hahaha rofl.', 'joke': 'Hungry', 'added_by': 'PatriciaWorker',
          'date_added': '2018-01-18'},
@@ -201,11 +201,11 @@ def populate():
          'date_added': '2018-01-22'},
         {'text': 'Good joke!', 'joke': 'Street', 'added_by': 'PatriciaWorker',
          'date_added': '2018-01-07'},
-        {'text': 'I don\'t get it!', 'joke': 'Rubik\'s cube', 'added_by': 'EricCarpenter',
+        {'text': 'I don\'t get it!', 'joke': 'Rubik\'s', 'added_by': 'EricCarpenter',
          'date_added': '2018-02-25'},
         {'text': 'I pure love Chuck Norris jokes!!!', 'joke': 'Death', 'added_by': 'SammyTheMan',
          'date_added': '2018-02-25'},
-        {'text': 'OMG ', 'joke': 'Ugly Joke', 'added_by': 'EricCarpenter',
+        {'text': 'OMG ', 'joke': 'Ugly', 'added_by': 'EricCarpenter',
          'date_added': '2018-03-04'},
         {'text': 'Well, it is true.', 'joke': 'Lightbulb', 'added_by': 'PatriciaWorker',
          'date_added': '2018-01-04'},
@@ -213,17 +213,17 @@ def populate():
          'date_added': '2018-01-12'},
         {'text': 'Really come on, try harder.\n Your parents would be ashamed.', 'joke': 'Lifts', 'added_by': 'WeeCraig',
          'date_added': '2017-12-30'},
-        {'text': 'I feel sick after reading this.', 'joke': 'Hockey Joke', 'added_by': 'WeeCraig',
+        {'text': 'I feel sick after reading this.', 'joke': 'Hockey', 'added_by': 'WeeCraig',
          'date_added': '2017-12-31'},
-        {'text': 'Gold, pure gold.', 'joke': 'Fat mama joke', 'added_by': 'PatriciaWorker',
+        {'text': 'Gold, pure gold.', 'joke': 'Fat', 'added_by': 'PatriciaWorker',
          'date_added': '2018-02-17'},
-        {'text': 'I\'ve a sore hand. Get it?', 'joke': 'Iva Joke', 'added_by': 'EricCarpenter',
+        {'text': 'I\'ve a sore hand. Get it?', 'joke': 'Iva', 'added_by': 'EricCarpenter',
          'date_added': '2018-02-14'},
-        {'text': 'Groan', 'joke': 'Canoe Joke', 'added_by': 'SammyTheMan',
+        {'text': 'Groan', 'joke': 'Canoe', 'added_by': 'SammyTheMan',
          'date_added': '2018-02-16'},
         {'text': 'Yeeeeeee haaaa!', 'joke': 'Guns', 'added_by': 'EricCarpenter',
          'date_added': '2018-02-04'},
-        {'text': 'This is older than me.', 'joke': 'Dr who joke', 'added_by': 'SammyTheMan',
+        {'text': 'This is older than me.', 'joke': 'Dr', 'added_by': 'SammyTheMan',
          'date_added': '2018-02-02'},
         {'text': 'This is older than me. And I\'m dead old!', 'joke': 'Lightbulb', 'added_by': 'EricCarpenter',
          'date_added': '2018-02-02'},
