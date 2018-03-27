@@ -1,8 +1,37 @@
 <!DOCTYPE html>
-<ul>
-	{% if joke_list %}
-		{% for j in joke_list %}
-			<li>{{ j.title }}</li>
-		{% endfor %}
-	{% endif %}
-	</ul>
+{% load staticfiles %}
+{% load jokeoverflow_template_tags %}
+
+    <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-5 list-box sc-list-box">
+        <div class="box-title text-center sc-heading-title"><p>Search results</p></div>
+            {% if joke_list %}
+            <ul class="list-group joke-list">
+                {% for joke in joke_list %}
+                {% get_joke_pop joke user%}
+                {% endfor %}
+            </ul>
+            {% endif %}
+            </p>
+        </div>
+        <div class="col-md-3">
+        </div>
+    </div>
+
+    <br>
+    <hr>
+<script
+        src="{% static "js/jokeoverflow-jquery.js" %}">
+</script>
+<script
+        src="{% static "js/jquery-3.3.1.min.js" %}">
+</script>
+<script
+        src="{% static "js/jokeoverflow-ajax.js" %}">
+</script>
+<script src="{% static 'lib/js/config.js' %}"></script>
+<script src="{% static 'lib/js/util.js' %}"></script>
+<script src="{% static 'lib/js/jquery.emojiarea.js' %}"></script>
+<script src="{% static 'lib/js/emoji-picker.js' %}"></script>
