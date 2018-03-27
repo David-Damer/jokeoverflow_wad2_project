@@ -273,7 +273,6 @@ def top_rated_jokes(request):
         else:
             print(form.errors)
 
-    print(str(cat_rated_dict))
     comments = Comment.objects.all()
     users = UserProfile.objects.all()
     context_dict = {'categories': category_list, 'cat_rated_jokes': cat_rated_dict, 'comments': comments,

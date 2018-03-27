@@ -28,7 +28,6 @@ urlpatterns = [
     url(r'^log_complaint', views.log_complaint, name='log_complaint'),
     url(r'^new_category', views.new_category, name='new_category'),
     url(r'^faq/', views.faq, name='faq'),
-    url(r'^testingSC1/', views.testingSC1, name='testingSC1'),
     url(r'^latest_news/', views.latest_news, name='latest_news'),
     url(r'^user_profiles/', views.user_profiles, name='user_profiles'),
     url(r'^user_profiles/(?P<username>[\w\-]+)/$', views.user_profiles, name='user_profiles'),
