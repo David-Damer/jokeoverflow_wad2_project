@@ -79,6 +79,14 @@ $(".joke-remove").click(function (data) {
     });
 
 });
+
+$('#suggestion').keyup(function(){
+        var query;
+        query = $(this).val();
+        $.get('/jokeoverflow/suggest_joke/', {suggestion: query}, function(data){
+         $('#jokes').html(data);
+        });
+});
 // flags joke
 $(".flag").click(function (data) {
     var joke = $(this).attr('data-fjoke');

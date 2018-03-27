@@ -46,7 +46,8 @@ urlpatterns = [
     url(r'^video_remove/$', views.video_remove, name='video_remove'),
     url(r'^joke_remove/$', views.joke_remove, name='joke_remove'),
     url(r'^flag/$', views.flag, name='flag'),
-    url(r'^delete/', views.delete_user, name='delete_user')
+    url(r'^delete/', views.delete_user, name='delete_user'),
+    url(r'^suggest_joke/$', views.suggest_joke, name='suggest_joke'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

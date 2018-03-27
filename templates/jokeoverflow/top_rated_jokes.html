@@ -36,6 +36,13 @@
 Top Rated Jokes
 {% endblock %}
 
+<div>
+{% block sidebar_block %} 
+	{% get_joke_list %} 
+{% endblock %} 
+</div>
+
+
 {% block body_block %}
 <div class="container">
     <br>
@@ -47,17 +54,26 @@ Top Rated Jokes
         Browse the creme de la creme of JokeOverflow
     </div>
     <br><br>
-    <div class="row">
-        <div class="col-md-3">
-        </div>
-        <div class="search-div col-md-6">
-            <form>
-                <input class="sc-joke-search" type="text" name="search-joke" placeholder="Search for joke...">
-            </form>
-        </div>
-        <div class="col-md-3">
-        </div>
-    </div>
+    <ul class="nav nav-list">
+        <li class="nav-header">Find a Joke</li>
+        <form>
+        <label></label>
+        <li><input  class="search-query span10" type="text" name="suggestion" value="" id="suggestion" /></li>
+        </form>
+    </ul>
+
+<div id="jokes">
+</div>
+
+<ul> 
+	{% if jokes %}
+		{% for j in jokes %} 
+			<li>{{ j.title }}</li> 
+		{% endfor %} 
+	{% else %}
+		<li> <strong>There are no Jokes123 present.</strong></li> 
+	{% endif %}	
+	</ul>
 
     <br>
 

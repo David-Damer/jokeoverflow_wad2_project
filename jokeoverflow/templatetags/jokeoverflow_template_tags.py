@@ -7,7 +7,7 @@ from django.utils.html import conditional_escape
 
 register = template.Library()
 
-from jokeoverflow.models import Joke,UserProfile
+from jokeoverflow.models import Joke, UserProfile
 
 @register.inclusion_tag('jokeoverflow/jokes.html')
 def get_joke_pop(joke=None, user=None):
@@ -16,6 +16,10 @@ def get_joke_pop(joke=None, user=None):
             'users': UserProfile.objects.all(),
             'act_user': user,
             }
+
+@register.inclusion_tag('jokeoverflow/jokes.html')
+def get_joke_list(joke=None):
+    return {'jokes': Joke.objects.all(), 'act_joke': joke}
 
 
 class PrefixNode(template.Node):
