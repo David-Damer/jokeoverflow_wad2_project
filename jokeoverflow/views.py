@@ -473,7 +473,7 @@ def flag(request):  # Ajax view
 
     return HttpResponse('Flagged')
 
-def get_joke_list(max_results=0, starts_with=''):
+def get_joke_list(max_results, starts_with=''):
         joke_list = []
         if starts_with:
                 joke_list = Joke.objects.filter(title__istartswith=starts_with)
@@ -491,6 +491,6 @@ def suggest_joke(request):
         if request.method == 'GET':
                 starts_with = request.GET['suggestion']
 
-        joke_list = get_joke_list(8, starts_with)
+        joke_list = get_joke_list(max_results=8, starts_with=starts_with)
 
-        return render(request, 'jokeoverflow/jokes.html', {'joke_list': joke_list })
+        return render(request, 'jokeoverflow/joke_list.html', {'joke_list': joke_list })

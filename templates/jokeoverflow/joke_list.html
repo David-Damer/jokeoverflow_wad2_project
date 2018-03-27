@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<ul>
+	{% if joke_list %}
+		{% for j in joke_list %}
+			<li>{{ j.title }}</li>
+		{% endfor %}
+	{% endif %}
+	</ul>

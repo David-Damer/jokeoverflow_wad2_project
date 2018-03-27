@@ -83,8 +83,9 @@ $(".joke-remove").click(function (data) {
 $('#suggestion').keyup(function(){
         var query;
         query = $(this).val();
+        console.log(this);
         $.get('/jokeoverflow/suggest_joke/', {suggestion: query}, function(data){
-         $('#jokes').html(data);
+         $('#jokeslist').html(data);
         });
 });
 // flags joke
