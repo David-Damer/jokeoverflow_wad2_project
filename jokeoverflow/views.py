@@ -492,5 +492,6 @@ def suggest_joke(request):
                 starts_with = request.GET['suggestion']
 
         joke_list = get_joke_list(max_results=8, starts_with=starts_with)
-
+        if not len(joke_list) > 0:
+            return HttpResponse('')
         return render(request, 'jokeoverflow/joke_list.html', {'joke_list': joke_list })
