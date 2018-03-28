@@ -17,6 +17,8 @@ from django.http import JsonResponse
 import json
 from django.utils.timezone import now
 
+# Used on several pages, put here to stop duplication.
+
 category_list = Category.objects.order_by('title')
 context_dict = {'categories': category_list}
 
@@ -30,6 +32,11 @@ def home(request):
             rated_clean_jokes.append(joke)
     rated_clean_short = []
     rated_clean_short = rated_clean_jokes[:5]
+
+# Home page, sorted jokes in order of rating, removed adult section and then
+# indexed to get top 5 rated "clean jokes.
+# Similarly below, sorted by date added and removed the adult jokes to get
+# most recent clean jokes.
 
     all_jokes = Joke.objects.order_by('-date_added')
     recent_clean_jokes = []
@@ -58,6 +65,9 @@ def add_joke(request, category_name_slug):
         form = JokeForm(request.POST)
         user = request.user
 
+# This is to add a joke to a category. firstly get the correct category
+# request the input and fill out form, save new joke
+
         if form.is_valid():
             if category:
                 joke = form.save(commit=False)
@@ -71,10 +81,8 @@ def add_joke(request, category_name_slug):
     context_dict = {'form': form, 'category': category, 'categories': category_list}
     return render(request, 'jokeoverflow/add_joke.html', context_dict)
 
-
+# general about page
 def about_us(request):
-    category_list = Category.objects.order_by('title')
-    context_dict = {'categories': category_list}
     return render(request, "jokeoverflow/about_us.html", context=context_dict)
 
 
@@ -109,21 +117,22 @@ def show_category(request, category_name_slug):
 
     return render(request, 'jokeoverflow/joke_category.html', context=context_dict)
 
-
+# general contact_us page
 def contact_us(request):
     response = render(request, 'jokeoverflow/contact_us.html', context_dict)
     return response
 
-
+# general FAQ page
 def faq(request):
     response = render(request, 'jokeoverflow/faq.html', context_dict)
     return response
 
-
+# general latest news page
 def latest_news(request):
     response = render(request, 'jokeoverflow/latest_news.html', context_dict)
     return response
 
+# get user, delete user.
 def delete_user(request):
     context = {}
     u = User.objects.get(username=request.user.username)
@@ -136,11 +145,12 @@ def user_profiles(request):
     userprofile = UserProfile.objects.order_by('user')
     category_list = Category.objects.order_by('title')
     users = UserProfile.objects.all().order_by('user')
-
     complaints = Complaint.objects.all().order_by('-date_added')
     all_jokes = Joke.objects.all().order_by('id')
     flagged_jokes = Joke.objects.filter(flagged=True).order_by('id');
 
+    # Used to list all entries by a user
+    # and to list their details
     form = UserProfileForm(
         {'picture': UserProfile.user_picture, 'bio': UserProfile.user_bio, 'date_of_birth': UserProfile.date_of_birth})
 
@@ -156,12 +166,13 @@ def user_profiles(request):
     return render(request, 'jokeoverflow/user_profiles.html',
                   {'categories': category_list, 'userprofile': userprofile, 'form': form, 'users': users, })
 
+# Allows user to edit profile
 def edit_profile(request):
     category_list = Category.objects.order_by('title')
     users = UserProfile.objects.all().order_by('user')
     userprofile = UserProfile.objects.order_by('user')
     form = EditProfileForm(request.POST or None, {'picture': UserProfile.user_picture, 'bio': UserProfile.user_bio })
-
+    # Using editp profile form to change fields
     if request.method == 'POST':
         form = EditProfileForm(request.POST or None, {'picture': UserProfile.user_picture, 'bio': UserProfile.user_bio })
         if form.is_valid():
@@ -180,6 +191,7 @@ def edit_profile(request):
 
 
 def videos(request):
+    # group objects
     category_list = Category.objects.order_by('title')
     rec_added_videos = Video.objects.all().order_by('-date_added')[:5]
     all_videos = Video.objects.all().order_by('title')
@@ -189,7 +201,7 @@ def videos(request):
                     }
     result_list = []
     query = ''
-
+    # use youtube to search 
     if request.method == 'POST':
         query = request.POST['query'].strip()
         if query:
@@ -199,25 +211,6 @@ def videos(request):
 
     response = render(request, 'jokeoverflow/videos.html', context_dict)
     return response
-
-
-def top_rated_videos(request):
-    category_list = Category.objects.order_by('title')
-    rated_videos = Video.objects.order_by('-upvotes')[:10]
-    context_dict = {'categories': category_list, 'topratedvideos': rated_videos, }
-    result_list = []
-    query = ''
-
-    if request.method == 'POST':
-        query = request.POST['query'].strip()
-        if query:
-            result_list = youtube_search(q=query)
-    context_dict['previous_query'] = query
-    context_dict['result_list'] = result_list
-
-    response = render(request, 'jokeoverflow/videos.html', context_dict)
-    return response
-
 
 @login_required
 def log_complaint(request):
@@ -229,7 +222,8 @@ def log_complaint(request):
             complaint = form.save(commit=False)
             complaint.user = request.user
             complaint.save()
-
+    # again, this logs a complaint on admin page.
+    # Calls the form, user completes and is returned by this view
             return redirect('home')
         else:
             print(form.errors)
@@ -254,6 +248,12 @@ def top_rated_jokes(request):
         rated_cat_jokes = Joke.objects.filter(category=cat).order_by('-rating')[:5]
         cat_rated_dict[str(cat)] = rated_cat_jokes
 
+# top rated jokes page, sorted jokes in order of rating, removed adult section and then
+# indexed to get top 5 rated "clean jokes.
+# Similarly below, sorted by date added and removed the adult jokes to get
+# most recent clean jokes.
+
+# This adds a comment to a joke
     form = CommentForm(request.POST)
     if request.method == 'POST':
         form = CommentForm(request.POST)
@@ -285,6 +285,7 @@ def search(request):
     result_list = []
     query = ''
 
+    # Used to retirve and search youtube.
     if request.method == 'POST':
         print('post' + query)
         query = request.POST['query'].strip()
@@ -298,6 +299,8 @@ def register_profile(request):
     category_list = Category.objects.order_by('title')
     form = UserProfileForm()
 
+    # Used to create new profile, cal form and save form.
+    
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES)
         if form.is_valid():
@@ -411,7 +414,7 @@ def add_comment(request):  # Ajax view
 
 
 @login_required
-def new_category(request):
+def new_category(request):      # Log new category request to admin interface
     form = CategoryRequestForm()
 
     if request.method == 'POST':
@@ -468,8 +471,8 @@ def flag(request):  # Ajax view
 
     return HttpResponse('Flagged')
 
-def get_joke_list(max_results, starts_with=''):
-        joke_list = []
+def get_joke_list(max_results, starts_with=''): # Use to search a joke and return
+        joke_list = []                          # all posibilities
         if starts_with:
                 joke_list = Joke.objects.filter(title__istartswith=starts_with)
 
@@ -479,8 +482,8 @@ def get_joke_list(max_results, starts_with=''):
 
         return joke_list
 
-def suggest_joke(request):
-
+def suggest_joke(request):          # Use to search a joke and return
+                                    # all posibilities
         joke_list = []
         starts_with = ''
         if request.method == 'GET':
