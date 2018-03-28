@@ -32,7 +32,6 @@ urlpatterns = [
     url(r'^user_profiles/', views.user_profiles, name='user_profiles'),
     url(r'^user_profiles/(?P<username>[\w\-]+)/$', views.user_profiles, name='user_profiles'),
     url(r'^videos/', views.videos, name='videos'),
-    url(r'^top_rated_videos/', views.top_rated_videos, name='top_rated_videos'),
     url(r'^top_rated_jokes/', views.top_rated_jokes, name='top_rated_jokes'),
     url(r'^category/(?P<category_name_slug>[\w\-]+)/$', views.show_category, name='show_category'),
     url(r'register_profile/', views.register_profile, name='register_profile'),

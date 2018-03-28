@@ -80,7 +80,7 @@ class ComplaintForm(forms.ModelForm):
         exclude = ('user', 'date_added')
 
 class CategoryRequestForm(forms.ModelForm):
-    new_category = forms.CharField(widget=forms.Textarea, max_length=128, help_text="Please enter the new category name.")
+    new_category = forms.CharField(widget=forms.Textarea, max_length=128)
 
     class Meta:
         model = CategoryRequest

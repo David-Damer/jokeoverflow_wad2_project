@@ -98,8 +98,8 @@ class Complaint(models.Model):
         return self.complaint
 
 class CategoryRequest(models.Model):
-    new_category = models.CharField(max_length=128, blank=False)
     user = models.ForeignKey(User)
+    new_category = models.CharField(max_length=128, blank=False)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

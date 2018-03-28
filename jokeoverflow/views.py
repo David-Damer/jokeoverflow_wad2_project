@@ -17,7 +17,8 @@ from django.http import JsonResponse
 import json
 from django.utils.timezone import now
 
-
+category_list = Category.objects.order_by('title')
+context_dict = {'categories': category_list}
 
 def home(request):
     category_list = Category.objects.order_by('title')
@@ -110,22 +111,16 @@ def show_category(request, category_name_slug):
 
 
 def contact_us(request):
-    category_list = Category.objects.order_by('title')
-    context_dict = {'categories': category_list}
     response = render(request, 'jokeoverflow/contact_us.html', context_dict)
     return response
 
 
 def faq(request):
-    category_list = Category.objects.order_by('title')
-    context_dict = {'categories': category_list}
     response = render(request, 'jokeoverflow/faq.html', context_dict)
     return response
 
 
 def latest_news(request):
-    category_list = Category.objects.order_by('title')
-    context_dict = {'categories': category_list}
     response = render(request, 'jokeoverflow/latest_news.html', context_dict)
     return response
 
@@ -423,7 +418,7 @@ def new_category(request):
         form = CategoryRequestForm(request.POST)
         if form.is_valid():
             new_category = form.save(commit=False)
-            new_category = request.user
+            new_category.user = request.user
             new_category.save()
 
             return redirect('home')
