@@ -11,7 +11,7 @@ pyasn1==0.4.2
 pyasn1-modules==0.2.1
 pycparser==2.18
 pytz==2018.3
-rsa==3.4.2
+rsa==4.7
 six==1.11.0
 uritemplate==3.0.0
 django-bootstrap-toolkit==2.15.0
